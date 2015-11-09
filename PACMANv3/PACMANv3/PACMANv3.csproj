@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1B298DF2-CCC7-44B7-911E-656CEAF102A2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PACMANv3</RootNamespace>
+    <AssemblyName>PACMANv3</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Speech" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="pkgModelo\Biscocho.cs" />
+    <Compile Include="pkgModelo\Celda.cs" />
+    <Compile Include="pkgModelo\DatosJugador.cs" />
+    <Compile Include="pkgModelo\Fantasma.cs" />
+    <Compile Include="pkgModelo\Juego.cs" />
+    <Compile Include="pkgModelo\Mapa.cs" />
+    <Compile Include="pkgModelo\PacMan.cs" />
+    <Compile Include="pkgVista\VistaEdicionDeMapas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pkgVista\VistaEdicionDeMapas.Designer.cs">
+      <DependentUpon>VistaEdicionDeMapas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pkgVista\VistaCreacionDeMapas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pkgVista\VistaCreacionDeMapas.Designer.cs">
+      <DependentUpon>VistaCreacionDeMapas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pkgVista\VistaJuego.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pkgVista\VistaJuego.Designer.cs">
+      <DependentUpon>VistaJuego.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pkgVista\VistaPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pkgVista\VistaPrincipal.Designer.cs">
+      <DependentUpon>VistaPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="pkgVista\VistaEdicionDeMapas.resx">
+      <DependentUpon>VistaEdicionDeMapas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pkgVista\VistaCreacionDeMapas.resx">
+      <DependentUpon>VistaCreacionDeMapas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pkgVista\VistaJuego.resx">
+      <DependentUpon>VistaJuego.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pkgVista\VistaPrincipal.resx">
+      <DependentUpon>VistaPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="ArchivosConf\Config\nombreMapasDificil.conf" />
+    <None Include="ArchivosConf\Config\nombreMapasFacil.conf" />
+    <None Include="ArchivosConf\Config\nombreMapasMedio.conf" />
+    <None Include="ArchivosConf\Maps\PredefinidoDificilLvl1.map" />
+    <None Include="ArchivosConf\Maps\PredefinidoDificilLvl2.map" />
+    <None Include="ArchivosConf\Maps\PredefinidoDificilLvl3.map" />
+    <None Include="ArchivosConf\Maps\PredefinidoFacilLvl1.map" />
+    <None Include="ArchivosConf\Maps\PredefinidoFacilLvl2.map" />
+    <None Include="ArchivosConf\Maps\PredefinidoFacilLvl3.map" />
+    <None Include="ArchivosConf\Maps\PredefinidoMedioLvl1.map" />
+    <None Include="ArchivosConf\Maps\PredefinidoMedioLvl2.map" />
+    <None Include="ArchivosConf\Maps\PredefinidoMedioLvl3.map" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\SONIDOS\nocheDeAcosador.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\FONDOS\FondoInicioPacman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\BOTONES\BtnJugar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\BOTONES\CrearMapa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\BOTONES\EditarMapa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\BOTONES\guardar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULAbajo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULAbajo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULArriba1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULArriba2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULDerecha1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULDerecha2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULIzquierda1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULIzquierda2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULMuerto1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULMuerto2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULOjos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULVulnerable1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\AZUL\AZULVulnerable2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOAbajo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOAbajo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOArriba1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOArriba2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADODerecha1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADODerecha2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOIzquierda1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOIzquierda2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOMuerto1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOMuerto2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOOjos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOVulnerable1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\MORADO\MORADOVulnerable2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\FONDOS\derrota.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\FONDOS\gameOver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\FONDOS\victoria.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAAbajo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAAbajo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAArriba1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAArriba2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJADerecha1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJADerecha2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAIzquierda1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAIzquierda2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAMuerto1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAMuerto2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAOjos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAVulnerable1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\NARANJA\NARANJAVulnerable2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PACMAN\PACMANAbajo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PACMAN\PACMANAbajo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PACMAN\PACMANArriba1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PACMAN\PACMANArriba2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PACMAN\PACMANDerecha1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PACMAN\PACMANDerecha2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PACMAN\PACMANIzquierda1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PACMAN\PACMANIzquierda2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\PARED\pared10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOAbajo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOAbajo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOArriba1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOArriba2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJODerecha1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJODerecha2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOIzquierda1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOIzquierda2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOMuerto1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOMuerto2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOOjos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOVulnerable1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROJO\ROJOVulnerable2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAAbajo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAAbajo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAArriba1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAArriba2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSADerecha1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSADerecha2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAIzquierda1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAIzquierda2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAMuerto1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAMuerto2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAOjos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAVulnerable1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\ROSA\ROSAVulnerable2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\SONIDOS\risaMacabra.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\SONIDOS\campanaInicio.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\BOTONES\historial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\BOTONES\inicio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\SONIDOS\bomb.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\SONIDOS\corte.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\SONIDOS\victoria.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\SONIDOS\superPastilla.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\FRUTA\lg-cherries-vyšnios-wild-red-plastic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\FRUTA\fruta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\SONIDOS\soundFrutilla.wav" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

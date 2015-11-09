@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AZULIzquierda1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULIzquierda1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULDerecha2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULDerecha2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAArriba1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAArriba1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PACMANDerecha1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PACMAN\PACMANDerecha1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PredefinidoMedioLvl3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Maps\PredefinidoMedioLvl3.map;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="FondoInicioPacman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\FONDOS\FondoInicioPacman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAAbajo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAAbajo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PredefinidoDificilLvl2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Maps\PredefinidoDificilLvl2.map;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ROJOMuerto1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOMuerto1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULIzquierda2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULIzquierda2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAAbajo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAAbajo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULOjos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULOjos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PACMANArriba2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PACMAN\PACMANArriba2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="derrota" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\FONDOS\derrota.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAIzquierda2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAIzquierda2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="guardar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\BOTONES\guardar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOArriba2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOArriba2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOAbajo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOAbajo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAVulnerable1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAVulnerable1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAAbajo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAAbajo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FondoInicioPacman1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\FONDOS\FondoInicioPacman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULArriba2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULArriba2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOAbajo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOAbajo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOVulnerable2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOVulnerable2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrearMapa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\BOTONES\CrearMapa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="victoria" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\FONDOS\victoria.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BtnJugar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\BOTONES\BtnJugar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAVulnerable1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAVulnerable1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROJOArriba2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOArriba2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROJODerecha1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJODerecha1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULAbajo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULAbajo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PACMANDerecha2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PACMAN\PACMANDerecha2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PACMANIzquierda2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PACMAN\PACMANIzquierda2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOIzquierda1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOIzquierda1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAIzquierda1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAIzquierda1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADODerecha2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADODerecha2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAVulnerable2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAVulnerable2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PredefinidoFacilLvl3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Maps\PredefinidoFacilLvl3.map;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ROJOIzquierda1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOIzquierda1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULMuerto1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULMuerto1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="historial" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\BOTONES\historial.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAMuerto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAMuerto2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAMuerto1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAMuerto1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOOjos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOOjos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJADerecha1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJADerecha1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULMuerto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULMuerto2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULVulnerable1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULVulnerable1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAOjos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAOjos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditarMapa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\BOTONES\EditarMapa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nombreMapasDificil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Config\nombreMapasDificil.conf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="AZULArriba1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULArriba1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAArriba2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAArriba2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOIzquierda2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOIzquierda2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PACMANArriba1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PACMAN\PACMANArriba1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PredefinidoMedioLvl1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Maps\PredefinidoMedioLvl1.map;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ROJOVulnerable1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOVulnerable1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAAbajo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAAbajo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAMuerto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAMuerto2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULAbajo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULAbajo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJADerecha2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJADerecha2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSADerecha2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSADerecha2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADODerecha1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADODerecha1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOVulnerable1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOVulnerable1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAVulnerable2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAVulnerable2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSADerecha1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSADerecha1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AZULDerecha1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULDerecha1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROJOOjos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOOjos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PACMANAbajo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PACMAN\PACMANAbajo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nocheDeAcosador" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\SONIDOS\nocheDeAcosador.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ROJOAbajo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOAbajo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PredefinidoDificilLvl1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Maps\PredefinidoDificilLvl1.map;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AZULVulnerable2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\AZUL\AZULVulnerable2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAOjos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAOjos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="risaMacabra" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\SONIDOS\risaMacabra.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ROSAIzquierda1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAIzquierda1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROJOAbajo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOAbajo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOMuerto1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOMuerto1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOArriba1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOArriba1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NARANJAArriba2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAArriba2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MORADOMuerto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\MORADO\MORADOMuerto2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PredefinidoFacilLvl2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Maps\PredefinidoFacilLvl2.map;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ROJOVulnerable2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOVulnerable2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROJOMuerto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOMuerto2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROJOIzquierda2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOIzquierda2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="campanaInicio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\SONIDOS\campanaInicio.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gameOver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\FONDOS\gameOver.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PredefinidoDificilLvl3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Maps\PredefinidoDificilLvl3.map;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PACMANAbajo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PACMAN\PACMANAbajo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nombreMapasMedio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Config\nombreMapasMedio.conf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ROJOArriba1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJOArriba1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAArriba1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAArriba1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PACMANIzquierda1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PACMAN\PACMANIzquierda1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nombreMapasFacil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Config\nombreMapasFacil.conf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ROJODerecha2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROJO\ROJODerecha2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ROSAIzquierda2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\ROSA\ROSAIzquierda2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PredefinidoMedioLvl2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ArchivosConf\Maps\PredefinidoMedioLvl2.map;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="NARANJAMuerto1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\NARANJA\NARANJAMuerto1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pared5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\PARED\pared5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inicio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\BOTONES\inicio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\SONIDOS\bomb.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="corte" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\SONIDOS\corte.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fruta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\FRUTA\fruta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="soundFrutilla" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\SONIDOS\soundFrutilla.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="superPastilla" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\SONIDOS\superPastilla.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="victoria1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\SONIDOS\victoria.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>
