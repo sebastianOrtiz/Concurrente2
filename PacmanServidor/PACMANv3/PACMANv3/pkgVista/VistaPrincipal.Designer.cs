@@ -69,6 +69,7 @@
             // 
             // btnAceptarConfigInicial
             // 
+            this.btnAceptarConfigInicial.BackColor = System.Drawing.SystemColors.ControlText;
             this.btnAceptarConfigInicial.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAceptarConfigInicial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptarConfigInicial.Image = global::PACMANv3.Properties.Resources.BtnJugar;
@@ -76,12 +77,13 @@
             this.btnAceptarConfigInicial.Name = "btnAceptarConfigInicial";
             this.btnAceptarConfigInicial.Size = new System.Drawing.Size(224, 114);
             this.btnAceptarConfigInicial.TabIndex = 15;
-            this.btnAceptarConfigInicial.UseVisualStyleBackColor = true;
+            this.btnAceptarConfigInicial.UseVisualStyleBackColor = false;
             this.btnAceptarConfigInicial.Click += new System.EventHandler(this.btnAceptarConfigInicial_Click);
             // 
             // lblDificultad
             // 
             this.lblDificultad.AutoSize = true;
+            this.lblDificultad.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblDificultad.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDificultad.ForeColor = System.Drawing.Color.White;
             this.lblDificultad.Location = new System.Drawing.Point(381, 78);
@@ -107,6 +109,7 @@
             // lblNombreJugador
             // 
             this.lblNombreJugador.AutoSize = true;
+            this.lblNombreJugador.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblNombreJugador.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombreJugador.ForeColor = System.Drawing.Color.White;
             this.lblNombreJugador.Location = new System.Drawing.Point(381, 38);
@@ -118,6 +121,7 @@
             // lblMetodoDeEntrada
             // 
             this.lblMetodoDeEntrada.AutoSize = true;
+            this.lblMetodoDeEntrada.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblMetodoDeEntrada.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMetodoDeEntrada.ForeColor = System.Drawing.Color.White;
             this.lblMetodoDeEntrada.Location = new System.Drawing.Point(381, 115);
@@ -129,6 +133,7 @@
             // rBtnVoz
             // 
             this.rBtnVoz.AutoSize = true;
+            this.rBtnVoz.BackColor = System.Drawing.SystemColors.ControlText;
             this.rBtnVoz.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rBtnVoz.ForeColor = System.Drawing.Color.White;
             this.rBtnVoz.Location = new System.Drawing.Point(635, 111);
@@ -137,11 +142,12 @@
             this.rBtnVoz.TabIndex = 10;
             this.rBtnVoz.TabStop = true;
             this.rBtnVoz.Text = "Voz";
-            this.rBtnVoz.UseVisualStyleBackColor = true;
+            this.rBtnVoz.UseVisualStyleBackColor = false;
             // 
             // rBtnTeclado
             // 
             this.rBtnTeclado.AutoSize = true;
+            this.rBtnTeclado.BackColor = System.Drawing.SystemColors.ControlText;
             this.rBtnTeclado.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rBtnTeclado.ForeColor = System.Drawing.Color.White;
             this.rBtnTeclado.Location = new System.Drawing.Point(548, 113);
@@ -150,11 +156,12 @@
             this.rBtnTeclado.TabIndex = 9;
             this.rBtnTeclado.TabStop = true;
             this.rBtnTeclado.Text = "Teclado";
-            this.rBtnTeclado.UseVisualStyleBackColor = true;
+            this.rBtnTeclado.UseVisualStyleBackColor = false;
             // 
             // lblNumVidas
             // 
             this.lblNumVidas.AutoSize = true;
+            this.lblNumVidas.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblNumVidas.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumVidas.ForeColor = System.Drawing.Color.White;
             this.lblNumVidas.Location = new System.Drawing.Point(561, 141);
@@ -166,6 +173,7 @@
             // lblHPPACMAN
             // 
             this.lblHPPACMAN.AutoSize = true;
+            this.lblHPPACMAN.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblHPPACMAN.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHPPACMAN.ForeColor = System.Drawing.Color.White;
             this.lblHPPACMAN.Location = new System.Drawing.Point(421, 141);
@@ -234,6 +242,7 @@
             // 
             // panelConfigInicio
             // 
+            this.panelConfigInicio.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelConfigInicio.BackgroundImage = global::PACMANv3.Properties.Resources.FondoInicioPacman;
             this.panelConfigInicio.Controls.Add(this.btnIntPuntajes);
             this.panelConfigInicio.Controls.Add(this.lblNombreJugador);
@@ -257,13 +266,14 @@
             // 
             // btnIntPuntajes
             // 
+            this.btnIntPuntajes.BackColor = System.Drawing.SystemColors.ControlText;
             this.btnIntPuntajes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIntPuntajes.Image = global::PACMANv3.Properties.Resources.historial;
             this.btnIntPuntajes.Location = new System.Drawing.Point(372, 324);
             this.btnIntPuntajes.Name = "btnIntPuntajes";
             this.btnIntPuntajes.Size = new System.Drawing.Size(109, 105);
             this.btnIntPuntajes.TabIndex = 23;
-            this.btnIntPuntajes.UseVisualStyleBackColor = true;
+            this.btnIntPuntajes.UseVisualStyleBackColor = false;
             this.btnIntPuntajes.Click += new System.EventHandler(this.btnIntPuntajes_Click);
             // 
             // panelPuntajes
@@ -283,6 +293,7 @@
             // lblFechaDat
             // 
             this.lblFechaDat.AutoSize = true;
+            this.lblFechaDat.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblFechaDat.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaDat.ForeColor = System.Drawing.Color.White;
             this.lblFechaDat.Location = new System.Drawing.Point(624, 58);
@@ -294,6 +305,7 @@
             // lblPtsDat
             // 
             this.lblPtsDat.AutoSize = true;
+            this.lblPtsDat.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblPtsDat.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPtsDat.ForeColor = System.Drawing.Color.White;
             this.lblPtsDat.Location = new System.Drawing.Point(535, 58);
@@ -305,6 +317,7 @@
             // lblDifDatos
             // 
             this.lblDifDatos.AutoSize = true;
+            this.lblDifDatos.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblDifDatos.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDifDatos.ForeColor = System.Drawing.Color.White;
             this.lblDifDatos.Location = new System.Drawing.Point(484, 58);
@@ -315,19 +328,20 @@
             // 
             // btnAceptarDatos
             // 
+            this.btnAceptarDatos.BackColor = System.Drawing.SystemColors.ControlText;
             this.btnAceptarDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptarDatos.Image = global::PACMANv3.Properties.Resources.inicio;
             this.btnAceptarDatos.Location = new System.Drawing.Point(365, 295);
             this.btnAceptarDatos.Name = "btnAceptarDatos";
             this.btnAceptarDatos.Size = new System.Drawing.Size(297, 124);
             this.btnAceptarDatos.TabIndex = 1;
-            this.btnAceptarDatos.UseVisualStyleBackColor = true;
+            this.btnAceptarDatos.UseVisualStyleBackColor = false;
             this.btnAceptarDatos.Click += new System.EventHandler(this.btnAceptarDatos_Click);
             // 
             // lblListadoDatos
             // 
             this.lblListadoDatos.AutoSize = true;
-            this.lblListadoDatos.BackColor = System.Drawing.Color.Black;
+            this.lblListadoDatos.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblListadoDatos.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListadoDatos.ForeColor = System.Drawing.Color.White;
             this.lblListadoDatos.Location = new System.Drawing.Point(373, 58);
