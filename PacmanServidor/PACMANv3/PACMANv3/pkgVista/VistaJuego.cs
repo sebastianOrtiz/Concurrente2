@@ -134,19 +134,19 @@ namespace PACMANv3.pkgVista {
                         graficarMapa(Juego.MapaActual, g);
                         dibujarControno(Juego.MapaActual, g);
                         graficarBiscochos(Juego.MapaActual, g);
-                        if (this.Juego.NivelActual == 1) {
+                        //if (this.Juego.NivelActual == 1) {
                             foreach (Fantasma fantasma in Juego.FantasmasLvl1) {
                                 g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
                             }
-                        } else if (this.Juego.NivelActual == 2) {
-                            foreach (Fantasma fantasma in Juego.FantasmasLvl2) {
-                                g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
-                            }
-                        } else if (this.Juego.NivelActual == 3) {
-                            foreach (Fantasma fantasma in Juego.FantasmasLvl3) {
-                                g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
-                            }
-                        }
+                        //} else if (this.Juego.NivelActual == 2) {
+                        //    foreach (Fantasma fantasma in Juego.FantasmasLvl2) {
+                        //        g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
+                        //    }
+                        //} else if (this.Juego.NivelActual == 3) {
+                        //    foreach (Fantasma fantasma in Juego.FantasmasLvl3) {
+                        //        g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
+                        //    }
+                        //}
 
                         g.DrawImage(Juego.PacMan.ImgActual, Juego.PacMan.X, Juego.PacMan.Y, Juego.PacMan.Windth, Juego.PacMan.Height);
 
@@ -224,7 +224,7 @@ namespace PACMANv3.pkgVista {
                             this.Juego.Jugando = 3;
                             break;
                         case Keys.F3:
-                            this.Juego.cambiarNivel();
+                            //this.Juego.cambiarNivel();
                             break;
                         case Keys.F4:
                             this.juego.hubicarFrutilla();

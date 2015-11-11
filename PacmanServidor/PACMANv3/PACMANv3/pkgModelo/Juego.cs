@@ -13,18 +13,18 @@ namespace PACMANv3.pkgModelo {
     /// </summary>
     public class Juego {
         private Mapa mapaActual;
-        private List<Mapa> listaDeMapaslvl1;
-        private List<Mapa> listaDeMapaslvl2;
-        private List<Mapa> listaDeMapaslvl3;
-        private Mapa lvl1;
-        private Mapa lvl2;
-        private Mapa lvl3;
+        //private List<Mapa> listaDeMapaslvl1;
+        //private List<Mapa> listaDeMapaslvl2;
+        //private List<Mapa> listaDeMapaslvl3;
+        //private Mapa lvl1;
+        //private Mapa lvl2;
+        //private Mapa lvl3;
         private string dificultad;
         private DatosJugador datosJugador;
         private Boolean entradaPorVoz;
         private List<Fantasma> fantasmasLvl1;
-        private List<Fantasma> fantasmasLvl2;
-        private List<Fantasma> fantasmasLvl3;
+        //private List<Fantasma> fantasmasLvl2;
+        //private List<Fantasma> fantasmasLvl3;
         private PacMan pacMan;
         private int nivelActual;
         private Boolean estadoDelJuego;
@@ -49,14 +49,15 @@ namespace PACMANv3.pkgModelo {
         /// <param name="entradaVoz">Vaor booleano que indica el metodo de entrada del juego (Voz o teclado)</param>
         /// <param name="vidasPac">Vidas del jugador</param>
         /// <param name="hpPac">Valor de cada vida del Jugador</param>
-        public Juego(List<Mapa> mapas, String dificultad, DatosJugador jugador, Boolean entradaVoz, int vidasPac, int hpPac) {
-            this.listaDeMapaslvl1 = new List<Mapa>();
-            this.listaDeMapaslvl2 = new List<Mapa>();
-            this.listaDeMapaslvl3 = new List<Mapa>();
+        public Juego(Mapa mapa, String dificultad, DatosJugador jugador, Boolean entradaVoz, int vidasPac, int hpPac) {
+            //this.listaDeMapaslvl1 = new List<Mapa>();
+            //this.listaDeMapaslvl2 = new List<Mapa>();
+            //this.listaDeMapaslvl3 = new List<Mapa>();
+            this.mapaActual = mapa;
             this.fantasmasLvl1 = new List<Fantasma>();
-            this.fantasmasLvl2 = new List<Fantasma>();
-            this.fantasmasLvl3 = new List<Fantasma>();
-            this.separarMapasPorNivel(mapas);
+            //this.fantasmasLvl2 = new List<Fantasma>();
+            //this.fantasmasLvl3 = new List<Fantasma>();
+            //this.separarMapasPorNivel(mapas);
             this.dificultad = dificultad;
             this.datosJugador = jugador;
             this.entradaPorVoz = entradaVoz;
@@ -78,23 +79,23 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Cambia el nivel del juego, cambia el mapa y demas banderas de estado
         /// </summary>
-        public void cambiarNivel() {
-            this.nivelActual++;
-            if (this.nivelActual == 4) {
-                this.jugando = 2;
-            } else {
-                this.mapaActual = this.siguienteNivel();
-                this.hubicarComodines();
-                this.pacMan.cambiarNivel(this.mapaActual, this.velocidadMayor());
-                this.tiempoAumentoVel = 0;
-                this.tiempoFantasmasVulnerables = 0;
-                this.tiempoFrutilla = 0;
-                this.tiempoFrutaViva = 0;
-                rehubicarPacman();
+        //public void cambiarNivel() {
+        //    this.nivelActual++;
+        //    if (this.nivelActual == 4) {
+        //        this.jugando = 2;
+        //    } else {
+        //        this.mapaActual = this.siguienteNivel();
+        //        this.hubicarComodines();
+        //        this.pacMan.cambiarNivel(this.mapaActual, this.velocidadMayor());
+        //        this.tiempoAumentoVel = 0;
+        //        this.tiempoFantasmasVulnerables = 0;
+        //        this.tiempoFrutilla = 0;
+        //        this.tiempoFrutaViva = 0;
+        //        rehubicarPacman();
 
-            }
+        //    }
 
-        }
+        //}
 
 
         /// <summary>
@@ -114,22 +115,22 @@ namespace PACMANv3.pkgModelo {
         /// Evalua el nivel actual y asigna el nuevo tablero
         /// </summary>
         /// <returns>Retorna el tablero del siguiente nivel</returns>
-        private Mapa siguienteNivel() {
-            Mapa m = lvl3;
-            switch (this.nivelActual) {
-                case 1:
-                    m = lvl1;
-                    break;
-                case 2:
-                    m = lvl2;
-                    break;
-                case 3:
-                    m = lvl3;
-                    break;
-            }
-            return m;
+        //private Mapa siguienteNivel() {
+        //    Mapa m = lvl3;
+        //    switch (this.nivelActual) {
+        //        case 1:
+        //            m = lvl1;
+        //            break;
+        //        case 2:
+        //            m = lvl2;
+        //            break;
+        //        case 3:
+        //            m = lvl3;
+        //            break;
+        //    }
+        //    return m;
 
-        }
+        //}
 
         /// <summary>
         /// Calcula intersecciones entre el PacMan y un fantasma ejecutando acciones dependiendo del estado del fantasma
@@ -194,46 +195,17 @@ namespace PACMANv3.pkgModelo {
         /// Evalua todas las colisiones del PacMan con los fantasmas
         /// </summary>
         private void evaluarColisiones() {
-            switch (this.nivelActual) {
-                case 1:
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        this.interseccionPacmanFantasma(fantasma);
-                    }
-                    break;
-                case 2:
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        this.interseccionPacmanFantasma(fantasma);
-                    }
-                    break;
-                case 3:
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        this.interseccionPacmanFantasma(fantasma);
-                    }
-                    break;
+            foreach (Fantasma fantasma in this.fantasmasLvl1) {
+                this.interseccionPacmanFantasma(fantasma);
             }
-
         }
 
         /// <summary>
         /// Aumenta la velocidad de todos los fantasmas y pacman
         /// </summary>
         private void aumentarVelocidad() {
-            switch (this.nivelActual) {
-                case 1:
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        fantasma.aumentarVelocidad();
-                    }
-                    break;
-                case 2:
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        fantasma.aumentarVelocidad();
-                    }
-                    break;
-                case 3:
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        fantasma.aumentarVelocidad();
-                    }
-                    break;
+            foreach (Fantasma fantasma in this.fantasmasLvl1) {
+                fantasma.aumentarVelocidad();
             }
             this.pacMan.aumentarVelocidad();
         }
@@ -300,45 +272,18 @@ namespace PACMANv3.pkgModelo {
         /// Vuelve vulnerables a los fantasmas cuando pacman come una super galleta
         /// </summary>
         private void volverVulnerables() {
-            switch (this.nivelActual) {
-                case 1:
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        fantasma.volverVulnerable();
-                    }
-                    break;
-                case 2:
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        fantasma.volverVulnerable();
-                    }
-                    break;
-                case 3:
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        fantasma.volverVulnerable();
-                    }
-                    break;
+            foreach (Fantasma fantasma in this.fantasmasLvl1) {
+                fantasma.volverVulnerable();
             }
         }
+
 
         /// <summary>
         /// Vuelve a los fantasmas a la normalidad una evz se acaba el tiempo
         /// </summary>
         private void quitarVulnerables() {
-            switch (this.nivelActual) {
-                case 1:
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        fantasma.quitarVulnerabilidad();
-                    }
-                    break;
-                case 2:
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        fantasma.quitarVulnerabilidad();
-                    }
-                    break;
-                case 3:
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        fantasma.quitarVulnerabilidad();
-                    }
-                    break;
+            foreach (Fantasma fantasma in this.fantasmasLvl1) {
+                fantasma.quitarVulnerabilidad();
             }
         }
 
@@ -373,7 +318,7 @@ namespace PACMANv3.pkgModelo {
         public void iteracionLoopDelJuego() {
             if (this.jugando == 1 && this.hayBiscochos()) {
                 this.pacMan.mover();
-                if (mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc!= null && mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc.Estado) {
+                if (mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc != null && mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc.Estado) {
                     if (mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc.Tipo == 3) {
                         sonido(4);
                         this.datosJugador.aumentarPuntaje(100);
@@ -393,21 +338,13 @@ namespace PACMANv3.pkgModelo {
                 }
                 this.evaluarColisiones();
 
-                if (this.nivelActual == 1) {
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        fantasma.mover();
-                    }
-                } else if (this.nivelActual == 2) {
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        fantasma.mover();
-                    }
-                } else if (this.nivelActual == 3) {
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        fantasma.mover();
-                    }
+
+                foreach (Fantasma fantasma in this.fantasmasLvl1) {
+                    fantasma.mover();
                 }
+
             } else {
-                this.cambiarNivel();
+                //this.cambiarNivel();
             }
 
         }
@@ -423,18 +360,18 @@ namespace PACMANv3.pkgModelo {
         /// Separa los mapas que llegan a juego por nivel para un facil manejo
         /// </summary>
         /// <param name="mapasAOrganizar">Lista de mapas que entran al juego</param>
-        private void separarMapasPorNivel(List<Mapa> mapasAOrganizar) {
-            foreach (Mapa map in mapasAOrganizar) {
-                if (map.Nivel == 1) {
-                    listaDeMapaslvl1.Add(map);
-                } else if (map.Nivel == 2) {
-                    listaDeMapaslvl2.Add(map);
-                } else if (map.Nivel == 3) {
-                    listaDeMapaslvl3.Add(map);
-                }
+        //private void separarMapasPorNivel(List<Mapa> mapasAOrganizar) {
+        //    foreach (Mapa map in mapasAOrganizar) {
+        //        if (map.Nivel == 1) {
+        //            listaDeMapaslvl1.Add(map);
+        //        } else if (map.Nivel == 2) {
+        //            listaDeMapaslvl2.Add(map);
+        //        } else if (map.Nivel == 3) {
+        //            listaDeMapaslvl3.Add(map);
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         /// <summary>
         /// Hace la configuracion basica del juego, crea los fantasmas y les da posiciones iniciales al igualq ue al pacman, crea las galletas y hubica los comodines
@@ -442,44 +379,56 @@ namespace PACMANv3.pkgModelo {
         /// <param name="vid"></param>
         /// <param name="hp"></param>
         private void configurarJuego(int vid, int hp) {
-            if (listaDeMapaslvl1.Count > 0 && listaDeMapaslvl2.Count > 0 && listaDeMapaslvl3.Count > 0) {
+            if (this.mapaActual != null) {
                 Random rdm = new Random();
-                Lvl1 = listaDeMapaslvl1.ElementAt(rdm.Next(0, listaDeMapaslvl1.Count));
-                Lvl2 = listaDeMapaslvl2.ElementAt(rdm.Next(0, listaDeMapaslvl2.Count));
-                Lvl3 = listaDeMapaslvl3.ElementAt(rdm.Next(0, listaDeMapaslvl3.Count));
+                //Lvl1 = listaDeMapaslvl1.ElementAt(rdm.Next(0, listaDeMapaslvl1.Count));
+                //Lvl2 = listaDeMapaslvl2.ElementAt(rdm.Next(0, listaDeMapaslvl2.Count));
+                //Lvl3 = listaDeMapaslvl3.ElementAt(rdm.Next(0, listaDeMapaslvl3.Count));
 
 
-                mapaActual = Lvl1;
+                //mapaActual = Lvl1;
 
-                Point[] centrolvl1 = Lvl1.posicionInicalFantasmas();
-                int dirSalidalvl1 = Lvl1.direccionDeSalidaDelFantasma();
-                Point[] centrolvl2 = Lvl2.posicionInicalFantasmas();
-                int dirSalidalvl2 = Lvl2.direccionDeSalidaDelFantasma();
-                Point[] centrolvl3 = Lvl3.posicionInicalFantasmas();
-                int dirSalidalvl3 = Lvl3.direccionDeSalidaDelFantasma();
-                //Fantasmas del nivel 1: 1 Rojo, 1 Rosa, 1 Naranja, 2 Azul
-                fantasmasLvl1.Add(new Fantasma(dirSalidalvl1, "Rojo", 19, centrolvl1[1].X, centrolvl1[1].Y, 1, this.dificultad, Lvl1, centrolvl1[0].X, centrolvl1[0].Y));
-                fantasmasLvl1.Add(new Fantasma(dirSalidalvl1, "Rosa", 19, centrolvl1[1].X, centrolvl1[1].Y, 1, this.dificultad, Lvl1, centrolvl1[0].X, centrolvl1[0].Y));
-                fantasmasLvl1.Add(new Fantasma(dirSalidalvl1, "Naranja", 19, centrolvl1[1].X, centrolvl1[1].Y, 1, this.dificultad, Lvl1, centrolvl1[0].X, centrolvl1[0].Y));
-                for (int i = 0; i < 2; i++) {
-                    fantasmasLvl1.Add(new Fantasma(dirSalidalvl1, "Azul", 19, centrolvl1[1].X, centrolvl1[1].Y, 1, this.dificultad, Lvl1, centrolvl1[0].X, centrolvl1[0].Y));
+                Point[] centro = mapaActual.posicionInicalFantasmas();
+                int dirSalida = mapaActual.direccionDeSalidaDelFantasma();
+                //Point[] centrolvl2 = Lvl2.posicionInicalFantasmas();
+                //int dirSalidalvl2 = Lvl2.direccionDeSalidaDelFantasma();
+                //Point[] centrolvl3 = Lvl3.posicionInicalFantasmas();
+                //int dirSalidalvl3 = Lvl3.direccionDeSalidaDelFantasma();
+
+                switch (this.dificultad) {
+                    case "Facil":
+                        //Fantasmas del nivel 1: 1 Rojo, 1 Rosa, 1 Naranja, 2 Azul
+                        fantasmasLvl1.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                        fantasmasLvl1.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                        fantasmasLvl1.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                        for (int i = 0; i < 2; i++) {
+                            fantasmasLvl1.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                        }
+                        break;
+                    case "Medio":
+                        //Fantasmas del nivel 2: 2 Rojo, 2 Rosa, 2 Naranja, 2 Azul
+                        for (int i = 0; i < 2; i++) {
+                            fantasmasLvl1.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                            fantasmasLvl1.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                            fantasmasLvl1.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                            fantasmasLvl1.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                        }
+                        break;
+                    case "Dificil":
+                        //Fantasmas del nivel 3: 2 Rojo, 2 Rosa, 3 Naranja, 3 Azul
+                        for (int i = 0; i < 2; i++) {
+                            fantasmasLvl1.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                            fantasmasLvl1.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                        }
+                        for (int i = 0; i < 3; i++) {
+                            fantasmasLvl1.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                            fantasmasLvl1.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapaActual, centro[0].X, centro[0].Y));
+                        }
+                        break;
                 }
-                //Fantasmas del nivel 2: 2 Rojo, 2 Rosa, 2 Naranja, 2 Azul
-                for (int i = 0; i < 2; i++) {
-                    fantasmasLvl2.Add(new Fantasma(dirSalidalvl2, "Rojo", 19, centrolvl2[1].X, centrolvl2[1].Y, 1, this.dificultad, Lvl2, centrolvl2[0].X, centrolvl2[0].Y));
-                    fantasmasLvl2.Add(new Fantasma(dirSalidalvl2, "Rosa", 19, centrolvl2[1].X, centrolvl2[1].Y, 1, this.dificultad, Lvl2, centrolvl2[0].X, centrolvl2[0].Y));
-                    fantasmasLvl2.Add(new Fantasma(dirSalidalvl2, "Naranja", 19, centrolvl2[1].X, centrolvl2[1].Y, 1, this.dificultad, Lvl2, centrolvl2[0].X, centrolvl2[0].Y));
-                    fantasmasLvl2.Add(new Fantasma(dirSalidalvl2, "Azul", 19, centrolvl2[1].X, centrolvl2[1].Y, 1, this.dificultad, Lvl2, centrolvl2[0].X, centrolvl2[0].Y));
-                }
-                //Fantasmas del nivel 3: 2 Rojo, 2 Rosa, 3 Naranja, 3 Azul
-                for (int i = 0; i < 2; i++) {
-                    fantasmasLvl3.Add(new Fantasma(dirSalidalvl3, "Rojo", 19, centrolvl3[1].X, centrolvl3[1].Y, 1, this.dificultad, Lvl3, centrolvl3[0].X, centrolvl3[0].Y));
-                    fantasmasLvl3.Add(new Fantasma(dirSalidalvl3, "Rosa", 19, centrolvl3[1].X, centrolvl3[1].Y, 1, this.dificultad, Lvl3, centrolvl3[0].X, centrolvl3[0].Y));
-                }
-                for (int i = 0; i < 3; i++) {
-                    fantasmasLvl3.Add(new Fantasma(dirSalidalvl3, "Naranja", 19, centrolvl3[1].X, centrolvl3[1].Y, 1, this.dificultad, Lvl3, centrolvl3[0].X, centrolvl3[0].Y));
-                    fantasmasLvl3.Add(new Fantasma(dirSalidalvl3, "Azul", 19, centrolvl3[1].X, centrolvl3[1].Y, 1, this.dificultad, Lvl3, centrolvl3[0].X, centrolvl3[0].Y));
-                }
+
+
+
                 hubicarPacmanEnMapaActualInicial(vid, hp);
                 hubicarComodines();
             } else {
@@ -492,14 +441,14 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         public void hubicarComodines() {
             int cantComodines = 0;
-            switch (this.nivelActual) {
-                case 1:
+            switch (this.dificultad) {
+                case "Facil":
                     cantComodines = 5;
                     break;
-                case 2:
+                case "Medio":
                     cantComodines = 8;
                     break;
-                case 3:
+                case "Deficil":
                     cantComodines = 10;
                     break;
             }
@@ -563,18 +512,7 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         /// <returns>Retorna la mayor velocidad</returns>
         private int velocidadMayor() {
-            int vel = 0; ;
-            switch (this.nivelActual) {
-                case 1:
-                    vel = fantasmasLvl1.ElementAt(0).Velocidad;
-                    break;
-                case 2:
-                    vel = fantasmasLvl2.ElementAt(0).Velocidad;
-                    break;
-                case 3:
-                    vel = fantasmasLvl3.ElementAt(0).Velocidad;
-                    break;
-            }
+            int vel = fantasmasLvl1.ElementAt(0).Velocidad;
             return vel;
         }
 
@@ -619,30 +557,6 @@ namespace PACMANv3.pkgModelo {
         }
 
         /// <summary>
-        /// Metodo accesor y mutador del atributo lvl3
-        /// </summary>
-        internal Mapa Lvl3 {
-            get { return lvl3; }
-            set { lvl3 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo Lvl2
-        /// </summary>
-        internal Mapa Lvl2 {
-            get { return lvl2; }
-            set { lvl2 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo Lvl1
-        /// </summary>
-        internal Mapa Lvl1 {
-            get { return lvl1; }
-            set { lvl1 = value; }
-        }
-
-        /// <summary>
         /// Metodo accesor y mutador del atributo PacMan
         /// </summary>
         internal PacMan PacMan {
@@ -650,21 +564,6 @@ namespace PACMANv3.pkgModelo {
             set { pacMan = value; }
         }
 
-        /// <summary>
-        /// Metodo accesor y mutador del atributo FantasmasLvl3
-        /// </summary>
-        public List<Fantasma> FantasmasLvl3 {
-            get { return fantasmasLvl3; }
-            set { fantasmasLvl3 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo FantasmasLvl2
-        /// </summary>
-        public List<Fantasma> FantasmasLvl2 {
-            get { return fantasmasLvl2; }
-            set { fantasmasLvl2 = value; }
-        }
 
         /// <summary>
         /// Metodo accesor y mutador del atributo FantasmasLvl1
@@ -712,30 +611,6 @@ namespace PACMANv3.pkgModelo {
         public Mapa MapaActual {
             get { return mapaActual; }
             set { mapaActual = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo ListaDeMapaslvl1
-        /// </summary>
-        public List<Mapa> ListaDeMapaslvl1 {
-            get { return listaDeMapaslvl1; }
-            set { listaDeMapaslvl1 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo ListaDeMapaslvl2
-        /// </summary>
-        public List<Mapa> ListaDeMapaslvl2 {
-            get { return listaDeMapaslvl2; }
-            set { listaDeMapaslvl2 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo ListaDeMapaslvl3
-        /// </summary>
-        public List<Mapa> ListaDeMapaslvl3 {
-            get { return listaDeMapaslvl3; }
-            set { listaDeMapaslvl3 = value; }
         }
 
         /// <summary>
