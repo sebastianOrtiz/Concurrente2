@@ -52,13 +52,13 @@ namespace PACMANv3.pkgVista {
             foreach (RecognizedWordUnit palabra in e.Result.Words) {
                 lblPalabra.Text = palabra.Text;
                 if (palabra.Text == "izquierda") {
-                    this.Juego.PacMan.adicionarOrden(4);
+                    this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
                 } else if (palabra.Text == "derecha") {
-                    this.Juego.PacMan.adicionarOrden(3);
+                    this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
                 } else if (palabra.Text == "arriba") {
-                    this.Juego.PacMan.adicionarOrden(1);
+                    this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
                 } else if (palabra.Text == "abajo") {
-                    this.Juego.PacMan.adicionarOrden(2);
+                    this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
                 }
             }
         }
@@ -119,9 +119,9 @@ namespace PACMANv3.pkgVista {
 
         private void refrescarTextos() {
             this.lblPuntaje.Text = "Puntos: " + this.Juego.DatosJugador.Puntaje + "";
-            this.lblOrdenesEnCola.Text = "Ordenes en cola:\n" + this.Juego.PacMan.listarOrdenesActuales();
+            this.lblOrdenesEnCola.Text = "Ordenes en cola:\n" + this.Juego.PacMans.ElementAt(0).listarOrdenesActuales();
             this.lblTiempo.Text = "Tiempo: " + this.Juego.obtenerTiempo();
-            this.lblVidasPac.Text = this.Juego.PacMan.estadoDeVida();
+            this.lblVidasPac.Text = this.Juego.PacMans.ElementAt(0).estadoDeVida();
             this.lblNombreJugador.Text = this.Juego.DatosJugador.Nombre;
         }
 
@@ -130,12 +130,12 @@ namespace PACMANv3.pkgVista {
                 Graphics g = e.Graphics;
                 if (Juego.Jugando == 1) {
 
-                    if (Juego.MapaActual != null) {
-                        graficarMapa(Juego.MapaActual, g);
-                        dibujarControno(Juego.MapaActual, g);
-                        graficarBiscochos(Juego.MapaActual, g);
+                    if (Juego.Mapa != null) {
+                        graficarMapa(Juego.Mapa, g);
+                        dibujarControno(Juego.Mapa, g);
+                        graficarBiscochos(Juego.Mapa, g);
                         //if (this.Juego.NivelActual == 1) {
-                            foreach (Fantasma fantasma in Juego.FantasmasLvl1) {
+                            foreach (Fantasma fantasma in Juego.Fantasmas) {
                                 g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
                             }
                         //} else if (this.Juego.NivelActual == 2) {
@@ -148,7 +148,7 @@ namespace PACMANv3.pkgVista {
                         //    }
                         //}
 
-                        g.DrawImage(Juego.PacMan.ImgActual, Juego.PacMan.X, Juego.PacMan.Y, Juego.PacMan.Windth, Juego.PacMan.Height);
+                            g.DrawImage(Juego.PacMans.ElementAt(0).ImgActual, Juego.PacMans.ElementAt(0).X, Juego.PacMans.ElementAt(0).Y, Juego.PacMans.ElementAt(0).Windth, Juego.PacMans.ElementAt(0).Height);
 
                         if (this.lblPuntaje.InvokeRequired) {
                             this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));
@@ -206,16 +206,16 @@ namespace PACMANv3.pkgVista {
                 if (!this.entradaPorVoz) {
                     switch (e.KeyData) {
                         case Keys.Up:
-                            this.Juego.PacMan.adicionarOrden(1);
+                            this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
                             break;
                         case Keys.Down:
-                            this.Juego.PacMan.adicionarOrden(2);
+                            this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
                             break;
                         case Keys.Right:
-                            this.Juego.PacMan.adicionarOrden(3);
+                            this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
                             break;
                         case Keys.Left:
-                            this.Juego.PacMan.adicionarOrden(4);
+                            this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
                             break;
                         case Keys.F1:
                             this.Juego.Jugando = 2;
