@@ -15,7 +15,7 @@ namespace PACMANv3.pkgModelo {
         private Boolean estado;
         private int width;
         private int height;
-
+        //
         /// <summary>
         /// Metodo Constructor de la clase Biscocho
         /// </summary>
