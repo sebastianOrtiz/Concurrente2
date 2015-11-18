@@ -13,18 +13,10 @@ namespace PACMANv3.pkgModelo {
     /// </summary>
     public class Juego {
         private Mapa mapa;
-        //private List<Mapa> listaDeMapaslvl1;
-        //private List<Mapa> listaDeMapaslvl2;
-        //private List<Mapa> listaDeMapaslvl3;
-        //private Mapa lvl1;
-        //private Mapa lvl2;
-        //private Mapa lvl3;
         private string dificultad;
         private DatosJugador datosJugador;
         private Boolean entradaPorVoz;
         private List<Fantasma> fantasmas;
-        //private List<Fantasma> fantasmasLvl2;
-        //private List<Fantasma> fantasmasLvl3;
         private List<PacMan> pacMans;
         private int nivelActual;
         private Boolean estadoDelJuego;
@@ -50,15 +42,9 @@ namespace PACMANv3.pkgModelo {
         /// <param name="vidasPac">Vidas del jugador</param>
         /// <param name="hpPac">Valor de cada vida del Jugador</param>
         public Juego(Mapa mapa, String dificultad, DatosJugador jugador, Boolean entradaVoz, int vidasPac, int hpPac) {
-            //this.listaDeMapaslvl1 = new List<Mapa>();
-            //this.listaDeMapaslvl2 = new List<Mapa>();
-            //this.listaDeMapaslvl3 = new List<Mapa>();
             this.mapa = mapa;
             this.fantasmas = new List<Fantasma>();
             this.pacMans = new List<PacMan>();
-            //this.fantasmasLvl2 = new List<Fantasma>();
-            //this.fantasmasLvl3 = new List<Fantasma>();
-            //this.separarMapasPorNivel(mapas);
             this.dificultad = dificultad;
             this.datosJugador = jugador;
             this.entradaPorVoz = entradaVoz;
@@ -81,29 +67,6 @@ namespace PACMANv3.pkgModelo {
             Estado nuevoEstado = new Estado(this.pacMans,this.fantasmas,this.mapa);
             return nuevoEstado;
         }
-
-        /// <summary>
-        /// Cambia el nivel del juego, cambia el mapa y demas banderas de estado
-        /// </summary>
-        //public void cambiarNivel() {
-        //    this.nivelActual++;
-        //    if (this.nivelActual == 4) {
-        //        this.jugando = 2;
-        //    } else {
-        //        this.mapaActual = this.siguienteNivel();
-        //        this.hubicarComodines();
-        //        this.pacMan.cambiarNivel(this.mapaActual, this.velocidadMayor());
-        //        this.tiempoAumentoVel = 0;
-        //        this.tiempoFantasmasVulnerables = 0;
-        //        this.tiempoFrutilla = 0;
-        //        this.tiempoFrutaViva = 0;
-        //        rehubicarPacman();
-
-        //    }
-
-        //}
-
-
         /// <summary>
         /// Evalua si aun hay galletas en el tablero actual
         /// </summary>
@@ -116,27 +79,6 @@ namespace PACMANv3.pkgModelo {
             }
             return false;
         }
-
-        /// <summary>
-        /// Evalua el nivel actual y asigna el nuevo tablero
-        /// </summary>
-        /// <returns>Retorna el tablero del siguiente nivel</returns>
-        //private Mapa siguienteNivel() {
-        //    Mapa m = lvl3;
-        //    switch (this.nivelActual) {
-        //        case 1:
-        //            m = lvl1;
-        //            break;
-        //        case 2:
-        //            m = lvl2;
-        //            break;
-        //        case 3:
-        //            m = lvl3;
-        //            break;
-        //    }
-        //    return m;
-
-        //}
 
         /// <summary>
         /// Calcula intersecciones entre el PacMan y un fantasma ejecutando acciones dependiendo del estado del fantasma
@@ -350,7 +292,7 @@ namespace PACMANv3.pkgModelo {
                 }
 
             } else {
-                //this.cambiarNivel();
+        
             }
 
         }
@@ -363,23 +305,6 @@ namespace PACMANv3.pkgModelo {
         }
 
         /// <summary>
-        /// Separa los mapas que llegan a juego por nivel para un facil manejo
-        /// </summary>
-        /// <param name="mapasAOrganizar">Lista de mapas que entran al juego</param>
-        //private void separarMapasPorNivel(List<Mapa> mapasAOrganizar) {
-        //    foreach (Mapa map in mapasAOrganizar) {
-        //        if (map.Nivel == 1) {
-        //            listaDeMapaslvl1.Add(map);
-        //        } else if (map.Nivel == 2) {
-        //            listaDeMapaslvl2.Add(map);
-        //        } else if (map.Nivel == 3) {
-        //            listaDeMapaslvl3.Add(map);
-        //        }
-
-        //    }
-        //}
-
-        /// <summary>
         /// Hace la configuracion basica del juego, crea los fantasmas y les da posiciones iniciales al igualq ue al pacman, crea las galletas y hubica los comodines
         /// </summary>
         /// <param name="vid"></param>
@@ -387,23 +312,11 @@ namespace PACMANv3.pkgModelo {
         private void configurarJuego(int vid, int hp) {
             if (this.mapa != null) {
                 Random rdm = new Random();
-                //Lvl1 = listaDeMapaslvl1.ElementAt(rdm.Next(0, listaDeMapaslvl1.Count));
-                //Lvl2 = listaDeMapaslvl2.ElementAt(rdm.Next(0, listaDeMapaslvl2.Count));
-                //Lvl3 = listaDeMapaslvl3.ElementAt(rdm.Next(0, listaDeMapaslvl3.Count));
-
-
-                //mapaActual = Lvl1;
-
                 Point[] centro = mapa.posicionInicalFantasmas();
                 int dirSalida = mapa.direccionDeSalidaDelFantasma();
-                //Point[] centrolvl2 = Lvl2.posicionInicalFantasmas();
-                //int dirSalidalvl2 = Lvl2.direccionDeSalidaDelFantasma();
-                //Point[] centrolvl3 = Lvl3.posicionInicalFantasmas();
-                //int dirSalidalvl3 = Lvl3.direccionDeSalidaDelFantasma();
-
                 switch (this.dificultad) {
                     case "Facil":
-                        //Fantasmas del nivel 1: 1 Rojo, 1 Rosa, 1 Naranja, 2 Azul
+                        //Fantasmas del nivel Facl: 1 Rojo, 1 Rosa, 1 Naranja, 2 Azul
                         fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
@@ -412,7 +325,7 @@ namespace PACMANv3.pkgModelo {
                         }
                         break;
                     case "Medio":
-                        //Fantasmas del nivel 2: 2 Rojo, 2 Rosa, 2 Naranja, 2 Azul
+                        //Fantasmas del nivel Medio: 2 Rojo, 2 Rosa, 2 Naranja, 2 Azul
                         for (int i = 0; i < 2; i++) {
                             fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
                             fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
@@ -421,7 +334,7 @@ namespace PACMANv3.pkgModelo {
                         }
                         break;
                     case "Dificil":
-                        //Fantasmas del nivel 3: 2 Rojo, 2 Rosa, 3 Naranja, 3 Azul
+                        //Fantasmas del nivel Dificl: 2 Rojo, 2 Rosa, 3 Naranja, 3 Azul
                         for (int i = 0; i < 2; i++) {
                             fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
                             fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
