@@ -10,12 +10,12 @@ namespace PACMANv3.pkgModelo
     class Mensaje
     {
         private string nombre;
-        private string mensaje;
+        private string texto;
 
         public Mensaje(string nombre, string mensaje)
         {
             this.nombre = nombre;
-            this.mensaje = mensaje;
+            this.texto = mensaje;
         }
 
         /// <summary>
@@ -30,10 +30,10 @@ namespace PACMANv3.pkgModelo
         /// <summary>
         /// Accesor y mutador de el atributo Mensaje
         /// </summary>
-        public string Mensaje
+        public string Texto
         {
-            get { return mensaje; }
-            set { mensaje = value; }
+            get { return texto; }
+            set { texto = value; }
         }
     }
 }
