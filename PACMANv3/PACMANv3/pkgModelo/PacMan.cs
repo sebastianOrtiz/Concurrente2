@@ -8,7 +8,9 @@ namespace PACMANv3.pkgModelo {
     /// <summary>
     /// Representa a pacman, el personaje que manipula el jugador dentro del juego
     /// </summary>
+    [Serializable()]
     public class PacMan {
+        
         private Image imgActual;
         private Image[] imgArriba;
         private Image[] imgAbajo;
@@ -449,6 +451,13 @@ namespace PACMANv3.pkgModelo {
             set { imgActual = value; }
         }
 
+        private int identificador;
+
+        public int Identificador
+        {
+            get { return identificador; }
+            set { identificador = value; }
+        }
 
     }
 }

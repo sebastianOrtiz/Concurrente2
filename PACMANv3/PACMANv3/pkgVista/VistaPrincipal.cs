@@ -23,32 +23,58 @@ namespace PACMANv3
     public partial class Form1 : Form
     {
         private Juego juego;
-        private List<Mapa> listadeMapasDificil;
-        private List<Mapa> listadeMapasMedio;
-        private List<Mapa> listadeMapasFacil;
-        private List<String> nombresDeMapasDificil;
-        private List<String> nombresDeMapasMedio;
-        private List<String> nombresDeMapasFacil;
+        private List<Mapa> listaDeMapas;
+        private List<String> nombresDeMapas;
         private List<DatosJugador> datosJugadores;
         private SoundPlayer soundFondo;
+        private Mapa mapaAJugar;
 
 
         public Form1()
         {
             InitializeComponent();
             cmbSeleccionarDificultad.SelectedIndex = 0;
-            listadeMapasDificil = new List<Mapa>();
-            listadeMapasMedio = new List<Mapa>();
-            listadeMapasFacil = new List<Mapa>();
-            nombresDeMapasDificil = new List<string>();
-            nombresDeMapasMedio = new List<string>();
-            nombresDeMapasFacil = new List<string>();
+
+            this.listaDeMapas = new List<Mapa>();
+            this.nombresDeMapas = new List<String>();
             this.datosJugadores = new List<DatosJugador>();
             cargarDatosJugadores();
             cargarNombresDeMapas();
             cargarMapas();
 
-            /* Conexión socket(envio y recibo)Socket sc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            /* Conexión socket(envio y recibo)
+            Socket ss = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
+            try
+            {
+                ss.Bind(direccion);
+                Console.WriteLine("Escuchando");
+                ss.Listen(1);
+                Console.WriteLine("Esperando");
+                Socket sc = ss.Accept();
+                BinaryFormatter serializer = new BinaryFormatter();
+                Mensaje m = null;
+                NetworkStream net = new NetworkStream(sc);
+                m = (Mensaje)serializer.Deserialize(net);
+                Console.WriteLine("" + m.Nombre);
+                Console.WriteLine("" + m.Texto);
+                m = new Mensaje("servidor","mundo!!");
+                serializer.Serialize(net, m);
+                net.Close();
+                sc.Close();
+                ss.Close();
+                Console.WriteLine("Cerrando conexion");
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("Error: {0}", error.ToString());
+            }*/
+
+
+            //-------------------------------------------------
+
+            //Conexión socket(envio y recibo)
+            Socket sc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
 
             try
@@ -59,16 +85,26 @@ namespace PACMANv3
                 BinaryFormatter serializer = new BinaryFormatter();
                 NetworkStream st = new NetworkStream(sc);
                 serializer.Serialize(st, m);
-                m = (Mensaje)serializer.Deserialize(st);
+                /*m = (Mensaje)serializer.Deserialize(st);
                 Console.WriteLine("" + m.Nombre);
                 Console.WriteLine("" + m.Texto);
                 st.Close();
-                sc.Close();
+                sc.Close();*/
             }
             catch (Exception error)
             {
                 Console.WriteLine("Error: {0}", error.ToString());
-            }*/
+            }
+        }
+
+        public void cargarMapasEnCombobox()
+        {
+
+            foreach (String nombre in nombresDeMapas)
+            {
+                cmbSeleccionMapa.Items.Add(nombre);
+                cmbSeleccionMapa.SelectedIndex = 0;
+            }
         }
 
         private void escribirJSONJugadores()
@@ -91,6 +127,7 @@ namespace PACMANv3
             }
             sr.Close();
 
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -107,37 +144,23 @@ namespace PACMANv3
 
         private void cargarNombresDeMapas()
         {
-            StreamReader sr = new StreamReader("./../../ArchivosConf/Config/nombreMapasDificil.conf");
+            StreamReader sr = new StreamReader("./../../ArchivosConf/Config/nombresMapas.conf");
             String linea;
             linea = sr.ReadLine();
             while (linea != null)
             {
-                nombresDeMapasDificil.Add(linea);
-                linea = sr.ReadLine();
-            }
-            sr = new StreamReader("./../../ArchivosConf/Config/nombreMapasMedio.conf");
-            linea = sr.ReadLine();
-            while (linea != null)
-            {
-                nombresDeMapasMedio.Add(linea);
-                linea = sr.ReadLine();
-            }
-
-            sr = new StreamReader("./../../ArchivosConf/Config/nombreMapasFacil.conf");
-            linea = sr.ReadLine();
-            while (linea != null)
-            {
-                nombresDeMapasFacil.Add(linea);
+                nombresDeMapas.Add(linea);
                 linea = sr.ReadLine();
             }
             sr.Close();
+            this.cargarMapasEnCombobox();
         }
 
         private void cargarMapas()
         {
             //LEYENDO JSON
             StreamReader sr;
-            foreach (String nombreMapa in nombresDeMapasDificil)
+            foreach (String nombreMapa in nombresDeMapas)
             {
                 sr = File.OpenText("./../../ArchivosConf/Maps/" + nombreMapa + ".map");
                 String entrada = sr.ReadToEnd();
@@ -146,91 +169,63 @@ namespace PACMANv3
                     Mapa nMap = JsonConvert.DeserializeObject<Mapa>(entrada);
                     nMap.MatrizDiseño = new Celda[nMap.Filas, nMap.Columnas];
                     nMap.crearMapa();
-                    listadeMapasDificil.Add(nMap);
-                }
-            }
-            foreach (String nombreMapa in nombresDeMapasMedio)
-            {
-                sr = File.OpenText("./../../ArchivosConf/Maps/" + nombreMapa + ".map");
-                String entrada = sr.ReadToEnd();
-                if (entrada != "")
-                {
-                    Mapa nMap = JsonConvert.DeserializeObject<Mapa>(entrada);
-                    nMap.MatrizDiseño = new Celda[nMap.Filas, nMap.Columnas];
-                    nMap.crearMapa();
-                    listadeMapasMedio.Add(nMap);
-                }
-            }
-            foreach (String nombreMapa in nombresDeMapasFacil)
-            {
-                sr = File.OpenText("./../../ArchivosConf/Maps/" + nombreMapa + ".map");
-                String entrada = sr.ReadToEnd();
-                if (entrada != "")
-                {
-                    Mapa nMap = JsonConvert.DeserializeObject<Mapa>(entrada);
-                    nMap.MatrizDiseño = new Celda[nMap.Filas, nMap.Columnas];
-                    nMap.crearMapa();
-                    listadeMapasFacil.Add(nMap);
+                    listaDeMapas.Add(nMap);
                 }
             }
         }
 
         private void btnAceptarConfigInicial_Click(object sender, EventArgs e)
         {
-            if (txtNombreJu.Text != null && cmbSeleccionarDificultad.SelectedIndex > -1)
+            if (cmbSeleccionMapa.SelectedIndex > -1)
             {
-                String dificultad = cmbSeleccionarDificultad.SelectedItem.ToString();
-                DatosJugador nuevoJugador = new DatosJugador(txtNombreJu.Text, dificultad);
-                Boolean entradaPorVoz;
-                if (rBtnVoz.Checked)
+                if (txtNombreJu.Text != null && cmbSeleccionarDificultad.SelectedIndex > -1)
                 {
-                    entradaPorVoz = true;
+                    String dificultad = cmbSeleccionarDificultad.SelectedItem.ToString();
+                    DatosJugador nuevoJugador = new DatosJugador(txtNombreJu.Text, dificultad);
+                    Boolean entradaPorVoz;
+                    if (rBtnVoz.Checked)
+                    {
+                        entradaPorVoz = true;
+                    }
+                    else
+                    {
+                        entradaPorVoz = false;
+                    }
+
+                    juego = new Juego(mapaAJugar, dificultad, nuevoJugador, entradaPorVoz, (int)nudVidasPacman.Value, (int)nudHPPacman.Value);
+
+                    VistaJuego vj = new VistaJuego();
+                    vj.definirEntrada(entradaPorVoz);
+                    if (entradaPorVoz)
+                    {
+                        vj.iniciarReconocedor();
+                    }
+                    vj.crearJuego(this.juego);
+                    DialogResult res = vj.ShowDialog();
+
+                    if (res == DialogResult.OK)
+                    {
+                        carYReproducir();
+                        DatosJugador jugadorEntrante = vj.Juego.DatosJugador;
+                        jugadorEntrante.Fecha = DateTime.Now.ToString();
+                        this.datosJugadores.Add(jugadorEntrante);
+                        this.ordenarDescendente();
+                        this.panelConfigInicio.Visible = false;
+                        this.panelPuntajes.Visible = true;
+                        this.listarDatosJugadores();
+                        this.cargarMapas();
+                    }
                 }
                 else
                 {
-                    entradaPorVoz = false;
-                }
-
-                if (dificultad == "Facil")
-                {
-                    juego = new Juego(listadeMapasFacil, dificultad, nuevoJugador, entradaPorVoz, (int)nudVidasPacman.Value, (int)nudHPPacman.Value);
-                }
-                else if (dificultad == "Medio")
-                {
-                    juego = new Juego(listadeMapasMedio, dificultad, nuevoJugador, entradaPorVoz, (int)nudVidasPacman.Value, (int)nudHPPacman.Value);
-                }
-                else if (dificultad == "Dificil")
-                {
-                    juego = new Juego(listadeMapasDificil, dificultad, nuevoJugador, entradaPorVoz, (int)nudVidasPacman.Value, (int)nudHPPacman.Value);
-
-                }
-
-                VistaJuego vj = new VistaJuego();
-                vj.definirEntrada(entradaPorVoz);
-                if (entradaPorVoz)
-                {
-                    vj.iniciarReconocedor();
-                }
-                vj.crearJuego(this.juego);
-                DialogResult res = vj.ShowDialog();
-
-                if (res == DialogResult.OK)
-                {
-                    carYReproducir();
-                    DatosJugador jugadorEntrante = vj.Juego.DatosJugador;
-                    jugadorEntrante.Fecha = DateTime.Now.ToString();
-                    this.datosJugadores.Add(jugadorEntrante);
-                    this.ordenarDescendente();
-                    this.panelConfigInicio.Visible = false;
-                    this.panelPuntajes.Visible = true;
-                    this.listarDatosJugadores();
-                    this.cargarMapas();
+                    MessageBox.Show("No hay nombre o nivel de dificultad seleccionado");
                 }
             }
             else
             {
-                MessageBox.Show("No hay nombre o nivel de dificultad seleccionado");
+                MessageBox.Show("Seleccione un Mapa");
             }
+
         }
 
         private void listarDatosJugadores()
@@ -260,19 +255,8 @@ namespace PACMANv3
 
             if (res == DialogResult.OK)
             {
-                Mapa nMapa = nuevaVen.Mapa;
-                if (nMapa.Dificultad == "Dificil")
-                {
-                    listadeMapasDificil.Add(nMapa);
-                }
-                else if (nMapa.Dificultad == "Medio")
-                {
-                    listadeMapasMedio.Add(nMapa);
-                }
-                else if (nMapa.Dificultad == "Facil")
-                {
-                    listadeMapasFacil.Add(nMapa);
-                }
+                //Mapa nMapa = nuevaVen.Mapa;
+                listaDeMapas.Add(nuevaVen.Mapa);
             }
         }
 
@@ -315,12 +299,8 @@ namespace PACMANv3
             VistaEdicionDeMapas ve = new VistaEdicionDeMapas();
             List<String> lista = new List<string>();
             List<Mapa> todosLosMapas = new List<Mapa>();
-            todosLosMapas.AddRange(listadeMapasFacil);
-            todosLosMapas.AddRange(listadeMapasMedio);
-            todosLosMapas.AddRange(listadeMapasDificil);
-            lista.AddRange(nombresDeMapasFacil);
-            lista.AddRange(nombresDeMapasMedio);
-            lista.AddRange(nombresDeMapasDificil);
+            todosLosMapas.AddRange(listaDeMapas);
+            lista.AddRange(nombresDeMapas);
             ve.cargarMapasEnElEditor(lista, todosLosMapas);
             DialogResult res = ve.ShowDialog();
 
@@ -328,47 +308,28 @@ namespace PACMANv3
             {
                 Mapa nuevoMapa = ve.MapaNuevo;
                 Mapa[] arrayMapas;
-                if (nuevoMapa.Dificultad == "Dificil")
+                arrayMapas = listaDeMapas.ToArray();
+                for (int i = 0; i < arrayMapas.Length; i++)
                 {
-                    arrayMapas = listadeMapasDificil.ToArray();
-                    for (int i = 0; i < arrayMapas.Length; i++)
+                    if (arrayMapas[i].Nombre.Equals(nuevoMapa.Nombre))
                     {
-                        if (arrayMapas[i].Nombre.Equals(nuevoMapa.Nombre))
-                        {
-                            arrayMapas[i] = nuevoMapa;
-                            break;
-                        }
+                        arrayMapas[i] = nuevoMapa;
+                        break;
                     }
-                    listadeMapasDificil.Clear();
-                    listadeMapasDificil.AddRange(arrayMapas);
                 }
-                else if (nuevoMapa.Dificultad == "Medio")
+                listaDeMapas.Clear();
+                listaDeMapas.AddRange(arrayMapas);
+            }
+        }
+
+        private void cmbSeleccionMapa_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            foreach (Mapa mapa in this.listaDeMapas)
+            {
+                if (mapa.Nombre.Equals(cmbSeleccionMapa.SelectedItem.ToString()))
                 {
-                    arrayMapas = listadeMapasMedio.ToArray();
-                    for (int i = 0; i < arrayMapas.Length; i++)
-                    {
-                        if (arrayMapas[i].Nombre.Equals(nuevoMapa.Nombre))
-                        {
-                            arrayMapas[i] = nuevoMapa;
-                            break;
-                        }
-                    }
-                    listadeMapasMedio.Clear();
-                    listadeMapasMedio.AddRange(arrayMapas);
-                }
-                else if (nuevoMapa.Dificultad == "Facil")
-                {
-                    arrayMapas = listadeMapasFacil.ToArray();
-                    for (int i = 0; i < arrayMapas.Length; i++)
-                    {
-                        if (arrayMapas[i].Nombre.Equals(nuevoMapa.Nombre))
-                        {
-                            arrayMapas[i] = nuevoMapa;
-                            break;
-                        }
-                    }
-                    listadeMapasFacil.Clear();
-                    listadeMapasFacil.AddRange(arrayMapas);
+                    this.mapaAJugar = mapa;
+                    break;
                 }
             }
         }

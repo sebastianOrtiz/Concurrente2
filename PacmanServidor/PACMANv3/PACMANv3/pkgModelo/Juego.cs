@@ -63,8 +63,21 @@ namespace PACMANv3.pkgModelo {
 
         }
 
+        public Biscocho[,] obtenerBiscochos()
+        {
+            Biscocho[,] biscochos = new Biscocho[mapa.Filas, mapa.Columnas];
+            for (int i = 0; i < mapa.Filas; i++)
+            {
+                for (int j = 0; j < mapa.Columnas; j++)
+                {
+                    biscochos[i, j] = mapa.MatrizDiseño[i, j].Bisc;
+                }
+            }
+            return biscochos;
+        }
+
         public Estado generarEstado() {
-            Estado nuevoEstado = new Estado(this.pacMans,this.fantasmas,this.mapa);
+            Estado nuevoEstado = new Estado(this.pacMans, this.fantasmas, this.obtenerBiscochos());
             return nuevoEstado;
         }
         /// <summary>

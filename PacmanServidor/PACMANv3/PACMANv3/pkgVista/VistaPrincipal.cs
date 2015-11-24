@@ -42,8 +42,8 @@ namespace PACMANv3
             cargarNombresDeMapas();
             cargarMapas();
 
-            /* Conexión socket(envio y recibo)
-            Socket ss = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //Conexión socket(envio y recibo)
+            /*Socket ss = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
             try
             {
@@ -64,6 +64,31 @@ namespace PACMANv3
                 sc.Close();
                 ss.Close();
                 Console.WriteLine("Cerrando conexion");
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("Error: {0}", error.ToString());
+            }*/
+
+            //-------------------------------------------------
+
+            //Conexión socket(envio y recibo)
+            /*Socket sc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
+
+            try
+            {
+                sc.Connect(direccion);            
+                Console.WriteLine("Conectado con exito");
+                Mensaje m = new Mensaje("cliente", "hola!!");
+                BinaryFormatter serializer = new BinaryFormatter();
+                NetworkStream st = new NetworkStream(sc);
+                serializer.Serialize(st, m);
+                m = (Mensaje)serializer.Deserialize(st);
+                Console.WriteLine("" + m.Nombre);
+                Console.WriteLine("" + m.Texto);
+                st.Close();
+                sc.Close();
             }
             catch (Exception error)
             {

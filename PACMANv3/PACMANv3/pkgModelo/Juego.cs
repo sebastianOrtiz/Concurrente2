@@ -7,25 +7,19 @@ using System.Drawing;
 using System.Threading;
 using System.Media;
 
-namespace PACMANv3.pkgModelo {
+namespace PACMANv3.pkgModelo
+{
     /// <summary>
     /// Clase juego que representa un juego con una dificultad y un jugador definidos
     /// </summary>
-    public class Juego {
-        private Mapa mapaActual;
-        private List<Mapa> listaDeMapaslvl1;
-        private List<Mapa> listaDeMapaslvl2;
-        private List<Mapa> listaDeMapaslvl3;
-        private Mapa lvl1;
-        private Mapa lvl2;
-        private Mapa lvl3;
+    public class Juego
+    {
+        private Mapa mapa;
         private string dificultad;
         private DatosJugador datosJugador;
         private Boolean entradaPorVoz;
-        private List<Fantasma> fantasmasLvl1;
-        private List<Fantasma> fantasmasLvl2;
-        private List<Fantasma> fantasmasLvl3;
-        private PacMan pacMan;
+        private List<Fantasma> fantasmas;
+        private List<PacMan> pacMans;
         private int nivelActual;
         private Boolean estadoDelJuego;
         private int jugando; //1 jugando, 2 gano, 3 perdio
@@ -49,14 +43,11 @@ namespace PACMANv3.pkgModelo {
         /// <param name="entradaVoz">Vaor booleano que indica el metodo de entrada del juego (Voz o teclado)</param>
         /// <param name="vidasPac">Vidas del jugador</param>
         /// <param name="hpPac">Valor de cada vida del Jugador</param>
-        public Juego(List<Mapa> mapas, String dificultad, DatosJugador jugador, Boolean entradaVoz, int vidasPac, int hpPac) {
-            this.listaDeMapaslvl1 = new List<Mapa>();
-            this.listaDeMapaslvl2 = new List<Mapa>();
-            this.listaDeMapaslvl3 = new List<Mapa>();
-            this.fantasmasLvl1 = new List<Fantasma>();
-            this.fantasmasLvl2 = new List<Fantasma>();
-            this.fantasmasLvl3 = new List<Fantasma>();
-            this.separarMapasPorNivel(mapas);
+        public Juego(Mapa mapa, String dificultad, DatosJugador jugador, Boolean entradaVoz, int vidasPac, int hpPac)
+        {
+            this.mapa = mapa;
+            this.fantasmas = new List<Fantasma>();
+            this.pacMans = new List<PacMan>();
             this.dificultad = dificultad;
             this.datosJugador = jugador;
             this.entradaPorVoz = entradaVoz;
@@ -75,35 +66,22 @@ namespace PACMANv3.pkgModelo {
 
         }
 
-        /// <summary>
-        /// Cambia el nivel del juego, cambia el mapa y demas banderas de estado
-        /// </summary>
-        public void cambiarNivel() {
-            this.nivelActual++;
-            if (this.nivelActual == 4) {
-                this.jugando = 2;
-            } else {
-                this.mapaActual = this.siguienteNivel();
-                this.hubicarComodines();
-                this.pacMan.cambiarNivel(this.mapaActual, this.velocidadMayor());
-                this.tiempoAumentoVel = 0;
-                this.tiempoFantasmasVulnerables = 0;
-                this.tiempoFrutilla = 0;
-                this.tiempoFrutaViva = 0;
-                rehubicarPacman();
-
-            }
-
-        }
-
+        /*public Estado generarEstado()
+        {
+            Estado nuevoEstado = new Estado(this.pacMans, this.fantasmas, this.mapa);
+            return nuevoEstado;
+        }*/
 
         /// <summary>
         /// Evalua si aun hay galletas en el tablero actual
         /// </summary>
         /// <returns>Retorna un valor true si aun hay galletas en el tablero</returns>
-        private Boolean hayBiscochos() {
-            foreach (Celda cel in this.mapaActual.MatrizDiseño) {
-                if (cel.Bisc != null && cel.Bisc.Estado) {
+        private Boolean hayBiscochos()
+        {
+            foreach (Celda cel in this.mapa.MatrizDiseño)
+            {
+                if (cel.Bisc != null && cel.Bisc.Estado)
+                {
                     return true;
                 }
             }
@@ -111,78 +89,78 @@ namespace PACMANv3.pkgModelo {
         }
 
         /// <summary>
-        /// Evalua el nivel actual y asigna el nuevo tablero
-        /// </summary>
-        /// <returns>Retorna el tablero del siguiente nivel</returns>
-        private Mapa siguienteNivel() {
-            Mapa m = lvl3;
-            switch (this.nivelActual) {
-                case 1:
-                    m = lvl1;
-                    break;
-                case 2:
-                    m = lvl2;
-                    break;
-                case 3:
-                    m = lvl3;
-                    break;
-            }
-            return m;
-
-        }
-
-        /// <summary>
         /// Calcula intersecciones entre el PacMan y un fantasma ejecutando acciones dependiendo del estado del fantasma
         /// </summary>
         /// <param name="fant">Fantasma al que se le evaluara la colision</param>
-        private void interseccionPacmanFantasma(Fantasma fant) {
+        private void interseccionPacmanFantasma(Fantasma fant)
+        {
             //Colision por la izquierda
-            if ((this.pacMan.X <= (fant.X + fant.Windth) && (this.pacMan.X + 10) >= (fant.X + fant.Windth)) && (this.pacMan.Y >= fant.Y && this.pacMan.Y <= fant.Y + fant.Height || this.pacMan.Y + this.pacMan.Height >= fant.Y && this.pacMan.Y <= fant.Y + fant.Height)) {
-                if (fant.Estado == 2) {
+            if ((this.pacMans.ElementAt(0).X <= (fant.X + fant.Windth) && (this.pacMans.ElementAt(0).X + 10) >= (fant.X + fant.Windth)) && (this.pacMans.ElementAt(0).Y >= fant.Y && this.pacMans.ElementAt(0).Y <= fant.Y + fant.Height || this.pacMans.ElementAt(0).Y + this.pacMans.ElementAt(0).Height >= fant.Y && this.pacMans.ElementAt(0).Y <= fant.Y + fant.Height))
+            {
+                if (fant.Estado == 2)
+                {
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
-                } else {
-                    this.rehubicarPacman();
-                    if (this.pacMan.disminuirVida(fant.Poder) <= 0) {
+                }
+                else
+                {
+                    this.rehubicarPacman(pacMans.ElementAt(0));
+                    if (this.pacMans.ElementAt(0).disminuirVida(fant.Poder) <= 0)
+                    {
                         this.jugando = 3;
                     }
                 }
                 sonido(2);
 
             } //Colision por la derecha
-            else if (((this.pacMan.X + this.pacMan.Windth) >= fant.X && (this.pacMan.X + this.pacMan.Windth - 10) <= fant.X) && (this.pacMan.Y >= fant.Y && this.pacMan.Y <= fant.Y + fant.Height || this.pacMan.Y + this.pacMan.Height >= fant.Y && this.pacMan.Y <= fant.Y + fant.Height)) {
-                if (fant.Estado == 2) {
+            else if (((this.pacMans.ElementAt(0).X + this.pacMans.ElementAt(0).Windth) >= fant.X && (this.pacMans.ElementAt(0).X + this.pacMans.ElementAt(0).Windth - 10) <= fant.X) && (this.pacMans.ElementAt(0).Y >= fant.Y && this.pacMans.ElementAt(0).Y <= fant.Y + fant.Height || this.pacMans.ElementAt(0).Y + this.pacMans.ElementAt(0).Height >= fant.Y && this.pacMans.ElementAt(0).Y <= fant.Y + fant.Height))
+            {
+                if (fant.Estado == 2)
+                {
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
-                } else {
-                    this.rehubicarPacman();
-                    if (this.pacMan.disminuirVida(fant.Poder) <= 0) {
+                }
+                else
+                {
+                    this.rehubicarPacman(pacMans.ElementAt(0));
+                    if (this.pacMans.ElementAt(0).disminuirVida(fant.Poder) <= 0)
+                    {
                         this.jugando = 3;
                     }
                 }
                 sonido(2);
             } //Colision por la arriba
-            else if ((this.pacMan.Y <= (fant.Y + fant.Height) && (this.pacMan.Y + 10) >= (fant.Y + fant.Height)) && (this.pacMan.X >= fant.X && this.pacMan.X <= fant.X + fant.Windth || this.pacMan.X + this.pacMan.Windth >= fant.X && this.pacMan.X <= fant.X + fant.Windth)) {
-                if (fant.Estado == 2) {
+            else if ((this.pacMans.ElementAt(0).Y <= (fant.Y + fant.Height) && (this.pacMans.ElementAt(0).Y + 10) >= (fant.Y + fant.Height)) && (this.pacMans.ElementAt(0).X >= fant.X && this.pacMans.ElementAt(0).X <= fant.X + fant.Windth || this.pacMans.ElementAt(0).X + this.pacMans.ElementAt(0).Windth >= fant.X && this.pacMans.ElementAt(0).X <= fant.X + fant.Windth))
+            {
+                if (fant.Estado == 2)
+                {
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
-                } else {
-                    this.rehubicarPacman();
-                    if (this.pacMan.disminuirVida(fant.Poder) <= 0) {
+                }
+                else
+                {
+                    this.rehubicarPacman(pacMans.ElementAt(0));
+                    if (this.pacMans.ElementAt(0).disminuirVida(fant.Poder) <= 0)
+                    {
                         this.jugando = 3;
                     }
                 }
                 sonido(2);
             } //Colision por la abajo
-            else if (((this.pacMan.Y + this.pacMan.Height) >= fant.Y && (this.pacMan.Y + this.pacMan.Height - 10) <= fant.Y) && (this.pacMan.X >= fant.X && this.pacMan.X <= fant.X + fant.Windth || this.pacMan.X + this.pacMan.Windth >= fant.X && this.pacMan.X <= fant.X + fant.Windth)) {
-                if (fant.Estado == 2) {
+            else if (((this.pacMans.ElementAt(0).Y + this.pacMans.ElementAt(0).Height) >= fant.Y && (this.pacMans.ElementAt(0).Y + this.pacMans.ElementAt(0).Height - 10) <= fant.Y) && (this.pacMans.ElementAt(0).X >= fant.X && this.pacMans.ElementAt(0).X <= fant.X + fant.Windth || this.pacMans.ElementAt(0).X + this.pacMans.ElementAt(0).Windth >= fant.X && this.pacMans.ElementAt(0).X <= fant.X + fant.Windth))
+            {
+                if (fant.Estado == 2)
+                {
 
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
 
-                } else {
-                    this.rehubicarPacman();
-                    if (this.pacMan.disminuirVida(fant.Poder) <= 0) {
+                }
+                else
+                {
+                    this.rehubicarPacman(pacMans.ElementAt(0));
+                    if (this.pacMans.ElementAt(0).disminuirVida(fant.Poder) <= 0)
+                    {
                         this.jugando = 3;
                     }
                 }
@@ -193,78 +171,62 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Evalua todas las colisiones del PacMan con los fantasmas
         /// </summary>
-        private void evaluarColisiones() {
-            switch (this.nivelActual) {
-                case 1:
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        this.interseccionPacmanFantasma(fantasma);
-                    }
-                    break;
-                case 2:
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        this.interseccionPacmanFantasma(fantasma);
-                    }
-                    break;
-                case 3:
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        this.interseccionPacmanFantasma(fantasma);
-                    }
-                    break;
+        private void evaluarColisiones()
+        {
+            foreach (Fantasma fantasma in this.fantasmas)
+            {
+                this.interseccionPacmanFantasma(fantasma);
             }
-
         }
 
         /// <summary>
         /// Aumenta la velocidad de todos los fantasmas y pacman
         /// </summary>
-        private void aumentarVelocidad() {
-            switch (this.nivelActual) {
-                case 1:
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        fantasma.aumentarVelocidad();
-                    }
-                    break;
-                case 2:
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        fantasma.aumentarVelocidad();
-                    }
-                    break;
-                case 3:
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        fantasma.aumentarVelocidad();
-                    }
-                    break;
+        private void aumentarVelocidad()
+        {
+            foreach (Fantasma fantasma in this.fantasmas)
+            {
+                fantasma.aumentarVelocidad();
             }
-            this.pacMan.aumentarVelocidad();
+            this.pacMans.ElementAt(0).aumentarVelocidad();
         }
 
         /// <summary>
         /// Aumenta el tiempo de juego actual ademas de otras variables que indican diferentes eventos en el juego
         /// </summary>
-        public void aumentarSegundos() {
-            while (this.estadoDelJuego) {
+        public void aumentarSegundos()
+        {
+            while (this.estadoDelJuego)
+            {
                 this.segundos++;
                 this.tiempoAumentoVel++;
                 this.tiempoFrutilla++;
-                if (this.tiempoFantasmasVulnerables > 0 && this.tiempoFantasmasVulnerables < 11) {
+                if (this.tiempoFantasmasVulnerables > 0 && this.tiempoFantasmasVulnerables < 11)
+                {
                     this.tiempoFantasmasVulnerables++;
-                } else {
+                }
+                else
+                {
                     this.tiempoFantasmasVulnerables = 0;
                     this.quitarVulnerables();
                 }
-                if (tiempoAumentoVel == 30) {
+                if (tiempoAumentoVel == 30)
+                {
                     this.aumentarVelocidad();
                     tiempoAumentoVel = 0;
                 }
-                if (tiempoFrutilla == 60) {
+                if (tiempoFrutilla == 60)
+                {
                     hubicarFrutilla();
                     tiempoFrutaViva++;
                     tiempoFrutilla = 0;
                     sonido(3);
                 }
-                if (tiempoFrutaViva > 0 && tiempoFrutaViva < 11) {
+                if (tiempoFrutaViva > 0 && tiempoFrutaViva < 11)
+                {
                     tiempoFrutaViva++;
-                    if (tiempoFrutaViva == 11) {
+                    if (tiempoFrutaViva == 11)
+                    {
                         tiempoFrutaViva = 0;
                         quitarFrutilla();
                     }
@@ -277,20 +239,28 @@ namespace PACMANv3.pkgModelo {
         /// Crea una representacion en forma de cadena del tiempo de juego el tiempo restante para el aumento de velocidad y el tiempo que los fantasmas estan vulnerables
         /// </summary>
         /// <returns>Retorna una cadena de texto</returns>
-        public String obtenerTiempo() {
+        public String obtenerTiempo()
+        {
             String tiempo = "";
-            if ((this.segundos / 60) / 10 < 1) {
+            if ((this.segundos / 60) / 10 < 1)
+            {
                 tiempo = "0" + (this.segundos / 60) + ":";
-            } else {
+            }
+            else
+            {
                 tiempo = (this.segundos / 60) + ":";
             }
-            if ((this.segundos % 60) / 10 < 1) {
+            if ((this.segundos % 60) / 10 < 1)
+            {
                 tiempo += "0" + this.segundos % 60;
-            } else {
+            }
+            else
+            {
                 tiempo += this.segundos % 60;
             }
             tiempo += "\nAumento de velocidad en: " + (30 - tiempoAumentoVel);
-            if (tiempoFantasmasVulnerables > 0) {
+            if (tiempoFantasmasVulnerables > 0)
+            {
                 tiempo += "\nVulerables durante: " + (11 - tiempoFantasmasVulnerables);
             }
             return tiempo;
@@ -299,46 +269,23 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Vuelve vulnerables a los fantasmas cuando pacman come una super galleta
         /// </summary>
-        private void volverVulnerables() {
-            switch (this.nivelActual) {
-                case 1:
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        fantasma.volverVulnerable();
-                    }
-                    break;
-                case 2:
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        fantasma.volverVulnerable();
-                    }
-                    break;
-                case 3:
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        fantasma.volverVulnerable();
-                    }
-                    break;
+        private void volverVulnerables()
+        {
+            foreach (Fantasma fantasma in this.fantasmas)
+            {
+                fantasma.volverVulnerable();
             }
         }
+
 
         /// <summary>
         /// Vuelve a los fantasmas a la normalidad una evz se acaba el tiempo
         /// </summary>
-        private void quitarVulnerables() {
-            switch (this.nivelActual) {
-                case 1:
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        fantasma.quitarVulnerabilidad();
-                    }
-                    break;
-                case 2:
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        fantasma.quitarVulnerabilidad();
-                    }
-                    break;
-                case 3:
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        fantasma.quitarVulnerabilidad();
-                    }
-                    break;
+        private void quitarVulnerables()
+        {
+            foreach (Fantasma fantasma in this.fantasmas)
+            {
+                fantasma.quitarVulnerabilidad();
             }
         }
 
@@ -346,9 +293,11 @@ namespace PACMANv3.pkgModelo {
         /// Reproduce un sonido dependiendo el valor ingresado
         /// </summary>
         /// <param name="n">indica el sonido que se desea reproducir 1- comer galleta normal, 2- colision entre fantasma y pacman, 3- comer super galleta y salida de fruta, 4- comer una fruta</param>
-        private void sonido(int n) {
+        private void sonido(int n)
+        {
             this.reproductor = new SoundPlayer();
-            switch (n) {
+            switch (n)
+            {
                 case 1:
                     this.reproductor = new SoundPlayer(Properties.Resources.bomb);
                     break;
@@ -370,44 +319,47 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Ejecuta todas las acciones que se hacen en una sola iteracion de juego, mover a los fantasmas y pacman, evaluar colisiones cambiar posicions comer galletas
         /// </summary>
-        public void iteracionLoopDelJuego() {
-            if (this.jugando == 1 && this.hayBiscochos()) {
-                this.pacMan.mover();
-                if (mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc!= null && mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc.Estado) {
-                    if (mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc.Tipo == 3) {
+        public void iteracionLoopDelJuego()
+        {
+            if (this.jugando == 1 && this.hayBiscochos())
+            {
+                this.pacMans.ElementAt(0).mover();
+                if (mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc != null && mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Estado)
+                {
+                    if (mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Tipo == 3)
+                    {
                         sonido(4);
                         this.datosJugador.aumentarPuntaje(100);
-                    } else if (mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc.Tipo == 2) {
+                    }
+                    else if (mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Tipo == 2)
+                    {
                         sonido(3);
-                        this.datosJugador.aumentarPuntaje(this.pacMan.Velocidad * this.nivelActual);
+                        this.datosJugador.aumentarPuntaje(this.pacMans.ElementAt(0).Velocidad * this.nivelActual);
                         this.tiempoFantasmasVulnerables = 0;
                         this.tiempoFantasmasVulnerables++;
                         this.volverVulnerables();
-                    } else if (mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc.Tipo == 1) {
+                    }
+                    else if (mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Tipo == 1)
+                    {
                         sonido(1);
-                        this.datosJugador.aumentarPuntaje(this.pacMan.Velocidad * this.nivelActual);
+                        this.datosJugador.aumentarPuntaje(this.pacMans.ElementAt(0).Velocidad * this.nivelActual);
                     }
 
-                    mapaActual.MatrizDiseño[this.pacMan.IAct, this.pacMan.JAct].Bisc.Estado = false;
+                    mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Estado = false;
 
                 }
                 this.evaluarColisiones();
 
-                if (this.nivelActual == 1) {
-                    foreach (Fantasma fantasma in this.fantasmasLvl1) {
-                        fantasma.mover();
-                    }
-                } else if (this.nivelActual == 2) {
-                    foreach (Fantasma fantasma in this.fantasmasLvl2) {
-                        fantasma.mover();
-                    }
-                } else if (this.nivelActual == 3) {
-                    foreach (Fantasma fantasma in this.fantasmasLvl3) {
-                        fantasma.mover();
-                    }
+
+                foreach (Fantasma fantasma in this.fantasmas)
+                {
+                    fantasma.mover();
                 }
-            } else {
-                this.cambiarNivel();
+
+            }
+            else
+            {
+
             }
 
         }
@@ -415,25 +367,9 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Metodo que llama a una iteracion de juego
         /// </summary>
-        public void actualizar() {
+        public void actualizar()
+        {
             this.iteracionLoopDelJuego();
-        }
-
-        /// <summary>
-        /// Separa los mapas que llegan a juego por nivel para un facil manejo
-        /// </summary>
-        /// <param name="mapasAOrganizar">Lista de mapas que entran al juego</param>
-        private void separarMapasPorNivel(List<Mapa> mapasAOrganizar) {
-            foreach (Mapa map in mapasAOrganizar) {
-                if (map.Nivel == 1) {
-                    listaDeMapaslvl1.Add(map);
-                } else if (map.Nivel == 2) {
-                    listaDeMapaslvl2.Add(map);
-                } else if (map.Nivel == 3) {
-                    listaDeMapaslvl3.Add(map);
-                }
-
-            }
         }
 
         /// <summary>
@@ -441,48 +377,57 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         /// <param name="vid"></param>
         /// <param name="hp"></param>
-        private void configurarJuego(int vid, int hp) {
-            if (listaDeMapaslvl1.Count > 0 && listaDeMapaslvl2.Count > 0 && listaDeMapaslvl3.Count > 0) {
+        private void configurarJuego(int vid, int hp)
+        {
+            if (this.mapa != null)
+            {
                 Random rdm = new Random();
-                Lvl1 = listaDeMapaslvl1.ElementAt(rdm.Next(0, listaDeMapaslvl1.Count));
-                Lvl2 = listaDeMapaslvl2.ElementAt(rdm.Next(0, listaDeMapaslvl2.Count));
-                Lvl3 = listaDeMapaslvl3.ElementAt(rdm.Next(0, listaDeMapaslvl3.Count));
+                Point[] centro = mapa.posicionInicalFantasmas();
+                int dirSalida = mapa.direccionDeSalidaDelFantasma();
+                switch (this.dificultad)
+                {
+                    case "Facil":
+                        //Fantasmas del nivel Facl: 1 Rojo, 1 Rosa, 1 Naranja, 2 Azul
+                        fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        for (int i = 0; i < 2; i++)
+                        {
+                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        }
+                        break;
+                    case "Medio":
+                        //Fantasmas del nivel Medio: 2 Rojo, 2 Rosa, 2 Naranja, 2 Azul
+                        for (int i = 0; i < 2; i++)
+                        {
+                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        }
+                        break;
+                    case "Dificil":
+                        //Fantasmas del nivel Dificl: 2 Rojo, 2 Rosa, 3 Naranja, 3 Azul
+                        for (int i = 0; i < 2; i++)
+                        {
+                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        }
+                        for (int i = 0; i < 3; i++)
+                        {
+                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        }
+                        break;
+                }
 
 
-                mapaActual = Lvl1;
 
-                Point[] centrolvl1 = Lvl1.posicionInicalFantasmas();
-                int dirSalidalvl1 = Lvl1.direccionDeSalidaDelFantasma();
-                Point[] centrolvl2 = Lvl2.posicionInicalFantasmas();
-                int dirSalidalvl2 = Lvl2.direccionDeSalidaDelFantasma();
-                Point[] centrolvl3 = Lvl3.posicionInicalFantasmas();
-                int dirSalidalvl3 = Lvl3.direccionDeSalidaDelFantasma();
-                //Fantasmas del nivel 1: 1 Rojo, 1 Rosa, 1 Naranja, 2 Azul
-                fantasmasLvl1.Add(new Fantasma(dirSalidalvl1, "Rojo", 19, centrolvl1[1].X, centrolvl1[1].Y, 1, this.dificultad, Lvl1, centrolvl1[0].X, centrolvl1[0].Y));
-                fantasmasLvl1.Add(new Fantasma(dirSalidalvl1, "Rosa", 19, centrolvl1[1].X, centrolvl1[1].Y, 1, this.dificultad, Lvl1, centrolvl1[0].X, centrolvl1[0].Y));
-                fantasmasLvl1.Add(new Fantasma(dirSalidalvl1, "Naranja", 19, centrolvl1[1].X, centrolvl1[1].Y, 1, this.dificultad, Lvl1, centrolvl1[0].X, centrolvl1[0].Y));
-                for (int i = 0; i < 2; i++) {
-                    fantasmasLvl1.Add(new Fantasma(dirSalidalvl1, "Azul", 19, centrolvl1[1].X, centrolvl1[1].Y, 1, this.dificultad, Lvl1, centrolvl1[0].X, centrolvl1[0].Y));
-                }
-                //Fantasmas del nivel 2: 2 Rojo, 2 Rosa, 2 Naranja, 2 Azul
-                for (int i = 0; i < 2; i++) {
-                    fantasmasLvl2.Add(new Fantasma(dirSalidalvl2, "Rojo", 19, centrolvl2[1].X, centrolvl2[1].Y, 1, this.dificultad, Lvl2, centrolvl2[0].X, centrolvl2[0].Y));
-                    fantasmasLvl2.Add(new Fantasma(dirSalidalvl2, "Rosa", 19, centrolvl2[1].X, centrolvl2[1].Y, 1, this.dificultad, Lvl2, centrolvl2[0].X, centrolvl2[0].Y));
-                    fantasmasLvl2.Add(new Fantasma(dirSalidalvl2, "Naranja", 19, centrolvl2[1].X, centrolvl2[1].Y, 1, this.dificultad, Lvl2, centrolvl2[0].X, centrolvl2[0].Y));
-                    fantasmasLvl2.Add(new Fantasma(dirSalidalvl2, "Azul", 19, centrolvl2[1].X, centrolvl2[1].Y, 1, this.dificultad, Lvl2, centrolvl2[0].X, centrolvl2[0].Y));
-                }
-                //Fantasmas del nivel 3: 2 Rojo, 2 Rosa, 3 Naranja, 3 Azul
-                for (int i = 0; i < 2; i++) {
-                    fantasmasLvl3.Add(new Fantasma(dirSalidalvl3, "Rojo", 19, centrolvl3[1].X, centrolvl3[1].Y, 1, this.dificultad, Lvl3, centrolvl3[0].X, centrolvl3[0].Y));
-                    fantasmasLvl3.Add(new Fantasma(dirSalidalvl3, "Rosa", 19, centrolvl3[1].X, centrolvl3[1].Y, 1, this.dificultad, Lvl3, centrolvl3[0].X, centrolvl3[0].Y));
-                }
-                for (int i = 0; i < 3; i++) {
-                    fantasmasLvl3.Add(new Fantasma(dirSalidalvl3, "Naranja", 19, centrolvl3[1].X, centrolvl3[1].Y, 1, this.dificultad, Lvl3, centrolvl3[0].X, centrolvl3[0].Y));
-                    fantasmasLvl3.Add(new Fantasma(dirSalidalvl3, "Azul", 19, centrolvl3[1].X, centrolvl3[1].Y, 1, this.dificultad, Lvl3, centrolvl3[0].X, centrolvl3[0].Y));
-                }
                 hubicarPacmanEnMapaActualInicial(vid, hp);
                 hubicarComodines();
-            } else {
+            }
+            else
+            {
 
             }
         }
@@ -490,27 +435,31 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Metodo que hubica aleatoriamente comodines en el mapa dependiendo del nive actual de juego
         /// </summary>
-        public void hubicarComodines() {
+        public void hubicarComodines()
+        {
             int cantComodines = 0;
-            switch (this.nivelActual) {
-                case 1:
+            switch (this.dificultad)
+            {
+                case "Facil":
                     cantComodines = 5;
                     break;
-                case 2:
+                case "Medio":
                     cantComodines = 8;
                     break;
-                case 3:
+                case "Deficil":
                     cantComodines = 10;
                     break;
             }
 
-            int filasAct = mapaActual.Filas;
-            int columnasAct = mapaActual.Columnas;
-            while (cantComodines > 0) {
+            int filasAct = mapa.Filas;
+            int columnasAct = mapa.Columnas;
+            while (cantComodines > 0)
+            {
                 int ni = this.r.Next(filasAct);
                 int nj = this.r.Next(columnasAct);
-                if (this.mapaActual.MatrizDiseño[ni, nj].SePuedePasar && this.mapaActual.MatrizDiseño[ni, nj].Bisc.Tipo == 1) {
-                    this.mapaActual.MatrizDiseño[ni, nj].Bisc.cambiarATipo2();
+                if (this.mapa.MatrizDiseño[ni, nj].SePuedePasar && this.mapa.MatrizDiseño[ni, nj].Bisc.Tipo == 1)
+                {
+                    this.mapa.MatrizDiseño[ni, nj].Bisc.cambiarATipo2();
                     cantComodines--;
                 }
             }
@@ -520,21 +469,26 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Desaparece la fruta cuando se cumple el tiempo
         /// </summary>
-        public void quitarFrutilla() {
-            mapaActual.MatrizDiseño[iFrut, jFrut].Bisc.Estado = false;
+        public void quitarFrutilla()
+        {
+            mapa.MatrizDiseño[iFrut, jFrut].Bisc.Estado = false;
         }
 
         /// <summary>
         /// Hubica una fruta aleatoriamente entre los espacio vacios del mapa
         /// </summary>
-        public void hubicarFrutilla() {
-            int filasAct = mapaActual.Filas;
-            int columnasAct = mapaActual.Columnas;
+        public void hubicarFrutilla()
+        {
+            int filasAct = mapa.Filas;
+            int columnasAct = mapa.Columnas;
             List<Point> posibles = new List<Point>();
 
-            for (int i = 0; i < filasAct; i++) {
-                for (int j = 0; j < columnasAct; j++) {
-                    if (!mapaActual.MatrizDiseño[i, j].Valor.Equals("Y") && mapaActual.MatrizDiseño[i, j].Bisc != null && !mapaActual.MatrizDiseño[i, j].Bisc.Estado) {
+            for (int i = 0; i < filasAct; i++)
+            {
+                for (int j = 0; j < columnasAct; j++)
+                {
+                    if (!mapa.MatrizDiseño[i, j].Valor.Equals("Y") && mapa.MatrizDiseño[i, j].Bisc != null && !mapa.MatrizDiseño[i, j].Bisc.Estado)
+                    {
                         posibles.Add(new Point(i, j));
                     }
                 }
@@ -542,7 +496,7 @@ namespace PACMANv3.pkgModelo {
             Point p = posibles.ElementAt(r.Next(0, posibles.Count));
             this.iFrut = p.X;
             this.jFrut = p.Y;
-            mapaActual.MatrizDiseño[iFrut, jFrut].Bisc.cambiarATipo3(mapaActual.MatrizDiseño[iFrut, jFrut].X, mapaActual.MatrizDiseño[iFrut, jFrut].Y);
+            mapa.MatrizDiseño[iFrut, jFrut].Bisc.cambiarATipo3(mapa.MatrizDiseño[iFrut, jFrut].X, mapa.MatrizDiseño[iFrut, jFrut].Y);
 
         }
 
@@ -551,30 +505,21 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         /// <param name="vidas">Cantidad de vidas de PacMan</param>
         /// <param name="hp">Valor de cada Vida de PacMan</param>
-        private void hubicarPacmanEnMapaActualInicial(int vidas, int hp) {
-            Point[] posCaman = mapaActual.posicionInicialPacMan();
+        private void hubicarPacmanEnMapaActualInicial(int vidas, int hp)
+        {
+            Point[] posCaman = mapa.posicionInicialPacMan();
             posFrut = posCaman[0];
             //mapaActual.MatrizDiseño[posFrut.X, posFrut.Y].Bisc.Estado = false;
-            pacMan = new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), this.NivelActual, mapaActual, vidas, hp, posCaman[0].X, posCaman[0].Y);
+            pacMans.Add(new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), this.NivelActual, mapa, vidas, hp, posCaman[0].X, posCaman[0].Y));
         }
 
         /// <summary>
         /// Calcula la mayor velocidad de los fantasmas la cual sera la velocidad de Pacman
         /// </summary>
         /// <returns>Retorna la mayor velocidad</returns>
-        private int velocidadMayor() {
-            int vel = 0; ;
-            switch (this.nivelActual) {
-                case 1:
-                    vel = fantasmasLvl1.ElementAt(0).Velocidad;
-                    break;
-                case 2:
-                    vel = fantasmasLvl2.ElementAt(0).Velocidad;
-                    break;
-                case 3:
-                    vel = fantasmasLvl3.ElementAt(0).Velocidad;
-                    break;
-            }
+        private int velocidadMayor()
+        {
+            int vel = fantasmas.ElementAt(0).Velocidad;
             return vel;
         }
 
@@ -582,8 +527,9 @@ namespace PACMANv3.pkgModelo {
         /// Rehubica un fantasma en la posicion central del mapa
         /// </summary>
         /// <param name="fant">Fantasma a rehubicar</param>
-        private void rehubicarFantasmas(Fantasma fant) {
-            Point[] cords = mapaActual.posicionInicalFantasmas();
+        private void rehubicarFantasmas(Fantasma fant)
+        {
+            Point[] cords = mapa.posicionInicalFantasmas();
             fant.IAct = cords[0].X;
             fant.JAct = cords[0].Y;
             fant.X = cords[1].X;
@@ -593,9 +539,10 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Rehubica a PacMan en su posicion inicial
         /// </summary>
-        private void rehubicarPacman() {
+        private void rehubicarPacman(PacMan pacMan)
+        {
             pacMan.vaciarOrdenes();
-            Point[] posCaman = mapaActual.posicionInicialPacMan();
+            Point[] posCaman = mapa.posicionInicialPacMan();
             pacMan.IAct = posCaman[0].X;
             pacMan.JAct = posCaman[0].Y;
             pacMan.X = posCaman[1].X;
@@ -605,7 +552,8 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Metodo accesor y mutador del atributo nivelActual
         /// </summary>
-        public int NivelActual {
+        public int NivelActual
+        {
             get { return nivelActual; }
             set { nivelActual = value; }
         }
@@ -613,71 +561,36 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Metodo accesor y mutador del atributo estadoJuego
         /// </summary>
-        public Boolean EstadoDelJuego {
+        public Boolean EstadoDelJuego
+        {
             get { return estadoDelJuego; }
             set { estadoDelJuego = value; }
         }
 
         /// <summary>
-        /// Metodo accesor y mutador del atributo lvl3
-        /// </summary>
-        internal Mapa Lvl3 {
-            get { return lvl3; }
-            set { lvl3 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo Lvl2
-        /// </summary>
-        internal Mapa Lvl2 {
-            get { return lvl2; }
-            set { lvl2 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo Lvl1
-        /// </summary>
-        internal Mapa Lvl1 {
-            get { return lvl1; }
-            set { lvl1 = value; }
-        }
-
-        /// <summary>
         /// Metodo accesor y mutador del atributo PacMan
         /// </summary>
-        internal PacMan PacMan {
-            get { return pacMan; }
-            set { pacMan = value; }
+        internal List<PacMan> PacMans
+        {
+            get { return pacMans; }
+            set { pacMans = value; }
         }
 
-        /// <summary>
-        /// Metodo accesor y mutador del atributo FantasmasLvl3
-        /// </summary>
-        public List<Fantasma> FantasmasLvl3 {
-            get { return fantasmasLvl3; }
-            set { fantasmasLvl3 = value; }
-        }
 
         /// <summary>
-        /// Metodo accesor y mutador del atributo FantasmasLvl2
+        /// Metodo accesor y mutador del atributo Fantasmas
         /// </summary>
-        public List<Fantasma> FantasmasLvl2 {
-            get { return fantasmasLvl2; }
-            set { fantasmasLvl2 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo FantasmasLvl1
-        /// </summary>
-        public List<Fantasma> FantasmasLvl1 {
-            get { return fantasmasLvl1; }
-            set { fantasmasLvl1 = value; }
+        public List<Fantasma> Fantasmas
+        {
+            get { return fantasmas; }
+            set { fantasmas = value; }
         }
 
         /// <summary>
         /// Metodo accesor y mutador del atributo EntradaPorVoz 
         /// </summary>
-        public Boolean EntradaPorVoz {
+        public Boolean EntradaPorVoz
+        {
             get { return entradaPorVoz; }
             set { entradaPorVoz = value; }
         }
@@ -685,7 +598,8 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Metodo accesor y mutador del atributo DatosJugador
         /// </summary>
-        public DatosJugador DatosJugador {
+        public DatosJugador DatosJugador
+        {
             get { return datosJugador; }
             set { datosJugador = value; }
         }
@@ -693,7 +607,8 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Metodo accesor y mutador del atributo Jugando
         /// </summary>
-        public int Jugando {
+        public int Jugando
+        {
             get { return jugando; }
             set { jugando = value; }
         }
@@ -701,47 +616,26 @@ namespace PACMANv3.pkgModelo {
         /// <summary>
         /// Metodo accesor y mutador del atributo Dificultad
         /// </summary>
-        public string Dificultad {
+        public string Dificultad
+        {
             get { return dificultad; }
             set { dificultad = value; }
         }
 
         /// <summary>
-        /// Metodo accesor y mutador del atributo MapaActual
+        /// Metodo accesor y mutador del atributo Mapa
         /// </summary>
-        public Mapa MapaActual {
-            get { return mapaActual; }
-            set { mapaActual = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo ListaDeMapaslvl1
-        /// </summary>
-        public List<Mapa> ListaDeMapaslvl1 {
-            get { return listaDeMapaslvl1; }
-            set { listaDeMapaslvl1 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo ListaDeMapaslvl2
-        /// </summary>
-        public List<Mapa> ListaDeMapaslvl2 {
-            get { return listaDeMapaslvl2; }
-            set { listaDeMapaslvl2 = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo ListaDeMapaslvl3
-        /// </summary>
-        public List<Mapa> ListaDeMapaslvl3 {
-            get { return listaDeMapaslvl3; }
-            set { listaDeMapaslvl3 = value; }
+        public Mapa Mapa
+        {
+            get { return mapa; }
+            set { mapa = value; }
         }
 
         /// <summary>
         /// Metodo accesor y mutador del atributo Segundos
         /// </summary>
-        public int Segundos {
+        public int Segundos
+        {
             get { return segundos; }
             set { segundos = value; }
         }

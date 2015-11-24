@@ -33,7 +33,7 @@ namespace PACMANv3.pkgVista {
             this.escucha = escucha = new SpeechRecognitionEngine();
             this.entradaPorVoz = false;
             this.sonidoFinJuego = true;
-            
+
             cargarRecursos();
         }
 
@@ -52,13 +52,13 @@ namespace PACMANv3.pkgVista {
             foreach (RecognizedWordUnit palabra in e.Result.Words) {
                 lblPalabra.Text = palabra.Text;
                 if (palabra.Text == "izquierda") {
-                    this.Juego.PacMan.adicionarOrden(4);
+                    this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
                 } else if (palabra.Text == "derecha") {
-                    this.Juego.PacMan.adicionarOrden(3);
+                    this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
                 } else if (palabra.Text == "arriba") {
-                    this.Juego.PacMan.adicionarOrden(1);
+                    this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
                 } else if (palabra.Text == "abajo") {
-                    this.Juego.PacMan.adicionarOrden(2);
+                    this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
                 }
             }
         }
@@ -86,15 +86,10 @@ namespace PACMANv3.pkgVista {
             imagenPared[7] = Properties.Resources.pared8;
             imagenPared[8] = Properties.Resources.pared9;
             imagenPared[9] = Properties.Resources.pared10;
-
             imgGameOver = Properties.Resources.gameOver;
             imgVictoria = Properties.Resources.victoria;
             imgDerrota = Properties.Resources.derrota;
             imgFruta = Properties.Resources.fruta;
-
-
-            
-
         }
 
         private void sonido(int n) {
@@ -107,7 +102,7 @@ namespace PACMANv3.pkgVista {
                     this.reproductor = new SoundPlayer(Properties.Resources.risaMacabra);
                     break;
             }
-            
+
             this.reproductor.Load();
             this.reproductor.Play();
         }
@@ -119,9 +114,9 @@ namespace PACMANv3.pkgVista {
 
         private void refrescarTextos() {
             this.lblPuntaje.Text = "Puntos: " + this.Juego.DatosJugador.Puntaje + "";
-            this.lblOrdenesEnCola.Text = "Ordenes en cola:\n" + this.Juego.PacMan.listarOrdenesActuales();
+            this.lblOrdenesEnCola.Text = "Ordenes en cola:\n" + this.Juego.PacMans.ElementAt(0).listarOrdenesActuales();
             this.lblTiempo.Text = "Tiempo: " + this.Juego.obtenerTiempo();
-            this.lblVidasPac.Text = this.Juego.PacMan.estadoDeVida();
+            this.lblVidasPac.Text = this.Juego.PacMans.ElementAt(0).estadoDeVida();
             this.lblNombreJugador.Text = this.Juego.DatosJugador.Nombre;
         }
 
@@ -130,25 +125,14 @@ namespace PACMANv3.pkgVista {
                 Graphics g = e.Graphics;
                 if (Juego.Jugando == 1) {
 
-                    if (Juego.MapaActual != null) {
-                        graficarMapa(Juego.MapaActual, g);
-                        dibujarControno(Juego.MapaActual, g);
-                        graficarBiscochos(Juego.MapaActual, g);
-                        if (this.Juego.NivelActual == 1) {
-                            foreach (Fantasma fantasma in Juego.FantasmasLvl1) {
-                                g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
-                            }
-                        } else if (this.Juego.NivelActual == 2) {
-                            foreach (Fantasma fantasma in Juego.FantasmasLvl2) {
-                                g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
-                            }
-                        } else if (this.Juego.NivelActual == 3) {
-                            foreach (Fantasma fantasma in Juego.FantasmasLvl3) {
-                                g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
-                            }
+                    if (Juego.Mapa != null) {
+                        graficarMapa(Juego.Mapa, g);
+                        dibujarControno(Juego.Mapa, g);
+                        graficarBiscochos(Juego.Mapa, g);
+                        foreach (Fantasma fantasma in Juego.Fantasmas) {
+                            g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
                         }
-
-                        g.DrawImage(Juego.PacMan.ImgActual, Juego.PacMan.X, Juego.PacMan.Y, Juego.PacMan.Windth, Juego.PacMan.Height);
+                        g.DrawImage(Juego.PacMans.ElementAt(0).ImgActual, Juego.PacMans.ElementAt(0).X, Juego.PacMans.ElementAt(0).Y, Juego.PacMans.ElementAt(0).Windth, Juego.PacMans.ElementAt(0).Height);
 
                         if (this.lblPuntaje.InvokeRequired) {
                             this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));
@@ -167,13 +151,11 @@ namespace PACMANv3.pkgVista {
                     accionesFinDelJuego();
                     g.DrawImage(imgGameOver, 0, 87, 596, 200);
                     g.DrawImage(imgDerrota, 10, 260, 596, 56);
-
-                    //this.juego.EstadoDelJuego = false;
                 }
             }
         }
 
-        
+
         private void accionesFinDelJuego() {
             if (sonidoFinJuego) {
                 if (this.Juego.Jugando == 2) {
@@ -185,7 +167,7 @@ namespace PACMANv3.pkgVista {
                 }
             }
             lblNombreFinal.Text = Juego.DatosJugador.Nombre;
-            lblPuntosFinal.Text = Juego.DatosJugador.Puntaje+" pts";
+            lblPuntosFinal.Text = Juego.DatosJugador.Puntaje + " pts";
             panel1.Left = 80;
             panel1.Top = 50;
             panel1.Height = 390;
@@ -206,25 +188,22 @@ namespace PACMANv3.pkgVista {
                 if (!this.entradaPorVoz) {
                     switch (e.KeyData) {
                         case Keys.Up:
-                            this.Juego.PacMan.adicionarOrden(1);
+                            this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
                             break;
                         case Keys.Down:
-                            this.Juego.PacMan.adicionarOrden(2);
+                            this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
                             break;
                         case Keys.Right:
-                            this.Juego.PacMan.adicionarOrden(3);
+                            this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
                             break;
                         case Keys.Left:
-                            this.Juego.PacMan.adicionarOrden(4);
+                            this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
                             break;
                         case Keys.F1:
                             this.Juego.Jugando = 2;
                             break;
                         case Keys.F2:
                             this.Juego.Jugando = 3;
-                            break;
-                        case Keys.F3:
-                            this.Juego.cambiarNivel();
                             break;
                         case Keys.F4:
                             this.juego.hubicarFrutilla();
@@ -315,7 +294,6 @@ namespace PACMANv3.pkgVista {
                 cuadros++;
                 if (Environment.TickCount - cronometro > 1000) {
                     cronometro += 1000;
-                    //Console.WriteLine(actualizaciones + " actualizaciones. " + cuadros + "cuadros");
                     cuadros = 0;
                     actualizaciones = 0;
                 }
@@ -335,6 +313,6 @@ namespace PACMANv3.pkgVista {
             this.juego.EstadoDelJuego = false;
         }
 
-        
+
     }
 }

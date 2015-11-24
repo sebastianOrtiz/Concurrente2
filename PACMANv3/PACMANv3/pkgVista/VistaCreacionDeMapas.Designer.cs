@@ -67,12 +67,13 @@
             // 
             // btnAceptarConf
             // 
+            this.btnAceptarConf.BackColor = System.Drawing.Color.White;
             this.btnAceptarConf.Location = new System.Drawing.Point(636, 6);
             this.btnAceptarConf.Name = "btnAceptarConf";
             this.btnAceptarConf.Size = new System.Drawing.Size(66, 24);
             this.btnAceptarConf.TabIndex = 4;
             this.btnAceptarConf.Text = "Aceptar";
-            this.btnAceptarConf.UseVisualStyleBackColor = true;
+            this.btnAceptarConf.UseVisualStyleBackColor = false;
             this.btnAceptarConf.Click += new System.EventHandler(this.btnAceptarConf_Click);
             // 
             // cmbNivel

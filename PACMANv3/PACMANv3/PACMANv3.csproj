@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="pkgModelo\Biscocho.cs" />
     <Compile Include="pkgModelo\Celda.cs" />
+    <Compile Include="pkgModelo\Cliente.cs" />
     <Compile Include="pkgModelo\DatosJugador.cs" />
+    <Compile Include="pkgModelo\Estado.cs" />
     <Compile Include="pkgModelo\Fantasma.cs" />
     <Compile Include="pkgModelo\Juego.cs" />
     <Compile Include="pkgModelo\Mapa.cs" />
@@ -76,6 +78,12 @@
     <Compile Include="pkgVista\VistaJuego.Designer.cs">
       <DependentUpon>VistaJuego.cs</DependentUpon>
     </Compile>
+    <Compile Include="pkgVista\VistaJuegoOnline.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pkgVista\VistaJuegoOnline.Designer.cs">
+      <DependentUpon>VistaJuegoOnline.cs</DependentUpon>
+    </Compile>
     <Compile Include="pkgVista\VistaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pkgVista\VistaJuego.resx">
       <DependentUpon>VistaJuego.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pkgVista\VistaJuegoOnline.resx">
+      <DependentUpon>VistaJuegoOnline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pkgVista\VistaPrincipal.resx">
       <DependentUpon>VistaPrincipal.cs</DependentUpon>

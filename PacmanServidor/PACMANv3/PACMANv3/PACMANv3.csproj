@@ -59,6 +59,7 @@
     <Compile Include="pkgModelo\Mapa.cs" />
     <Compile Include="pkgModelo\Mensaje.cs" />
     <Compile Include="pkgModelo\PacMan.cs" />
+    <Compile Include="pkgModelo\Servidor.cs" />
     <Compile Include="pkgVista\VistaEdicionDeMapas.cs">
       <SubType>Form</SubType>
     </Compile>

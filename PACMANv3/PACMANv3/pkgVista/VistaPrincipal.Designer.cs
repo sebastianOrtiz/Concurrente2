@@ -40,6 +40,8 @@
             this.btnCrearMapa = new System.Windows.Forms.Button();
             this.btnEditarMapa = new System.Windows.Forms.Button();
             this.panelConfigInicio = new System.Windows.Forms.Panel();
+            this.lblSeleccioneMapa = new System.Windows.Forms.Label();
+            this.cmbSeleccionMapa = new System.Windows.Forms.ComboBox();
             this.btnIntPuntajes = new System.Windows.Forms.Button();
             this.panelPuntajes = new System.Windows.Forms.Panel();
             this.lblFechaDat = new System.Windows.Forms.Label();
@@ -61,30 +63,32 @@
             // txtNombreJu
             // 
             this.txtNombreJu.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreJu.Location = new System.Drawing.Point(553, 34);
+            this.txtNombreJu.Location = new System.Drawing.Point(576, 83);
             this.txtNombreJu.Name = "txtNombreJu";
-            this.txtNombreJu.Size = new System.Drawing.Size(135, 22);
+            this.txtNombreJu.Size = new System.Drawing.Size(203, 22);
             this.txtNombreJu.TabIndex = 16;
             this.txtNombreJu.Text = "Jugador 1";
             // 
             // btnAceptarConfigInicial
             // 
+            this.btnAceptarConfigInicial.BackColor = System.Drawing.SystemColors.ControlText;
             this.btnAceptarConfigInicial.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAceptarConfigInicial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptarConfigInicial.Image = global::PACMANv3.Properties.Resources.BtnJugar;
-            this.btnAceptarConfigInicial.Location = new System.Drawing.Point(442, 187);
+            this.btnAceptarConfigInicial.Location = new System.Drawing.Point(438, 213);
             this.btnAceptarConfigInicial.Name = "btnAceptarConfigInicial";
             this.btnAceptarConfigInicial.Size = new System.Drawing.Size(224, 114);
             this.btnAceptarConfigInicial.TabIndex = 15;
-            this.btnAceptarConfigInicial.UseVisualStyleBackColor = true;
+            this.btnAceptarConfigInicial.UseVisualStyleBackColor = false;
             this.btnAceptarConfigInicial.Click += new System.EventHandler(this.btnAceptarConfigInicial_Click);
             // 
             // lblDificultad
             // 
             this.lblDificultad.AutoSize = true;
+            this.lblDificultad.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblDificultad.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDificultad.ForeColor = System.Drawing.Color.White;
-            this.lblDificultad.Location = new System.Drawing.Point(381, 78);
+            this.lblDificultad.Location = new System.Drawing.Point(414, 117);
             this.lblDificultad.Name = "lblDificultad";
             this.lblDificultad.Size = new System.Drawing.Size(164, 17);
             this.lblDificultad.TabIndex = 14;
@@ -99,17 +103,18 @@
             "Facil",
             "Medio",
             "Dificil"});
-            this.cmbSeleccionarDificultad.Location = new System.Drawing.Point(553, 74);
+            this.cmbSeleccionarDificultad.Location = new System.Drawing.Point(576, 114);
             this.cmbSeleccionarDificultad.Name = "cmbSeleccionarDificultad";
-            this.cmbSeleccionarDificultad.Size = new System.Drawing.Size(135, 25);
+            this.cmbSeleccionarDificultad.Size = new System.Drawing.Size(203, 25);
             this.cmbSeleccionarDificultad.TabIndex = 13;
             // 
             // lblNombreJugador
             // 
             this.lblNombreJugador.AutoSize = true;
+            this.lblNombreJugador.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblNombreJugador.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombreJugador.ForeColor = System.Drawing.Color.White;
-            this.lblNombreJugador.Location = new System.Drawing.Point(381, 38);
+            this.lblNombreJugador.Location = new System.Drawing.Point(414, 86);
             this.lblNombreJugador.Name = "lblNombreJugador";
             this.lblNombreJugador.Size = new System.Drawing.Size(154, 17);
             this.lblNombreJugador.TabIndex = 12;
@@ -118,9 +123,10 @@
             // lblMetodoDeEntrada
             // 
             this.lblMetodoDeEntrada.AutoSize = true;
+            this.lblMetodoDeEntrada.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblMetodoDeEntrada.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMetodoDeEntrada.ForeColor = System.Drawing.Color.White;
-            this.lblMetodoDeEntrada.Location = new System.Drawing.Point(381, 115);
+            this.lblMetodoDeEntrada.Location = new System.Drawing.Point(423, 153);
             this.lblMetodoDeEntrada.Name = "lblMetodoDeEntrada";
             this.lblMetodoDeEntrada.Size = new System.Drawing.Size(151, 17);
             this.lblMetodoDeEntrada.TabIndex = 11;
@@ -129,35 +135,38 @@
             // rBtnVoz
             // 
             this.rBtnVoz.AutoSize = true;
+            this.rBtnVoz.BackColor = System.Drawing.SystemColors.ControlText;
             this.rBtnVoz.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rBtnVoz.ForeColor = System.Drawing.Color.White;
-            this.rBtnVoz.Location = new System.Drawing.Point(635, 111);
+            this.rBtnVoz.Location = new System.Drawing.Point(667, 151);
             this.rBtnVoz.Name = "rBtnVoz";
             this.rBtnVoz.Size = new System.Drawing.Size(53, 21);
             this.rBtnVoz.TabIndex = 10;
             this.rBtnVoz.TabStop = true;
             this.rBtnVoz.Text = "Voz";
-            this.rBtnVoz.UseVisualStyleBackColor = true;
+            this.rBtnVoz.UseVisualStyleBackColor = false;
             // 
             // rBtnTeclado
             // 
             this.rBtnTeclado.AutoSize = true;
+            this.rBtnTeclado.BackColor = System.Drawing.SystemColors.ControlText;
             this.rBtnTeclado.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rBtnTeclado.ForeColor = System.Drawing.Color.White;
-            this.rBtnTeclado.Location = new System.Drawing.Point(548, 113);
+            this.rBtnTeclado.Location = new System.Drawing.Point(580, 151);
             this.rBtnTeclado.Name = "rBtnTeclado";
             this.rBtnTeclado.Size = new System.Drawing.Size(81, 21);
             this.rBtnTeclado.TabIndex = 9;
             this.rBtnTeclado.TabStop = true;
             this.rBtnTeclado.Text = "Teclado";
-            this.rBtnTeclado.UseVisualStyleBackColor = true;
+            this.rBtnTeclado.UseVisualStyleBackColor = false;
             // 
             // lblNumVidas
             // 
             this.lblNumVidas.AutoSize = true;
+            this.lblNumVidas.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblNumVidas.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumVidas.ForeColor = System.Drawing.Color.White;
-            this.lblNumVidas.Location = new System.Drawing.Point(561, 141);
+            this.lblNumVidas.Location = new System.Drawing.Point(557, 170);
             this.lblNumVidas.Name = "lblNumVidas";
             this.lblNumVidas.Size = new System.Drawing.Size(127, 17);
             this.lblNumVidas.TabIndex = 18;
@@ -166,9 +175,10 @@
             // lblHPPACMAN
             // 
             this.lblHPPACMAN.AutoSize = true;
+            this.lblHPPACMAN.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblHPPACMAN.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHPPACMAN.ForeColor = System.Drawing.Color.White;
-            this.lblHPPACMAN.Location = new System.Drawing.Point(421, 141);
+            this.lblHPPACMAN.Location = new System.Drawing.Point(444, 170);
             this.lblHPPACMAN.Name = "lblHPPACMAN";
             this.lblHPPACMAN.Size = new System.Drawing.Size(111, 17);
             this.lblHPPACMAN.TabIndex = 17;
@@ -177,7 +187,7 @@
             // nudHPPacman
             // 
             this.nudHPPacman.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudHPPacman.Location = new System.Drawing.Point(454, 161);
+            this.nudHPPacman.Location = new System.Drawing.Point(470, 190);
             this.nudHPPacman.Minimum = new decimal(new int[] {
             1,
             0,
@@ -196,7 +206,7 @@
             // nudVidasPacman
             // 
             this.nudVidasPacman.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudVidasPacman.Location = new System.Drawing.Point(598, 161);
+            this.nudVidasPacman.Location = new System.Drawing.Point(591, 190);
             this.nudVidasPacman.Minimum = new decimal(new int[] {
             1,
             0,
@@ -234,7 +244,10 @@
             // 
             // panelConfigInicio
             // 
+            this.panelConfigInicio.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelConfigInicio.BackgroundImage = global::PACMANv3.Properties.Resources.FondoInicioPacman;
+            this.panelConfigInicio.Controls.Add(this.lblSeleccioneMapa);
+            this.panelConfigInicio.Controls.Add(this.cmbSeleccionMapa);
             this.panelConfigInicio.Controls.Add(this.btnIntPuntajes);
             this.panelConfigInicio.Controls.Add(this.lblNombreJugador);
             this.panelConfigInicio.Controls.Add(this.btnEditarMapa);
@@ -255,15 +268,38 @@
             this.panelConfigInicio.Size = new System.Drawing.Size(793, 458);
             this.panelConfigInicio.TabIndex = 23;
             // 
+            // lblSeleccioneMapa
+            // 
+            this.lblSeleccioneMapa.AutoSize = true;
+            this.lblSeleccioneMapa.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSeleccioneMapa.ForeColor = System.Drawing.Color.White;
+            this.lblSeleccioneMapa.Location = new System.Drawing.Point(414, 53);
+            this.lblSeleccioneMapa.Name = "lblSeleccioneMapa";
+            this.lblSeleccioneMapa.Size = new System.Drawing.Size(153, 17);
+            this.lblSeleccioneMapa.TabIndex = 25;
+            this.lblSeleccioneMapa.Text = "Selecciona un Mapa:";
+            // 
+            // cmbSeleccionMapa
+            // 
+            this.cmbSeleccionMapa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSeleccionMapa.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbSeleccionMapa.FormattingEnabled = true;
+            this.cmbSeleccionMapa.Location = new System.Drawing.Point(576, 50);
+            this.cmbSeleccionMapa.Name = "cmbSeleccionMapa";
+            this.cmbSeleccionMapa.Size = new System.Drawing.Size(203, 25);
+            this.cmbSeleccionMapa.TabIndex = 24;
+            this.cmbSeleccionMapa.SelectionChangeCommitted += new System.EventHandler(this.cmbSeleccionMapa_SelectionChangeCommitted);
+            // 
             // btnIntPuntajes
             // 
+            this.btnIntPuntajes.BackColor = System.Drawing.SystemColors.ControlText;
             this.btnIntPuntajes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIntPuntajes.Image = global::PACMANv3.Properties.Resources.historial;
             this.btnIntPuntajes.Location = new System.Drawing.Point(372, 324);
             this.btnIntPuntajes.Name = "btnIntPuntajes";
             this.btnIntPuntajes.Size = new System.Drawing.Size(109, 105);
             this.btnIntPuntajes.TabIndex = 23;
-            this.btnIntPuntajes.UseVisualStyleBackColor = true;
+            this.btnIntPuntajes.UseVisualStyleBackColor = false;
             this.btnIntPuntajes.Click += new System.EventHandler(this.btnIntPuntajes_Click);
             // 
             // panelPuntajes
@@ -276,13 +312,14 @@
             this.panelPuntajes.Controls.Add(this.lblListadoDatos);
             this.panelPuntajes.Location = new System.Drawing.Point(-1, 1);
             this.panelPuntajes.Name = "panelPuntajes";
-            this.panelPuntajes.Size = new System.Drawing.Size(790, 458);
+            this.panelPuntajes.Size = new System.Drawing.Size(304, 458);
             this.panelPuntajes.TabIndex = 23;
             this.panelPuntajes.Visible = false;
             // 
             // lblFechaDat
             // 
             this.lblFechaDat.AutoSize = true;
+            this.lblFechaDat.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblFechaDat.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaDat.ForeColor = System.Drawing.Color.White;
             this.lblFechaDat.Location = new System.Drawing.Point(624, 58);
@@ -294,6 +331,7 @@
             // lblPtsDat
             // 
             this.lblPtsDat.AutoSize = true;
+            this.lblPtsDat.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblPtsDat.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPtsDat.ForeColor = System.Drawing.Color.White;
             this.lblPtsDat.Location = new System.Drawing.Point(535, 58);
@@ -305,6 +343,7 @@
             // lblDifDatos
             // 
             this.lblDifDatos.AutoSize = true;
+            this.lblDifDatos.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblDifDatos.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDifDatos.ForeColor = System.Drawing.Color.White;
             this.lblDifDatos.Location = new System.Drawing.Point(484, 58);
@@ -315,19 +354,20 @@
             // 
             // btnAceptarDatos
             // 
+            this.btnAceptarDatos.BackColor = System.Drawing.SystemColors.ControlText;
             this.btnAceptarDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptarDatos.Image = global::PACMANv3.Properties.Resources.inicio;
             this.btnAceptarDatos.Location = new System.Drawing.Point(365, 295);
             this.btnAceptarDatos.Name = "btnAceptarDatos";
             this.btnAceptarDatos.Size = new System.Drawing.Size(297, 124);
             this.btnAceptarDatos.TabIndex = 1;
-            this.btnAceptarDatos.UseVisualStyleBackColor = true;
+            this.btnAceptarDatos.UseVisualStyleBackColor = false;
             this.btnAceptarDatos.Click += new System.EventHandler(this.btnAceptarDatos_Click);
             // 
             // lblListadoDatos
             // 
             this.lblListadoDatos.AutoSize = true;
-            this.lblListadoDatos.BackColor = System.Drawing.Color.Black;
+            this.lblListadoDatos.BackColor = System.Drawing.SystemColors.ControlText;
             this.lblListadoDatos.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListadoDatos.ForeColor = System.Drawing.Color.White;
             this.lblListadoDatos.Location = new System.Drawing.Point(373, 58);
@@ -383,6 +423,8 @@
         private System.Windows.Forms.Label lblFechaDat;
         private System.Windows.Forms.Label lblPtsDat;
         private System.Windows.Forms.Label lblDifDatos;
+        private System.Windows.Forms.ComboBox cmbSeleccionMapa;
+        private System.Windows.Forms.Label lblSeleccioneMapa;
     }
 }
 

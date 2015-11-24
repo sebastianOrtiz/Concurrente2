@@ -12,6 +12,7 @@ namespace PACMANv3.pkgModelo {
     /// <summary>
     /// Representa un tablero de juego
     /// </summary>
+    [Serializable()]
     public class Mapa {
         private Celda[,] matrizDiseño;
         private int filas;

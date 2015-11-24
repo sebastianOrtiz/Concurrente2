@@ -8,6 +8,7 @@ namespace PACMANv3.pkgModelo {
     /// <summary>
     /// Clase que representa las galletas, las super galletas y las frutas
     /// </summary>
+    [Serializable()]
     public class Biscocho {
         private int tipo; //1 Galletanomal, 2 Galleta Grande, 3 Fruta
         private int x;

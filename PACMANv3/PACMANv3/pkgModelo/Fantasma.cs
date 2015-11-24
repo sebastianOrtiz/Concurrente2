@@ -9,6 +9,7 @@ namespace PACMANv3.pkgModelo {
     /// <summary>
     /// Clase que representa un enemigo en el juego
     /// </summary>
+    [Serializable()]
     public class Fantasma {
         private Image imgActual;
         private Image[] imgArriba;

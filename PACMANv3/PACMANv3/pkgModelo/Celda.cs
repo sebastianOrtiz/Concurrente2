@@ -9,6 +9,7 @@ namespace PACMANv3.pkgModelo {
     /// <summary>
     /// Clase que representa una celda en la matriz del mapa
     /// </summary>
+    [Serializable()]
     public class Celda {
         private string valor;
         private int x;
