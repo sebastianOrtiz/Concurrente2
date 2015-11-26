@@ -14,11 +14,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Newtonsoft.Json;
+using System.Threading;
 
-namespace PACMANv3.pkgVista
-{
-    public partial class VistaJuegoOnline : Form
-    {
+namespace PACMANv3.pkgVista {
+    public partial class VistaJuegoOnline : Form {
         private Mapa mapa;
         public static Queue<Estado> colaDeEstados;
         private Estado estadoActual;
@@ -33,15 +33,93 @@ namespace PACMANv3.pkgVista
         private SpeechRecognitionEngine escucha;
         private List<Mensaje> mensajes;
 
-        public VistaJuegoOnline()
-        {
+        private List<Mapa> listaDeMapas;
+        private List<String> nombresDeMapas;
+
+        public VistaJuegoOnline() {
             InitializeComponent();
+
+            this.listaDeMapas = new List<Mapa>();
+            this.nombresDeMapas = new List<String>();
+
             colaDeEstados = new Queue<Estado>();
             this.cargarRecursos();
+            this.jugando = 1;
+            cargarNombresDeMapas();
+            cargarMapas();
+            generarEstadoActual();
+            new Thread(cicloJuego).Start();
         }
 
-        private void cargarRecursos()
-        {
+        private void cargarNombresDeMapas() {
+            StreamReader sr = new StreamReader("./../../ArchivosConf/Config/nombresMapas.conf");
+            String linea;
+            linea = sr.ReadLine();
+            while (linea != null) {
+                nombresDeMapas.Add(linea);
+                linea = sr.ReadLine();
+            }
+            sr.Close();
+            //this.cargarMapasEnCombobox();
+        }
+
+        private void cargarMapas() {
+            //LEYENDO JSON
+            StreamReader sr;
+            foreach (String nombreMapa in nombresDeMapas) {
+                sr = File.OpenText("./../../ArchivosConf/Maps/" + nombreMapa + ".map");
+                String entrada = sr.ReadToEnd();
+                if (entrada != "") {
+                    Mapa nMap = JsonConvert.DeserializeObject<Mapa>(entrada);
+                    nMap.MatrizDiseño = new Celda[nMap.Filas, nMap.Columnas];
+                    nMap.crearMapa();
+                    listaDeMapas.Add(nMap);
+                }
+            }
+        }
+
+        public Biscocho[,] obtenerBiscochos() {
+            Biscocho[,] biscochos = new Biscocho[mapa.Filas, mapa.Columnas];
+            for (int i = 0; i < mapa.Filas; i++) {
+                for (int j = 0; j < mapa.Columnas; j++) {
+                    biscochos[i, j] = mapa.MatrizDiseño[i, j].Bisc;
+                }
+            }
+            return biscochos;
+        }
+
+        private void generarEstadoActual() {
+            this.mapa = listaDeMapas.ElementAt(0);
+
+
+            Point[] centro = mapa.posicionInicalFantasmas();
+            int dirSalida = mapa.direccionDeSalidaDelFantasma();
+
+            List<Fantasma> fantasmas = new List<Fantasma>();
+            for (int i = 0; i < 2; i++) {
+                fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
+                fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
+                fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
+                fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
+            }
+
+            for (int i = 0; i < 30; i++) {
+                List<PacMan> pacmans = new List<PacMan>();
+                Point[] posCaman = this.mapa.posicionInicialPacMan();
+
+                pacmans.Add(new PacMan(19, posCaman[1].X + i, posCaman[1].Y, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y));
+                Estado est = new Estado(pacmans, fantasmas, obtenerBiscochos());
+
+                colaDeEstados.Enqueue(est);
+                //pacmans.ElementAt(0).mover();
+            }
+
+
+            //estadoActual = est;
+            //this.graficarPanel();
+        }
+
+        private void cargarRecursos() {
             this.imagenPared = new Image[10];
             imagenPared[0] = Properties.Resources.pared1;
             imagenPared[0] = Properties.Resources.pared1;
@@ -69,54 +147,49 @@ namespace PACMANv3.pkgVista
         //    this.lblNombreJugador.Text = this.Juego.DatosJugador.Nombre;
         //}
 
-        private void pintar(object sender, PaintEventArgs e)
-        {
-            if (estadoActual != null)
-            {
-                Graphics g = e.Graphics;
-                if (this.jugando == 1)
-                {
+        private void graficarEstadoActual(Graphics g) {
+            if (this.jugando == 1) {
 
-                    if (this.mapa != null)
-                    {
-                        graficarMapa(this.mapa, g);
-                        dibujarControno(this.mapa, g);
-                        graficarBiscochos(this.mapa, g);
-                        foreach (Fantasma fantasma in this.estadoActual.Fantasmas)
-                        {
-                            g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
-                        }
-                        foreach (PacMan jugador in this.estadoActual.Jugadores)
-                        {
-                            g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
-                        }
-
-
-                        //if (this.lblPuntaje.InvokeRequired)
-                        //{
-                        //    this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));
-                        //}
-                        //else
-                        //{
-                        //    this.refrescarTextos();
-                        //}
+                if (this.mapa != null) {
+                    graficarMapa(this.mapa, g);
+                    dibujarControno(this.mapa, g);
+                    graficarBiscochos(this.mapa, g);
+                    foreach (Fantasma fantasma in this.estadoActual.Fantasmas) {
+                        g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
                     }
+                    foreach (PacMan jugador in this.estadoActual.Jugadores) {
+                        g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                    }
+
+
+                    //if (this.lblPuntaje.InvokeRequired)
+                    //{
+                    //    this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));
+                    //}
+                    //else
+                    //{
+                    //    this.refrescarTextos();
+                    //}
                 }
-                else if (this.jugando == 2)
-                {
-                    //accionesFinDelJuego();
-                    g.DrawImage(imgGameOver, 0, 87, 596, 200);
-                    g.DrawImage(imgVictoria, 10, 260, 596, 56);
+            } else if (this.jugando == 2) {
+                //accionesFinDelJuego();
+                g.DrawImage(imgGameOver, 0, 87, 596, 200);
+                g.DrawImage(imgVictoria, 10, 260, 596, 56);
 
 
 
-                }
-                else if (this.jugando == 3)
-                {
-                    //accionesFinDelJuego();
-                    g.DrawImage(imgGameOver, 0, 87, 596, 200);
-                    g.DrawImage(imgDerrota, 10, 260, 596, 56);
-                }
+            } else if (this.jugando == 3) {
+                //accionesFinDelJuego();
+                g.DrawImage(imgGameOver, 0, 87, 596, 200);
+                g.DrawImage(imgDerrota, 10, 260, 596, 56);
+            }
+        }
+
+
+        private void pintar(object sender, PaintEventArgs e) {
+            if (estadoActual != null) {
+                Graphics g = e.Graphics;
+                this.graficarEstadoActual(g);
             }
         }
 
@@ -227,13 +300,11 @@ namespace PACMANv3.pkgVista
             }
         }*/
 
-        public void definirEntrada(Boolean entrada)
-        {
+        public void definirEntrada(Boolean entrada) {
             this.entradaPorVoz = entrada;
         }
 
-        private void dibujarControno(Mapa m, Graphics g)
-        {
+        private void dibujarControno(Mapa m, Graphics g) {
             Point psi = new Point(m.MatrizDiseño[0, 0].X - 1, m.MatrizDiseño[0, 0].Y - 1);
             Point psd = new Point(m.MatrizDiseño[0, m.Columnas - 1].X + 20, m.MatrizDiseño[0, m.Columnas - 1].Y - 1);
             Point pii = new Point(m.MatrizDiseño[m.Filas - 1, 0].X - 1, m.MatrizDiseño[m.Filas - 1, 0].Y + 20);
@@ -245,14 +316,10 @@ namespace PACMANv3.pkgVista
             g.DrawLine(new Pen(Brushes.White, 1), psd, pid);
         }
 
-        private void graficarBiscochos(Mapa m, Graphics g)
-        {
-            foreach (Celda celda in m.MatrizDiseño)
-            {
-                if (celda.SePuedePasar && celda.Valor == "O" && celda.Bisc.Estado)
-                {
-                    switch (celda.Bisc.Tipo)
-                    {
+        private void graficarBiscochos(Mapa m, Graphics g) {
+            foreach (Celda celda in m.MatrizDiseño) {
+                if (celda.SePuedePasar && celda.Valor == "O" && celda.Bisc.Estado) {
+                    switch (celda.Bisc.Tipo) {
                         case 1:
                             g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
                             break;
@@ -267,84 +334,75 @@ namespace PACMANv3.pkgVista
             }
         }
 
-        private void graficarMapa(Mapa m, Graphics g)
-        {
+        private void graficarMapa(Mapa m, Graphics g) {
             dibujarControno(m, g);
-            if (m.Dificultad == "Facil")
-            {
-                foreach (Celda celda in m.MatrizDiseño)
-                {
-                    if (!celda.SePuedePasar)
-                    {
+            if (m.Dificultad == "Facil") {
+                foreach (Celda celda in m.MatrizDiseño) {
+                    if (!celda.SePuedePasar) {
                         g.DrawImage(imagenPared[0], celda.X, celda.Y, celda.Width, celda.Heiht);
                     }
                 }
-            }
-            else if (m.Dificultad == "Medio")
-            {
-                foreach (Celda celda in m.MatrizDiseño)
-                {
-                    if (!celda.SePuedePasar)
-                    {
+            } else if (m.Dificultad == "Medio") {
+                foreach (Celda celda in m.MatrizDiseño) {
+                    if (!celda.SePuedePasar) {
                         g.DrawImage(imagenPared[3], celda.X, celda.Y, celda.Width, celda.Heiht);
                     }
                 }
-            }
-            else if (m.Dificultad == "Dificil")
-            {
-                foreach (Celda celda in m.MatrizDiseño)
-                {
-                    if (!celda.SePuedePasar)
-                    {
+            } else if (m.Dificultad == "Dificil") {
+                foreach (Celda celda in m.MatrizDiseño) {
+                    if (!celda.SePuedePasar) {
                         g.DrawImage(imagenPared[2], celda.X, celda.Y, celda.Width, celda.Heiht);
                     }
                 }
             }
         }
 
-        private void graficarPanel()
-        {
+        private void graficarPanel() {
             panel1.Invalidate();
         }
 
-        private void cicloJuego()
-        {
-            long ultimo = Environment.TickCount;
-            long cronometro = Environment.TickCount;
-            double milisegundo = 1000 / 60;
-            double cambio = 0;
-            int cuadros = 0;
-            int actualizaciones = 0;
-            while (jugando == 1)
-            {
-                long ahora = Environment.TickCount;
-                cambio += (ahora - ultimo) / milisegundo;
-                ultimo = ahora;
-                while (cambio >= 1)
-                {
-                    if (this.jugando == 1)
-                    {
-                        this.cambierEstadoActual();
-                        //Juego.actualizar();
-                    }
-
-                    actualizaciones++;
-                    cambio--;
-                }
-                graficarPanel();
-                cuadros++;
-                if (Environment.TickCount - cronometro > 1000)
-                {
-                    cronometro += 1000;
-                    cuadros = 0;
-                    actualizaciones = 0;
-                }
+        private void cicloJuego() {
+            while (jugando == 1) {
+                this.cambierEstadoActual();
+                this.graficarPanel();
+                Thread.Sleep(100);
             }
+
+            //long ultimo = Environment.TickCount;
+            //long cronometro = Environment.TickCount;
+            //double milisegundo = 1000 / 60;
+            //double cambio = 0;
+            //int cuadros = 0;
+            //int actualizaciones = 0;
+            //while (jugando == 1) {
+            //    long ahora = Environment.TickCount;
+            //    cambio += (ahora - ultimo) / milisegundo;
+            //    ultimo = ahora;
+            //    while (cambio >= 1) {
+            //        if (this.jugando == 1) {
+            //            this.cambierEstadoActual();
+            //            //Juego.actualizar();
+            //        }
+
+            //        actualizaciones++;
+            //        cambio--;
+            //    }
+            //    //this.cambierEstadoActual();
+            //    graficarPanel();
+            //    cuadros++;
+            //    if (Environment.TickCount - cronometro > 1000) {
+            //        cronometro += 1000;
+            //        cuadros = 0;
+            //        actualizaciones = 0;
+            //    }
+            //}
         }
 
-        private void cambierEstadoActual()
-        {
-            this.estadoActual = colaDeEstados.Dequeue();
+        private void cambierEstadoActual() {
+            if (colaDeEstados.Count > 0) {
+                this.estadoActual = colaDeEstados.Dequeue();
+            }
+
         }
 
         /*public void actualizarChat(Mensaje m)
@@ -357,10 +415,16 @@ namespace PACMANv3.pkgVista
              
         }*/
 
-        private void VistaJuegoOnline_Load(object sender, EventArgs e)
-        {
+        private void VistaJuegoOnline_Load(object sender, EventArgs e) {
             DoubleBuffered = true;
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true });
         }
+
+        private void button1_Click(object sender, EventArgs e) {
+            this.cambierEstadoActual();
+            this.graficarPanel();
+        }
+
+
     }
 }

@@ -49,6 +49,7 @@
             this.lblDifDatos = new System.Windows.Forms.Label();
             this.btnAceptarDatos = new System.Windows.Forms.Button();
             this.lblListadoDatos = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudHPPacman)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVidasPacman)).BeginInit();
             this.panelConfigInicio.SuspendLayout();
@@ -246,6 +247,7 @@
             // 
             this.panelConfigInicio.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelConfigInicio.BackgroundImage = global::PACMANv3.Properties.Resources.FondoInicioPacman;
+            this.panelConfigInicio.Controls.Add(this.button1);
             this.panelConfigInicio.Controls.Add(this.lblSeleccioneMapa);
             this.panelConfigInicio.Controls.Add(this.cmbSeleccionMapa);
             this.panelConfigInicio.Controls.Add(this.btnIntPuntajes);
@@ -376,6 +378,18 @@
             this.lblListadoDatos.TabIndex = 0;
             this.lblListadoDatos.Text = "Datos";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button1.Location = new System.Drawing.Point(426, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 23);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "Juego Online";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,6 +439,7 @@
         private System.Windows.Forms.Label lblDifDatos;
         private System.Windows.Forms.ComboBox cmbSeleccionMapa;
         private System.Windows.Forms.Label lblSeleccioneMapa;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -128,6 +128,7 @@ namespace PACMANv3.pkgModelo {
             this.imgIzquierda[1] = Properties.Resources.PACMANIzquierda2;
 
             this.direccion = 3;
+            this.imgActual = this.imgDerecha[0];
 
             
         }
@@ -281,7 +282,7 @@ namespace PACMANv3.pkgModelo {
                         colaDeOrdenes.Dequeue();
                     }
                 } else {
-                    //this.cambiarDirecion();
+                    this.cambiarDirecion();
                 }
             }
 
