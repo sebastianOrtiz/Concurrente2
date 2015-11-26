@@ -29,6 +29,7 @@ namespace PACMANv3
         private SoundPlayer soundFondo;
         private Mapa mapaAJugar;
 
+        private Socket ss;
 
         public Form1()
         {
@@ -42,58 +43,7 @@ namespace PACMANv3
             cargarNombresDeMapas();
             cargarMapas();
 
-            //Conexión socket(envio y recibo)
-            /*Socket ss = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
-            try
-            {
-                ss.Bind(direccion);
-                Console.WriteLine("Escuchando");
-                ss.Listen(1);
-                Console.WriteLine("Esperando");
-                Socket sc = ss.Accept();
-                BinaryFormatter serializer = new BinaryFormatter();
-                Mensaje m = null;
-                NetworkStream net = new NetworkStream(sc);
-                m = (Mensaje)serializer.Deserialize(net);
-                Console.WriteLine("" + m.Nombre);
-                Console.WriteLine("" + m.Texto);
-                m = new Mensaje("servidor","mundo!!");
-                serializer.Serialize(net, m);
-                net.Close();
-                sc.Close();
-                ss.Close();
-                Console.WriteLine("Cerrando conexion");
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine("Error: {0}", error.ToString());
-            }*/
-
-            //-------------------------------------------------
-
-            //Conexión socket(envio y recibo)
-            /*Socket sc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
-
-            try
-            {
-                sc.Connect(direccion);            
-                Console.WriteLine("Conectado con exito");
-                Mensaje m = new Mensaje("cliente", "hola!!");
-                BinaryFormatter serializer = new BinaryFormatter();
-                NetworkStream st = new NetworkStream(sc);
-                serializer.Serialize(st, m);
-                m = (Mensaje)serializer.Deserialize(st);
-                Console.WriteLine("" + m.Nombre);
-                Console.WriteLine("" + m.Texto);
-                st.Close();
-                sc.Close();
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine("Error: {0}", error.ToString());
-            }*/
+            this.socket();
         }
 
         public void cargarMapasEnCombobox()
@@ -332,5 +282,112 @@ namespace PACMANv3
                 }
             }
         }
+
+
+
+        private void socket()
+        {
+            TcpListener server = new TcpListener(IPAddress.Loopback, 1339);
+            server.Start();
+            Console.WriteLine("esperando");
+            TcpClient client = server.AcceptTcpClient();
+            NetworkStream net = client.GetStream();
+
+            BinaryFormatter serializer = new BinaryFormatter();
+            Console.WriteLine(net.ReadTimeout);
+
+            /*** Leer ***/
+            byte[] msgDataLen = new byte[4];
+            net.Read(msgDataLen, 0, 4);
+
+            int dataLen = BitConverter.ToInt32(msgDataLen, 0);
+            Console.WriteLine("tamaño leido {0}", dataLen);
+            Console.WriteLine("esperando datos");
+            byte[] msgDataBytes = new byte[dataLen];
+            net.Read(msgDataBytes, 0, dataLen);
+            MemoryStream ms = new MemoryStream(msgDataBytes);
+            ms.Position = 0;
+            Mensaje m = (Mensaje)serializer.Deserialize(ms);
+            Console.WriteLine(m.Nombre);
+            Console.WriteLine(m.Texto);
+            /*** ***/
+
+            /*//Conexión socket(envio y recibo)
+            ss = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
+            try
+            {
+                ss.Bind(direccion);
+                Console.WriteLine("Escuchando");
+                ss.Listen(1);
+                Console.WriteLine("Esperando");
+                Socket sc = ss.Accept();
+                BinaryFormatter serializer = new BinaryFormatter();
+
+                Mensaje m = null;
+                NetworkStream net = new NetworkStream(sc);
+
+                /*m = (Mensaje)serializer.Deserialize(net);
+                Console.WriteLine("" + m.Nombre);
+                Console.WriteLine("" + m.Texto);*/
+
+            /*m = new Mensaje("servidor", "mundo!!");
+            serializer.Serialize(net, m);*/
+
+            /*** Leer ***/
+            /*byte[] msgDataLen = new byte[4];
+            net.Read(msgDataLen, 0, 4);
+
+            int dataLen = BitConverter.ToInt32(msgDataLen, 0);
+            Console.WriteLine("tamaño leido {0}", dataLen);
+            Console.WriteLine("esperando datos");
+            byte[] msgDataBytes = new byte[dataLen];
+            net.Read(msgDataBytes, 0, dataLen);
+            /*** ***/
+
+            /*MemoryStream ms = new MemoryStream(msgDataBytes);
+            serializer.Serialize(ms, m);
+            msgDataBytes = ms.ToArray();
+
+            byte[] msgDataLen = BitConverter.GetBytes((Int32)msgDataBytes.Length);
+            net.Write(msgDataLen, 0, 4);
+            net.Write(msgDataBytes, 0, msgDataBytes.Length);*/
+
+            /*net.Close();
+            sc.Close();
+            ss.Close();
+            Console.WriteLine("Cerrando conexion");
+        }
+        catch (Exception error)
+        {
+            Console.WriteLine("Error: {0}", error.ToString());
+        }*/
+
+            //-------------------------------------------------
+
+            //Conexión socket(envio y recibo)
+            /*Socket sc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
+
+            try
+            {
+                sc.Connect(direccion);            
+                Console.WriteLine("Conectado con exito");
+                Mensaje m = new Mensaje("cliente", "hola!!");
+                BinaryFormatter serializer = new BinaryFormatter();
+                NetworkStream st = new NetworkStream(sc);
+                serializer.Serialize(st, m);
+                m = (Mensaje)serializer.Deserialize(st);
+                Console.WriteLine("" + m.Nombre);
+                Console.WriteLine("" + m.Texto);
+                st.Close();
+                sc.Close();
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("Error: {0}", error.ToString());
+            }*/
+        }
+
     }
 }
