@@ -9,13 +9,24 @@ namespace PACMANv3.pkgModelo
     [Serializable()]
     class Mensaje
     {
+        private int id;
         private string nombre;
         private string texto;
 
-        public Mensaje(string nombre, string mensaje)
+        public Mensaje(int id, string nombre, string mensaje)
         {
+            this.id = id;
             this.nombre = nombre;
             this.texto = mensaje;
+        }
+
+        /// <summary>
+        /// Accesor y mutador de el atributo Nombre
+        /// </summary>
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
         }
 
         /// <summary>

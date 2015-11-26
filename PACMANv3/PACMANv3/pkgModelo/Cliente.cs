@@ -14,18 +14,17 @@ namespace PACMANv3.pkgModelo
 {
     class Cliente
     {
-        private Socket sc;
-        private NetworkStream nst;
-        private static BinaryFormatter bnFm = new BinaryFormatter();
+        private TcpClient sc;
+        private NetworkStream net;
         private VistaJuegoOnline vista;
-        private Thread th;
 
-        public Cliente(Socket sc, NetworkStream nst, VistaJuegoOnline vista)
+        private static BinaryFormatter bnFm = new BinaryFormatter();
+
+        public Cliente(TcpClient sc, VistaJuegoOnline vista)
         {
             this.sc = sc;
-            this.nst = nst;
+            this.net = sc.GetStream();
             this.vista = vista;
-            this.th = new Thread(this.escuchar);
         }
 
         private void escuchar()

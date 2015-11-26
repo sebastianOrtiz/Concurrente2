@@ -9,29 +9,39 @@ using System.Net.Sockets;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace PACMANv3.pkgModelo
-{
+namespace PACMANv3.pkgModelo {
 
-    class Servidor
-    {
-        private Socket ss;
-        private int cantJugadores;
+    class Servidor {
+        private TcpListener server;
         private Thread th;
+        private int cantTotalJugadores;
 
-        public Servidor(int cantJugadores)
-        {
-            this.cantJugadores = cantJugadores;
-            this.ss = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint direccion;
-            //direccion = new IPEndPoint(IPAddress.Parse(''), 1339);
-            direccion = new IPEndPoint(IPAddress.Loopback, 1339);
-            ss.Bind(direccion);
-            ss.Listen(this.cantJugadores);
+        public static BinaryFormatter serializer = new BinaryFormatter();
+        private static List<UsuarioServidor> usuarios = new List<UsuarioServidor>();
+
+        public Servidor(int cantJugadores) {
+            this.cantTotalJugadores = cantJugadores;
+            this.server = new TcpListener(IPAddress.Loopback, 1339);
         }
 
-        private void atender()
-        {
-            
+        private void atender() {
+            server.Start();
+            while (usuarios.Count < this.cantTotalJugadores) {
+                TcpClient client = server.AcceptTcpClient();
+
+                UsuarioServidor usv = new UsuarioServidor(usuarios.Count, client);
+                usuarios.Add(usv);
+
+                new Thread(usv.atender).Start();
+            }
+        }
+
+        public static void enviarMensaje(Mensaje m) {
+            foreach (UsuarioServidor usv in usuarios) {
+                if (usv.Id != m.Id) {
+                    usv.enviar(m);
+                }
+            }
         }
     }
 }
