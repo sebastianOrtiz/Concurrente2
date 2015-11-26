@@ -241,7 +241,7 @@ namespace PACMANv3 {
 
         private void socket() {
 
-            Mensaje m = new Mensaje("cliente", "hola!!");
+            /*Mensaje m = new Mensaje("cliente", "hola!!");
             BinaryFormatter serializer = new BinaryFormatter();
 
             IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
@@ -249,7 +249,7 @@ namespace PACMANv3 {
 
             NetworkStream net = client.GetStream();
 
-            /*** Escribir ***/
+            // Escribir
             byte[] userDataBytes;
             MemoryStream ms = new MemoryStream();
             serializer.Serialize(ms, m);
@@ -261,7 +261,7 @@ namespace PACMANv3 {
             net.Write(userDataLen, 0, 4);
 
             Thread.Sleep(10 * 1000);
-            net.Write(userDataBytes, 0, userDataBytes.Length);
+            net.Write(userDataBytes, 0, userDataBytes.Length);*/
             /*** ***/
 
             /* Conexión socket(envio y recibo)
