@@ -61,6 +61,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "VistaJuegoOnline";
             this.Text = "VistaJuegoOnline";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VistaJuegoOnline_FormClosing);
             this.Load += new System.EventHandler(this.VistaJuegoOnline_Load);
             this.ResumeLayout(false);
 

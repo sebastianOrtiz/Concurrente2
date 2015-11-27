@@ -120,7 +120,7 @@ namespace PACMANv3 {
                         entradaPorVoz = false;
                     }
 
-                    juego = new Juego(mapaAJugar, dificultad, nuevoJugador, entradaPorVoz, (int)nudVidasPacman.Value, (int)nudHPPacman.Value);
+                    juego = new Juego(mapaAJugar, dificultad, nuevoJugador, entradaPorVoz, (int) nudVidasPacman.Value, (int) nudHPPacman.Value);
 
                     VistaJuego vj = new VistaJuego();
                     vj.definirEntrada(entradaPorVoz);
@@ -337,6 +337,7 @@ namespace PACMANv3 {
         private void button1_Click(object sender, EventArgs e) {
             VistaJuegoOnline vjo = new VistaJuegoOnline();
             vjo.Visible = true;
+            vjo.conectar("127.0.0.1", 1339);
         }
     }
 }

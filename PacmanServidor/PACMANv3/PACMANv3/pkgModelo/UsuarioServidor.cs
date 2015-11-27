@@ -21,24 +21,31 @@ namespace PACMANv3.pkgModelo {
             this.conectado = true;
         }
 
+        public void enviarId() {
+            Mensaje m = new Mensaje(this.id, "", "conectado");
+            m.Conectar = true;
+            enviar(m);
+        }
+
         public void atender() {
-            //Leer
-            byte[] msgDataLen = new byte[4];
-            net.Read(msgDataLen, 0, 4);
+            while (this.conectado) {
+                //Leer
+                byte[] msgDataLen = new byte[4];
+                net.Read(msgDataLen, 0, 4);
 
-            int dataLen = BitConverter.ToInt32(msgDataLen, 0);
-            Console.WriteLine("tamaño leido {0}", dataLen);
-            Console.WriteLine("esperando datos");
-            byte[] msgDataBytes = new byte[dataLen];
-            net.Read(msgDataBytes, 0, dataLen);
-            MemoryStream ms = new MemoryStream(msgDataBytes);
-            ms.Position = 0;
+                int dataLen = BitConverter.ToInt32(msgDataLen, 0);
 
-            Object o = Servidor.serializer.Deserialize(ms);
-            if (o.GetType() == typeof(Mensaje)) {
-                Servidor.enviarMensaje((Mensaje) o);
-            } else if (o.GetType() == typeof(Estado)) {
+                byte[] msgDataBytes = new byte[dataLen];
+                net.Read(msgDataBytes, 0, dataLen);
+                MemoryStream ms = new MemoryStream(msgDataBytes);
+                ms.Position = 0;
 
+                Object o = Servidor.serializer.Deserialize(ms);
+                if (o.GetType() == typeof(Mensaje)) {
+                    Servidor.enviarTodos(o);
+                } else if (o.GetType() == typeof(Estado)) {
+
+                }
             }
         }
 

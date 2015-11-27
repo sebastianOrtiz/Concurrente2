@@ -15,32 +15,51 @@ namespace PACMANv3.pkgModelo {
         private TcpListener server;
         private Thread th;
         private int cantTotalJugadores;
+        private bool conectado;
 
         public static BinaryFormatter serializer = new BinaryFormatter();
         private static List<UsuarioServidor> usuarios = new List<UsuarioServidor>();
 
-        public Servidor(int cantJugadores) {
+        public Servidor(int cantJugadores, string ipAddress) {
             this.cantTotalJugadores = cantJugadores;
+            //this.server = new TcpListener(IPAddress.Parse(ipAddress), 1339);
             this.server = new TcpListener(IPAddress.Loopback, 1339);
         }
 
-        private void atender() {
+        public void atender() {
+            this.conectado = true;
             server.Start();
-            while (usuarios.Count < this.cantTotalJugadores) {
-                TcpClient client = server.AcceptTcpClient();
 
-                UsuarioServidor usv = new UsuarioServidor(usuarios.Count, client);
-                usuarios.Add(usv);
+            while (this.conectado) {
+                while (this.conectado && usuarios.Count < this.cantTotalJugadores) {
+                    TcpClient client = server.AcceptTcpClient();
 
-                new Thread(usv.atender).Start();
+                    UsuarioServidor usv = new UsuarioServidor(usuarios.Count, client);
+                    usv.enviarId();
+                    usuarios.Add(usv);
+
+                    new Thread(usv.atender).Start();
+                }
             }
         }
 
-        public static void enviarMensaje(Mensaje m) {
-            foreach (UsuarioServidor usv in usuarios) {
-                if (usv.Id != m.Id) {
-                    usv.enviar(m);
+        public static void enviarTodos(Object o) {
+            if (o.GetType() == typeof(Mensaje)) {
+                Mensaje m = (Mensaje) o;
+                foreach (UsuarioServidor usv in usuarios) {
+                    if (usv.Id != m.Id) {
+                        usv.enviar(m);
+                    }
                 }
+            } else if (o.GetType() == typeof(Estado)) {
+
+            }
+        }
+
+        public void terminarHilos() {
+            this.conectado = false;
+            foreach (UsuarioServidor usv in usuarios) {
+                usv.Conectado = false;
             }
         }
     }

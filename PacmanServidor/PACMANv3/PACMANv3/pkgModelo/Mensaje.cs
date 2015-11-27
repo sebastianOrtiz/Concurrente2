@@ -10,15 +10,17 @@ namespace PACMANv3.pkgModelo {
         private int id;
         private string nombre;
         private string texto;
+        private bool conectar;
 
         public Mensaje(int id, string nombre, string mensaje) {
             this.id = id;
             this.nombre = nombre;
             this.texto = mensaje;
+            this.conectar = false;
         }
 
         /// <summary>
-        /// Accesor y mutador de el atributo Nombre
+        /// Accesor y mutador de el atributo Id
         /// </summary>
         public int Id {
             get { return id; }
@@ -34,11 +36,19 @@ namespace PACMANv3.pkgModelo {
         }
 
         /// <summary>
-        /// Accesor y mutador de el atributo Mensaje
+        /// Accesor y mutador de el atributo Texto
         /// </summary>
         public string Texto {
             get { return texto; }
             set { texto = value; }
+        }
+
+        /// <summary>
+        /// Accesor y mutador de el atributo Conectar
+        /// </summary>
+        public bool Conectar {
+            get { return conectar; }
+            set { conectar = value; }
         }
     }
 }

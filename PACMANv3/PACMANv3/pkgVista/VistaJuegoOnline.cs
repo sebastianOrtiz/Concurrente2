@@ -36,6 +36,8 @@ namespace PACMANv3.pkgVista {
         private List<Mapa> listaDeMapas;
         private List<String> nombresDeMapas;
 
+        private Cliente usuario;
+
         public VistaJuegoOnline() {
             InitializeComponent();
 
@@ -321,14 +323,14 @@ namespace PACMANv3.pkgVista {
                 if (celda.SePuedePasar && celda.Valor == "O" && celda.Bisc.Estado) {
                     switch (celda.Bisc.Tipo) {
                         case 1:
-                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
-                            break;
+                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
+                        break;
                         case 2:
-                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
-                            break;
+                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
+                        break;
                         case 3:
-                            g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
-                            break;
+                        g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
+                        break;
                     }
                 }
             }
@@ -415,6 +417,15 @@ namespace PACMANv3.pkgVista {
              
         }*/
 
+        public void conectar(string ipAddress, int port) {
+            this.usuario = new Cliente(ipAddress, port, this);
+            this.usuario.recibirId();
+        }
+
+        private void terminarHilos() {
+            this.usuario.Conectado = false;
+        }
+
         private void VistaJuegoOnline_Load(object sender, EventArgs e) {
             DoubleBuffered = true;
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true });
@@ -425,6 +436,13 @@ namespace PACMANv3.pkgVista {
             this.graficarPanel();
         }
 
+        private void VistaJuegoOnline_FormClosing(object sender, FormClosingEventArgs e) {
+            this.terminarHilos();
+        }
 
+        public int Identificador {
+            get { return identificador; }
+            set { identificador = value; }
+        }
     }
 }
