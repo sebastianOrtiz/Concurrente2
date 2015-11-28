@@ -16,6 +16,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 using System.Threading;
+using System.Drawing.Imaging;
 
 namespace PACMANv3.pkgVista {
     public partial class VistaJuegoOnline : Form {
@@ -122,6 +123,7 @@ namespace PACMANv3.pkgVista {
         }
 
         private void cargarRecursos() {
+
             this.imagenPared = new Image[10];
             imagenPared[0] = Properties.Resources.pared1;
             imagenPared[0] = Properties.Resources.pared1;
@@ -160,7 +162,12 @@ namespace PACMANv3.pkgVista {
                         g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
                     }
                     foreach (PacMan jugador in this.estadoActual.Jugadores) {
-                        g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                        if (jugador.Identificador == this.identificador) {
+                            g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                        } else {
+                            g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                        }
+                        
                     }
 
 
@@ -323,14 +330,14 @@ namespace PACMANv3.pkgVista {
                 if (celda.SePuedePasar && celda.Valor == "O" && celda.Bisc.Estado) {
                     switch (celda.Bisc.Tipo) {
                         case 1:
-                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
-                        break;
+                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
+                            break;
                         case 2:
-                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
-                        break;
+                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
+                            break;
                         case 3:
-                        g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
-                        break;
+                            g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
+                            break;
                     }
                 }
             }
