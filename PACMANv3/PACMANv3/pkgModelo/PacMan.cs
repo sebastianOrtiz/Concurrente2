@@ -32,6 +32,8 @@ namespace PACMANv3.pkgModelo {
         private int vidas;
         private Queue<int> colaDeOrdenes;
         private Random randCambairDir;
+
+        private int identificador;
         
         /// <summary>
         /// Constructor de la clase PacMan
@@ -452,7 +454,7 @@ namespace PACMANv3.pkgModelo {
             set { imgActual = value; }
         }
 
-        private int identificador;
+        
 
         public int Identificador
         {
