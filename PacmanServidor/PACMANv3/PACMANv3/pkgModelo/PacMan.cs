@@ -10,11 +10,17 @@ namespace PACMANv3.pkgModelo {
     /// </summary>
     [Serializable()]
     public class PacMan {
+
         private Image imgActual;
         private Image[] imgArriba;
         private Image[] imgAbajo;
         private Image[] imgDerecha;
         private Image[] imgIzquierda;
+
+        private Image[] imgCamisetaRoja;
+        private Image[] imgCamisetaVerde;
+
+
         private int direccion; //1 arriba, 2 abajo, 3 derecha , 4 izquierda
         private int windth;
         private int height;
@@ -34,8 +40,6 @@ namespace PACMANv3.pkgModelo {
 
         private int identificador;
 
-        
-        
         /// <summary>
         /// Constructor de la clase PacMan
         /// </summary>
@@ -49,7 +53,7 @@ namespace PACMANv3.pkgModelo {
         /// <param name="hp">Valor de cada vida</param>
         /// <param name="i">Indica la posicion inicial en las filas de la matriz</param>
         /// <param name="j">Indica la posicion inicial en las columnas de la matriz</param>
-        public PacMan(int lado, int x, int y, int velocidad, int nivel,  Mapa mapaActual, int vidas, int hp, int i, int j) {
+        public PacMan(int lado, int x, int y, int velocidad, int nivel, Mapa mapaActual, int vidas, int hp, int i, int j) {
             this.windth = lado;
             this.height = lado;
             this.x = x;
@@ -121,6 +125,9 @@ namespace PACMANv3.pkgModelo {
             this.imgDerecha = new Image[2];
             this.imgIzquierda = new Image[2];
 
+            this.imgCamisetaVerde = new Image[4];
+            this.imgCamisetaRoja = new Image[4];
+
             this.imgAbajo[0] = Properties.Resources.PACMANAbajo1;
             this.imgAbajo[1] = Properties.Resources.PACMANAbajo2;
             this.imgArriba[0] = Properties.Resources.PACMANArriba1;
@@ -130,9 +137,28 @@ namespace PACMANv3.pkgModelo {
             this.imgIzquierda[0] = Properties.Resources.PACMANIzquierda1;
             this.imgIzquierda[1] = Properties.Resources.PACMANIzquierda2;
 
-            this.direccion = 3;
+            this.imgCamisetaVerde[0] = Properties.Resources.CAMISAVArriba;
+            this.imgCamisetaVerde[1] = Properties.Resources.CAMISAVAbajo;
+            this.imgCamisetaVerde[2] = Properties.Resources.CAMISAVDerecha;
+            this.imgCamisetaVerde[3] = Properties.Resources.CAMISAVIzquierda;
 
-            
+            this.imgCamisetaRoja[0] = Properties.Resources.CAMISARArriba;
+            this.imgCamisetaRoja[1] = Properties.Resources.CAMISARAbajo;
+            this.imgCamisetaRoja[2] = Properties.Resources.CAMISARDerecha;
+            this.imgCamisetaRoja[3] = Properties.Resources.CAMISARIzquierda;
+
+            this.direccion = 3;
+            this.imgActual = this.imgDerecha[0];
+
+
+        }
+
+        public Image obtenerCamisetaRoja() {
+            return this.imgCamisetaRoja[this.direccion - 1];
+        }
+
+        public Image obtenerCamisetaVerde() {
+            return this.imgCamisetaVerde[this.direccion - 1];
         }
 
         /// <summary>
@@ -284,7 +310,7 @@ namespace PACMANv3.pkgModelo {
                         colaDeOrdenes.Dequeue();
                     }
                 } else {
-                    //this.cambiarDirecion();
+                    this.cambiarDirecion();
                 }
             }
 
@@ -454,9 +480,12 @@ namespace PACMANv3.pkgModelo {
             set { imgActual = value; }
         }
 
+
+
         public int Identificador {
             get { return identificador; }
             set { identificador = value; }
         }
+
     }
 }

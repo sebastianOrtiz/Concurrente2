@@ -460,4 +460,28 @@
   <data name="victoria1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Recursos\SONIDOS\victoria.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="CAMISARAbajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\CAMISAR\CAMISARAbajo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CAMISARArriba" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\CAMISAR\CAMISARArriba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CAMISARDerecha" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\CAMISAR\CAMISARDerecha.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CAMISARIzquierda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\CAMISAR\CAMISARIzquierda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CAMISAVAbajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\CAMISAV\CAMISAVAbajo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CAMISAVArriba" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\CAMISAV\CAMISAVArriba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CAMISAVDerecha" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\CAMISAV\CAMISAVDerecha.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CAMISAVIzquierda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\CAMISAV\CAMISAVIzquierda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -453,6 +453,54 @@
   <ItemGroup>
     <None Include="Recursos\SONIDOS\soundFrutilla.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAR\CAMISAAbajo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAR\CAMISAArriba.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAR\CAMISADerecha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAR\CAMISAIzquierda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAV\CAMISAAbajo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAV\CAMISAArriba.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAV\CAMISADerecha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAV\CAMISAIzquierda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAV\CAMISAVAbajo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAV\CAMISAVArriba.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAV\CAMISAVDerecha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAV\CAMISAVIzquierda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAR\CAMISARAbajo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAR\CAMISARArriba.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAR\CAMISARDerecha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\CAMISAR\CAMISARIzquierda.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

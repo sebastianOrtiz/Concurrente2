@@ -109,8 +109,15 @@ namespace PACMANv3.pkgVista {
             for (int i = 0; i < 30; i++) {
                 List<PacMan> pacmans = new List<PacMan>();
                 Point[] posCaman = this.mapa.posicionInicialPacMan();
-
-                pacmans.Add(new PacMan(19, posCaman[1].X + i, posCaman[1].Y, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y));
+                PacMan p = new PacMan(19, posCaman[1].X + i, posCaman[1].Y, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y);
+                p.Identificador = 0;
+                PacMan p1 = new PacMan(19, posCaman[1].X, posCaman[1].Y - i, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y);
+                p1.Identificador = 1;
+                PacMan p2 = new PacMan(19, posCaman[1].X - i, posCaman[1].Y, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y);
+                p2.Identificador = 2;
+                pacmans.Add(p);
+                pacmans.Add(p1);
+                pacmans.Add(p2);
                 Estado est = new Estado(pacmans, fantasmas, obtenerBiscochos());
 
                 colaDeEstados.Enqueue(est);
@@ -164,10 +171,12 @@ namespace PACMANv3.pkgVista {
                     foreach (PacMan jugador in this.estadoActual.Jugadores) {
                         if (jugador.Identificador == this.identificador) {
                             g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                            g.DrawImage(jugador.obtenerCamisetaVerde(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
                         } else {
                             g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                            g.DrawImage(jugador.obtenerCamisetaRoja(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
                         }
-                        
+
                     }
 
 

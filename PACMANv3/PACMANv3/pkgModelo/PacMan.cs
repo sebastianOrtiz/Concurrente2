@@ -16,6 +16,11 @@ namespace PACMANv3.pkgModelo {
         private Image[] imgAbajo;
         private Image[] imgDerecha;
         private Image[] imgIzquierda;
+
+        private Image[] imgCamisetaRoja;
+        private Image[] imgCamisetaVerde;
+
+
         private int direccion; //1 arriba, 2 abajo, 3 derecha , 4 izquierda
         private int windth;
         private int height;
@@ -120,6 +125,9 @@ namespace PACMANv3.pkgModelo {
             this.imgDerecha = new Image[2];
             this.imgIzquierda = new Image[2];
 
+            this.imgCamisetaVerde = new Image[4];
+            this.imgCamisetaRoja = new Image[4];
+
             this.imgAbajo[0] = Properties.Resources.PACMANAbajo1;
             this.imgAbajo[1] = Properties.Resources.PACMANAbajo2;
             this.imgArriba[0] = Properties.Resources.PACMANArriba1;
@@ -129,10 +137,28 @@ namespace PACMANv3.pkgModelo {
             this.imgIzquierda[0] = Properties.Resources.PACMANIzquierda1;
             this.imgIzquierda[1] = Properties.Resources.PACMANIzquierda2;
 
+            this.imgCamisetaVerde[0] = Properties.Resources.CAMISAVArriba;
+            this.imgCamisetaVerde[1] = Properties.Resources.CAMISAVAbajo;
+            this.imgCamisetaVerde[2] = Properties.Resources.CAMISAVDerecha;
+            this.imgCamisetaVerde[3] = Properties.Resources.CAMISAVIzquierda;
+
+            this.imgCamisetaRoja[0] = Properties.Resources.CAMISARArriba;
+            this.imgCamisetaRoja[1] = Properties.Resources.CAMISARAbajo;
+            this.imgCamisetaRoja[2] = Properties.Resources.CAMISARDerecha;
+            this.imgCamisetaRoja[3] = Properties.Resources.CAMISARIzquierda;
+
             this.direccion = 3;
             this.imgActual = this.imgDerecha[0];
 
             
+        }
+
+        public Image obtenerCamisetaRoja() {
+            return this.imgCamisetaRoja[this.direccion - 1];
+        }
+
+        public Image obtenerCamisetaVerde() {
+            return this.imgCamisetaVerde[this.direccion - 1];
         }
 
         /// <summary>
