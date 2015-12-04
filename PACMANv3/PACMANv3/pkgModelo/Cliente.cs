@@ -62,8 +62,12 @@ namespace PACMANv3.pkgModelo {
             userDataBytes = ms.ToArray();
 
             byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
+
+            Console.WriteLine(userDataBytes.Length);
+            //Console.WriteLine();
+
             net.Write(userDataLen, 0, 4);
-            net.Write(userDataBytes, 0, userDataLen.Length);
+            net.Write(userDataBytes, 0, userDataBytes.Length);
         }
 
         public void escuchar() {

@@ -37,7 +37,7 @@ namespace PACMANv3.pkgModelo {
                 net.Read(msgDataLen, 0, 4);
 
                 int dataLen = BitConverter.ToInt32(msgDataLen, 0);
-
+                Console.WriteLine(dataLen);
                 byte[] msgDataBytes = new byte[dataLen];
 
                 //net.Read(msgDataBytes, 0, dataLen);
@@ -55,6 +55,7 @@ namespace PACMANv3.pkgModelo {
             int dataRead = 0;
             do {
                 dataRead += net.Read(userData, dataRead, len - dataRead);
+                Console.WriteLine(dataRead);
             } while (dataRead < len);
         }
 
