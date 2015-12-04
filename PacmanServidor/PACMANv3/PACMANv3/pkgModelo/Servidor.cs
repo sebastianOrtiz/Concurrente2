@@ -68,7 +68,7 @@ namespace PACMANv3.pkgModelo {
             } else if (o.Direccion == 0) {
                 foreach (UsuarioServidor usv in usuarios) {
                     if (usv.Id != o.Id) {
-                        Console.WriteLine(usv.Id);
+                        Console.WriteLine("usuario {0}: {1}", usv.Id, o.Texto);
                         usv.enviar(o);
                     }
                 }
