@@ -40,6 +40,9 @@
             this.btnCrearMapa = new System.Windows.Forms.Button();
             this.btnEditarMapa = new System.Windows.Forms.Button();
             this.panelConfigInicio = new System.Windows.Forms.Panel();
+            this.btnIniciarServ = new System.Windows.Forms.Button();
+            this.lblNumJugadores = new System.Windows.Forms.Label();
+            this.numDDJugadores = new System.Windows.Forms.NumericUpDown();
             this.lblSeleccioneMapa = new System.Windows.Forms.Label();
             this.cmbSeleccionMapa = new System.Windows.Forms.ComboBox();
             this.btnIntPuntajes = new System.Windows.Forms.Button();
@@ -49,14 +52,11 @@
             this.lblDifDatos = new System.Windows.Forms.Label();
             this.btnAceptarDatos = new System.Windows.Forms.Button();
             this.lblListadoDatos = new System.Windows.Forms.Label();
-            this.numDDJugadores = new System.Windows.Forms.NumericUpDown();
-            this.lblNumJugadores = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudHPPacman)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVidasPacman)).BeginInit();
             this.panelConfigInicio.SuspendLayout();
-            this.panelPuntajes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDDJugadores)).BeginInit();
+            this.panelPuntajes.SuspendLayout();
             this.SuspendLayout();
             // 
             // pruebasToolStripMenuItem
@@ -251,7 +251,7 @@
             // 
             this.panelConfigInicio.BackColor = System.Drawing.SystemColors.ControlText;
             this.panelConfigInicio.BackgroundImage = global::PACMANv3.Properties.Resources.FondoInicioPacman;
-            this.panelConfigInicio.Controls.Add(this.button1);
+            this.panelConfigInicio.Controls.Add(this.btnIniciarServ);
             this.panelConfigInicio.Controls.Add(this.lblNumJugadores);
             this.panelConfigInicio.Controls.Add(this.numDDJugadores);
             this.panelConfigInicio.Controls.Add(this.lblSeleccioneMapa);
@@ -275,6 +275,53 @@
             this.panelConfigInicio.Name = "panelConfigInicio";
             this.panelConfigInicio.Size = new System.Drawing.Size(793, 458);
             this.panelConfigInicio.TabIndex = 23;
+            // 
+            // btnIniciarServ
+            // 
+            this.btnIniciarServ.BackColor = System.Drawing.Color.White;
+            this.btnIniciarServ.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciarServ.ForeColor = System.Drawing.Color.Black;
+            this.btnIniciarServ.Location = new System.Drawing.Point(645, 20);
+            this.btnIniciarServ.Name = "btnIniciarServ";
+            this.btnIniciarServ.Size = new System.Drawing.Size(134, 23);
+            this.btnIniciarServ.TabIndex = 28;
+            this.btnIniciarServ.Text = "Iniciar Serrvidor";
+            this.btnIniciarServ.UseVisualStyleBackColor = false;
+            this.btnIniciarServ.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lblNumJugadores
+            // 
+            this.lblNumJugadores.AutoSize = true;
+            this.lblNumJugadores.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumJugadores.ForeColor = System.Drawing.Color.White;
+            this.lblNumJugadores.Location = new System.Drawing.Point(468, 22);
+            this.lblNumJugadores.Name = "lblNumJugadores";
+            this.lblNumJugadores.Size = new System.Drawing.Size(100, 17);
+            this.lblNumJugadores.TabIndex = 27;
+            this.lblNumJugadores.Text = "Nº Jugadores";
+            // 
+            // numDDJugadores
+            // 
+            this.numDDJugadores.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numDDJugadores.Location = new System.Drawing.Point(574, 20);
+            this.numDDJugadores.Maximum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.numDDJugadores.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numDDJugadores.Name = "numDDJugadores";
+            this.numDDJugadores.Size = new System.Drawing.Size(67, 22);
+            this.numDDJugadores.TabIndex = 26;
+            this.numDDJugadores.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lblSeleccioneMapa
             // 
@@ -384,37 +431,6 @@
             this.lblListadoDatos.TabIndex = 0;
             this.lblListadoDatos.Text = "Datos";
             // 
-            // numDDJugadores
-            // 
-            this.numDDJugadores.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numDDJugadores.Location = new System.Drawing.Point(574, 20);
-            this.numDDJugadores.Name = "numDDJugadores";
-            this.numDDJugadores.Size = new System.Drawing.Size(67, 22);
-            this.numDDJugadores.TabIndex = 26;
-            // 
-            // lblNumJugadores
-            // 
-            this.lblNumJugadores.AutoSize = true;
-            this.lblNumJugadores.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumJugadores.ForeColor = System.Drawing.Color.White;
-            this.lblNumJugadores.Location = new System.Drawing.Point(468, 22);
-            this.lblNumJugadores.Name = "lblNumJugadores";
-            this.lblNumJugadores.Size = new System.Drawing.Size(100, 17);
-            this.lblNumJugadores.TabIndex = 27;
-            this.lblNumJugadores.Text = "Nº Jugadores";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(645, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 23);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "Iniciar Serrvidor";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -432,9 +448,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudVidasPacman)).EndInit();
             this.panelConfigInicio.ResumeLayout(false);
             this.panelConfigInicio.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDDJugadores)).EndInit();
             this.panelPuntajes.ResumeLayout(false);
             this.panelPuntajes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numDDJugadores)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -466,7 +482,7 @@
         private System.Windows.Forms.Label lblDifDatos;
         private System.Windows.Forms.ComboBox cmbSeleccionMapa;
         private System.Windows.Forms.Label lblSeleccioneMapa;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnIniciarServ;
         private System.Windows.Forms.Label lblNumJugadores;
         private System.Windows.Forms.NumericUpDown numDDJugadores;
     }

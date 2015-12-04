@@ -22,8 +22,9 @@ namespace PACMANv3.pkgModelo {
 
         public Servidor(int cantJugadores, string ipAddress) {
             this.cantTotalJugadores = cantJugadores;
-            //this.server = new TcpListener(IPAddress.Parse(ipAddress), 1339);
-            this.server = new TcpListener(IPAddress.Loopback, 1339);
+            this.server = new TcpListener(IPAddress.Parse(ipAddress), 1339);
+            Console.WriteLine(this.server);
+            //this.server = new TcpListener(IPAddress.Loopback, 1339);
         }
 
         private void atender() {

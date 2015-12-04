@@ -39,10 +39,6 @@ namespace PACMANv3 {
             cargarDatosJugadores();
             cargarNombresDeMapas();
             cargarMapas();
-
-            //this.socket();
-            this.servidor = new Servidor(1, "127.0.0.1");
-            new Thread(this.servidor.run).Start();
         }
 
         public void cargarMapasEnCombobox() {
@@ -348,6 +344,12 @@ namespace PACMANv3 {
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             this.servidor.terminarHilos();
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            this.servidor = new Servidor((int) this.numDDJugadores.Value, "0.0.0.0");
+            new Thread(this.servidor.run).Start();
+            this.btnIniciarServ.Enabled = false;
         }
 
     }
