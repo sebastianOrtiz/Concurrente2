@@ -462,6 +462,10 @@ namespace PACMANv3.pkgVista {
             set { identificador = value; }
         }
 
+        public void recibirMensaje(String m) {
+            this.rTMensajes.Text += m + "\n";            
+        }
+
         private void btnEnviarMensaje_Click(object sender, EventArgs e) {
             String mensaje = txtMensaje.Text;
             if (mensaje != "") {

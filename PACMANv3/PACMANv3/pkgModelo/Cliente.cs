@@ -67,6 +67,7 @@ namespace PACMANv3.pkgModelo {
                 if (m.Conectar) {
                     this.vista.Identificador = m.Id;
                     Console.WriteLine("id: {0} mensaje: {1}", m.Id, m.Texto);
+
                 } else if (m.TEspera >= 1 && m.TEspera <= 5) {
                     Console.WriteLine("Inicia en {0}", m.TEspera);
                     // Mostrar tiempo de espera
