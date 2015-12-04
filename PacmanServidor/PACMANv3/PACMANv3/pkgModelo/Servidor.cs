@@ -40,12 +40,10 @@ namespace PACMANv3.pkgModelo {
 
                 new Thread(usv.atender).Start();
                 conectados = usuarios.Count;
-                Console.WriteLine("tiempo: {0}", conectados);
             }
         }
 
         private void cuentaRegresiva() {
-            Console.WriteLine("cuenta");
             int espera = 5;
             Mensaje m;
             while (espera > 0) {
@@ -61,7 +59,7 @@ namespace PACMANv3.pkgModelo {
         public static void enviarTodos(Object o) {
             if (o.GetType() == typeof(Mensaje)) {
                 Mensaje m = (Mensaje) o;
-                Console.WriteLine("dir: {0}", m.Direccion);
+                Console.WriteLine("usuario: {1}, mensaje: {0}", m.Texto, m.Nombre);
                 if (m.Direccion > 0) {
                     foreach (UsuarioServidor usv in usuarios) {
                         if (usv.Id != m.Id) {
@@ -95,6 +93,9 @@ namespace PACMANv3.pkgModelo {
             //while (this.conectado) {
             this.atender();
             this.cuentaRegresiva();
+            Mensaje m = new Mensaje();
+            m.Texto = "Inicia juego";
+            enviarTodos(m);
             //}
         }
     }

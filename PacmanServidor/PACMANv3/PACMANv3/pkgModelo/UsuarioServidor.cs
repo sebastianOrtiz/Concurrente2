@@ -60,7 +60,6 @@ namespace PACMANv3.pkgModelo {
             byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
             net.Write(userDataLen, 0, 4);
             net.Write(userDataBytes, 0, userDataBytes.Length);
-            Console.WriteLine("envio");
         }
 
         /*public void enviar(Mensaje m) {
