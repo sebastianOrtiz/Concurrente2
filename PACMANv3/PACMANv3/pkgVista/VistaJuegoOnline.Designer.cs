@@ -30,6 +30,9 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.rTMensajes = new System.Windows.Forms.RichTextBox();
+            this.txtMensaje = new System.Windows.Forms.TextBox();
+            this.btnEnviarMensaje = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panel1
@@ -51,12 +54,41 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // rTMensajes
+            // 
+            this.rTMensajes.Location = new System.Drawing.Point(609, 40);
+            this.rTMensajes.Name = "rTMensajes";
+            this.rTMensajes.Size = new System.Drawing.Size(268, 343);
+            this.rTMensajes.TabIndex = 2;
+            this.rTMensajes.Text = "";
+            // 
+            // txtMensaje
+            // 
+            this.txtMensaje.Location = new System.Drawing.Point(609, 389);
+            this.txtMensaje.Name = "txtMensaje";
+            this.txtMensaje.Size = new System.Drawing.Size(268, 20);
+            this.txtMensaje.TabIndex = 3;
+            // 
+            // btnEnviarMensaje
+            // 
+            this.btnEnviarMensaje.BackColor = System.Drawing.Color.White;
+            this.btnEnviarMensaje.Location = new System.Drawing.Point(609, 416);
+            this.btnEnviarMensaje.Name = "btnEnviarMensaje";
+            this.btnEnviarMensaje.Size = new System.Drawing.Size(268, 23);
+            this.btnEnviarMensaje.TabIndex = 4;
+            this.btnEnviarMensaje.Text = "Enviar";
+            this.btnEnviarMensaje.UseVisualStyleBackColor = false;
+            this.btnEnviarMensaje.Click += new System.EventHandler(this.btnEnviarMensaje_Click);
+            // 
             // VistaJuegoOnline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(625, 563);
+            this.ClientSize = new System.Drawing.Size(889, 563);
+            this.Controls.Add(this.btnEnviarMensaje);
+            this.Controls.Add(this.txtMensaje);
+            this.Controls.Add(this.rTMensajes);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Name = "VistaJuegoOnline";
@@ -64,6 +96,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VistaJuegoOnline_FormClosing);
             this.Load += new System.EventHandler(this.VistaJuegoOnline_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -71,5 +104,8 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox rTMensajes;
+        private System.Windows.Forms.TextBox txtMensaje;
+        private System.Windows.Forms.Button btnEnviarMensaje;
     }
 }

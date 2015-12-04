@@ -42,6 +42,18 @@ namespace PACMANv3.pkgModelo {
             this.procesar(o);
         }
 
+        public void enviar(Object o) {
+            //Escribir
+            byte[] userDataBytes;
+            MemoryStream ms = new MemoryStream();
+            serializer.Serialize(ms, o);
+            userDataBytes = ms.ToArray();
+
+            byte[] userDataLen = BitConverter.GetBytes((Int32)userDataBytes.Length);
+            net.Write(userDataLen, 0, 4);
+            net.Write(userDataBytes, 0, userDataLen.Length);
+        }
+
         public void escuchar() {
             while (this.conectado) {
                 this.recibir();
@@ -50,7 +62,7 @@ namespace PACMANv3.pkgModelo {
 
         public void procesar(Object o) {
             if (o.GetType() == typeof(Mensaje)) {
-                Mensaje m = (Mensaje) o;
+                Mensaje m = (Mensaje)o;
                 Console.WriteLine(m.TEspera);
                 if (m.Conectar) {
                     this.vista.Identificador = m.Id;
@@ -62,7 +74,7 @@ namespace PACMANv3.pkgModelo {
                     /* RECIBIR MENSAJES CHAT */
                 }
             } else if (o.GetType() == typeof(Estado)) {
-                VistaJuegoOnline.colaDeEstados.Enqueue((Estado) o);
+                VistaJuegoOnline.colaDeEstados.Enqueue((Estado)o);
             }
         }
 
