@@ -335,9 +335,11 @@ namespace PACMANv3 {
         }
 
         private void button1_Click(object sender, EventArgs e) {
+            String ipServidor = txtIPServidor.Text;
+            int puertoServer = int.Parse(txtPuerto.Text);
             VistaJuegoOnline vjo = new VistaJuegoOnline();
             vjo.Visible = true;
-            vjo.conectar("127.0.0.1", 1339);
+            vjo.conectar(ipServidor, puertoServer);
         }
     }
 }
