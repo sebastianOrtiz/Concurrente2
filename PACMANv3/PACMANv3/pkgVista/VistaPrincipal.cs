@@ -22,7 +22,7 @@ namespace PACMANv3 {
     public partial class Form1 : Form {
         private Juego juego;
         private List<Mapa> listaDeMapas;
-        private List<String> nombresDeMapas;
+        private List<string> nombresDeMapas;
         private List<DatosJugador> datosJugadores;
         private SoundPlayer soundFondo;
         private Mapa mapaAJugar;
@@ -34,7 +34,7 @@ namespace PACMANv3 {
             cmbSeleccionarDificultad.SelectedIndex = 0;
 
             this.listaDeMapas = new List<Mapa>();
-            this.nombresDeMapas = new List<String>();
+            this.nombresDeMapas = new List<string>();
             this.datosJugadores = new List<DatosJugador>();
             cargarDatosJugadores();
             cargarNombresDeMapas();
@@ -45,14 +45,14 @@ namespace PACMANv3 {
 
         public void cargarMapasEnCombobox() {
 
-            foreach (String nombre in nombresDeMapas) {
+            foreach (string nombre in nombresDeMapas) {
                 cmbSeleccionMapa.Items.Add(nombre);
                 cmbSeleccionMapa.SelectedIndex = 0;
             }
         }
 
         private void escribirJSONJugadores() {
-            String js = JsonConvert.SerializeObject(datosJugadores);
+            string js = JsonConvert.SerializeObject(datosJugadores);
             StreamWriter sw = File.CreateText("./../../ArchivosConf/DatosUsuarios/HistoricoDeUsuarios.data");
             sw.Write(js);
             sw.Close();
@@ -62,7 +62,7 @@ namespace PACMANv3 {
             //LEYENDO JSON
             StreamReader sr;
             sr = File.OpenText("./../../ArchivosConf/DatosUsuarios/HistoricoDeUsuarios.data");
-            String entrada = sr.ReadToEnd();
+            string entrada = sr.ReadToEnd();
             if (entrada != "") {
                 this.datosJugadores = JsonConvert.DeserializeObject<List<DatosJugador>>(entrada);
             }
@@ -83,7 +83,7 @@ namespace PACMANv3 {
 
         private void cargarNombresDeMapas() {
             StreamReader sr = new StreamReader("./../../ArchivosConf/Config/nombresMapas.conf");
-            String linea;
+            string linea;
             linea = sr.ReadLine();
             while (linea != null) {
                 nombresDeMapas.Add(linea);
@@ -96,9 +96,9 @@ namespace PACMANv3 {
         private void cargarMapas() {
             //LEYENDO JSON
             StreamReader sr;
-            foreach (String nombreMapa in nombresDeMapas) {
+            foreach (string nombreMapa in nombresDeMapas) {
                 sr = File.OpenText("./../../ArchivosConf/Maps/" + nombreMapa + ".map");
-                String entrada = sr.ReadToEnd();
+                string entrada = sr.ReadToEnd();
                 if (entrada != "") {
                     Mapa nMap = JsonConvert.DeserializeObject<Mapa>(entrada);
                     nMap.MatrizDiseño = new Celda[nMap.Filas, nMap.Columnas];
@@ -111,7 +111,7 @@ namespace PACMANv3 {
         private void btnAceptarConfigInicial_Click(object sender, EventArgs e) {
             if (cmbSeleccionMapa.SelectedIndex > -1) {
                 if (txtNombreJu.Text != null && cmbSeleccionarDificultad.SelectedIndex > -1) {
-                    String dificultad = cmbSeleccionarDificultad.SelectedItem.ToString();
+                    string dificultad = cmbSeleccionarDificultad.SelectedItem.ToString();
                     DatosJugador nuevoJugador = new DatosJugador(txtNombreJu.Text, dificultad);
                     Boolean entradaPorVoz;
                     if (rBtnVoz.Checked) {
@@ -151,10 +151,10 @@ namespace PACMANv3 {
         }
 
         private void listarDatosJugadores() {
-            String datNom = "";
-            String datdif = "";
-            String datpts = "";
-            String datfecha = "";
+            string datNom = "";
+            string datdif = "";
+            string datpts = "";
+            string datfecha = "";
             for (int i = 0; i < this.datosJugadores.Count; i++) {
                 datNom += (i + 1) + "- " + this.datosJugadores.ElementAt(i).Nombre + "\n";
                 datdif += this.datosJugadores.ElementAt(i).Dificultad + "\n";
@@ -208,7 +208,7 @@ namespace PACMANv3 {
 
         private void btnEditarMapa_Click(object sender, EventArgs e) {
             VistaEdicionDeMapas ve = new VistaEdicionDeMapas();
-            List<String> lista = new List<string>();
+            List<string> lista = new List<string>();
             List<Mapa> todosLosMapas = new List<Mapa>();
             todosLosMapas.AddRange(listaDeMapas);
             lista.AddRange(nombresDeMapas);
@@ -335,7 +335,7 @@ namespace PACMANv3 {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            String ipServidor = txtIPServidor.Text;
+            string ipServidor = txtIPServidor.Text;
             int puertoServer = int.Parse(txtPuerto.Text);
             VistaJuegoOnline vjo = new VistaJuegoOnline();
             vjo.Visible = true;

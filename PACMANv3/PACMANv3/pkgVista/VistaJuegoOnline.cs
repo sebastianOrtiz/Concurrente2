@@ -35,7 +35,7 @@ namespace PACMANv3.pkgVista {
         private List<Mensaje> mensajes;
 
         private List<Mapa> listaDeMapas;
-        private List<String> nombresDeMapas;
+        private List<string> nombresDeMapas;
 
         private Cliente usuario;
 
@@ -43,7 +43,7 @@ namespace PACMANv3.pkgVista {
             InitializeComponent();
 
             this.listaDeMapas = new List<Mapa>();
-            this.nombresDeMapas = new List<String>();
+            this.nombresDeMapas = new List<string>();
 
             colaDeEstados = new Queue<Estado>();
             this.cargarRecursos();
@@ -56,7 +56,7 @@ namespace PACMANv3.pkgVista {
 
         private void cargarNombresDeMapas() {
             StreamReader sr = new StreamReader("./../../ArchivosConf/Config/nombresMapas.conf");
-            String linea;
+            string linea;
             linea = sr.ReadLine();
             while (linea != null) {
                 nombresDeMapas.Add(linea);
@@ -69,9 +69,9 @@ namespace PACMANv3.pkgVista {
         private void cargarMapas() {
             //LEYENDO JSON
             StreamReader sr;
-            foreach (String nombreMapa in nombresDeMapas) {
+            foreach (string nombreMapa in nombresDeMapas) {
                 sr = File.OpenText("./../../ArchivosConf/Maps/" + nombreMapa + ".map");
-                String entrada = sr.ReadToEnd();
+                string entrada = sr.ReadToEnd();
                 if (entrada != "") {
                     Mapa nMap = JsonConvert.DeserializeObject<Mapa>(entrada);
                     nMap.MatrizDiseño = new Celda[nMap.Filas, nMap.Columnas];
@@ -462,12 +462,12 @@ namespace PACMANv3.pkgVista {
             set { identificador = value; }
         }
 
-        public void recibirMensaje(String m) {
-            this.rTMensajes.Text += m + "\n";            
+        public void recibirMensaje(string m) {
+            this.rTMensajes.Text += m + "\n";
         }
 
         private void btnEnviarMensaje_Click(object sender, EventArgs e) {
-            String mensaje = txtMensaje.Text;
+            string mensaje = txtMensaje.Text;
             if (mensaje != "") {
                 Mensaje m = new Mensaje(this.identificador, ("usuario " + this.identificador), mensaje, 0);
                 this.rTMensajes.Text += "Yo:" + mensaje + "\n";
