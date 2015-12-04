@@ -19,6 +19,8 @@ namespace PACMANv3.pkgModelo {
 
         private static BinaryFormatter serializer = new BinaryFormatter();
 
+        private delegate void DelegateCambiar(string s);
+
         public Cliente(string ipAddress, int port, VistaJuegoOnline vista) {
             this.sc = new TcpClient(ipAddress, port);
             this.net = sc.GetStream();
@@ -34,22 +36,32 @@ namespace PACMANv3.pkgModelo {
             int dataLen = BitConverter.ToInt32(msgDataLen, 0);
 
             byte[] msgDataBytes = new byte[dataLen];
-            net.Read(msgDataBytes, 0, dataLen);
+
+            //net.Read(msgDataBytes, 0, dataLen);
+            this.safeRead(msgDataBytes, dataLen);
+
             MemoryStream ms = new MemoryStream(msgDataBytes);
             ms.Position = 0;
 
-            Object o = serializer.Deserialize(ms);
+            Estado o = (Estado) serializer.Deserialize(ms);
             this.procesar(o);
         }
 
-        public void enviar(Object o) {
+        private void safeRead(byte[] userData, int len) {
+            int dataRead = 0;
+            do {
+                dataRead += net.Read(userData, dataRead, len - dataRead);
+            } while (dataRead < len);
+        }
+
+        public void enviar(Estado o) {
             //Escribir
             byte[] userDataBytes;
             MemoryStream ms = new MemoryStream();
             serializer.Serialize(ms, o);
             userDataBytes = ms.ToArray();
 
-            byte[] userDataLen = BitConverter.GetBytes((Int32)userDataBytes.Length);
+            byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
             net.Write(userDataLen, 0, 4);
             net.Write(userDataBytes, 0, userDataLen.Length);
         }
@@ -60,23 +72,27 @@ namespace PACMANv3.pkgModelo {
             }
         }
 
-        public void procesar(Object o) {
-            if (o.GetType() == typeof(Mensaje)) {
-                Mensaje m = (Mensaje)o;
-                Console.WriteLine(m.TEspera);
-                if (m.Conectar) {
-                    this.vista.Identificador = m.Id;
-                    Console.WriteLine("id: {0} mensaje: {1}", m.Id, m.Texto);
-
-                } else if (m.TEspera >= 1 && m.TEspera <= 5) {
-                    Console.WriteLine("Inicia en {0}", m.TEspera);
-                    // Mostrar tiempo de espera
+        public void procesar(Estado e) {
+            Console.WriteLine(e.TEspera);
+            if (e.Conectar) {
+                this.vista.Identificador = e.Id;
+                Console.WriteLine("id: {0} mensaje: {1}", e.Id, e.Texto);
+            } else if (e.TEspera >= 1 && e.TEspera <= 5) {
+                Console.WriteLine("Inicia en {0}", e.TEspera);
+                // Mostrar tiempo de espera
+            } else if (e.Biscochos == null) {
+                if (this.vista.InvokeRequired) {
+                    this.vista.Invoke(new DelegateCambiar(this.cambiarTexto), new object[] { e.Texto });
                 } else {
-                    /* RECIBIR MENSAJES CHAT */
+                    this.vista.recibirMensaje(e.Texto);
                 }
-            } else if (o.GetType() == typeof(Estado)) {
-                VistaJuegoOnline.colaDeEstados.Enqueue((Estado)o);
+            } else {
+                VistaJuegoOnline.colaDeEstados.Enqueue(e);
             }
+        }
+
+        private void cambiarTexto(string st) {
+            this.vista.recibirMensaje(st);
         }
 
         public bool Conectado {

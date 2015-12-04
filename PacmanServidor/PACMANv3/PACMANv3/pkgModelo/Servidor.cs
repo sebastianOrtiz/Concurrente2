@@ -34,7 +34,7 @@ namespace PACMANv3.pkgModelo {
             while (this.conectado && conectados < this.cantTotalJugadores) {
                 TcpClient client = server.AcceptTcpClient();
 
-                UsuarioServidor usv = new UsuarioServidor(usuarios.Count, client);
+                UsuarioServidor usv = new UsuarioServidor(usuarios.Count + 1, client);
                 usv.enviarId();
                 usuarios.Add(usv);
 
@@ -45,9 +45,9 @@ namespace PACMANv3.pkgModelo {
 
         private void cuentaRegresiva() {
             int espera = 5;
-            Mensaje m;
+            Estado m;
             while (espera > 0) {
-                m = new Mensaje();
+                m = new Estado();
                 m.TEspera = espera;
                 enviarTodos(m);
                 Console.WriteLine(m.TEspera);
@@ -56,25 +56,21 @@ namespace PACMANv3.pkgModelo {
             }
         }
 
-        public static void enviarTodos(Object o) {
-            if (o.GetType() == typeof(Mensaje)) {
-                Mensaje m = (Mensaje) o;
-                Console.WriteLine("usuario: {1}, mensaje: {0}", m.Texto, m.Nombre);
-                if (m.Direccion > 0) {
-                    foreach (UsuarioServidor usv in usuarios) {
-                        if (usv.Id != m.Id) {
-                            usv.enviar(m);
-                        }
-                    }
-                } else if (m.Direccion == 0) {
-                    foreach (UsuarioServidor usv in usuarios) {
-                        Console.WriteLine(usv.Id);
-                        usv.enviar(m);
+        public static void enviarTodos(Estado o) {
+            //Console.WriteLine("usuario: {1}, mensaje: {0}", o.Texto, o.Nombre);
+            if (o.Direccion > 0) {
+                foreach (UsuarioServidor usv in usuarios) {
+                    //modificar
+                    if (usv.Id != o.Id) {
+                        usv.enviar(o);
                     }
                 }
-            } else if (o.GetType() == typeof(Estado)) {
+            } else if (o.Direccion == 0) {
                 foreach (UsuarioServidor usv in usuarios) {
-                    usv.enviar(o);
+                    if (usv.Id != o.Id) {
+                        Console.WriteLine(usv.Id);
+                        usv.enviar(o);
+                    }
                 }
             }
         }
@@ -93,7 +89,7 @@ namespace PACMANv3.pkgModelo {
             //while (this.conectado) {
             this.atender();
             this.cuentaRegresiva();
-            Mensaje m = new Mensaje();
+            Estado m = new Estado();
             m.Texto = "Inicia juego";
             enviarTodos(m);
             //}

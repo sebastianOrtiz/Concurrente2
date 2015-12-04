@@ -22,7 +22,7 @@ namespace PACMANv3.pkgModelo {
         }
 
         public void enviarId() {
-            Mensaje m = new Mensaje();
+            Estado m = new Estado();
             m.Id = this.id;
             m.Texto = "conectado";
             m.TEspera = -1;
@@ -39,24 +39,32 @@ namespace PACMANv3.pkgModelo {
                 int dataLen = BitConverter.ToInt32(msgDataLen, 0);
 
                 byte[] msgDataBytes = new byte[dataLen];
-                net.Read(msgDataBytes, 0, dataLen);
+
+                //net.Read(msgDataBytes, 0, dataLen);
+                this.safeRead(msgDataBytes, dataLen);
+
                 MemoryStream ms = new MemoryStream(msgDataBytes);
                 ms.Position = 0;
 
-                Object o = Servidor.serializer.Deserialize(ms);
+                Estado o = (Estado) Servidor.serializer.Deserialize(ms);
                 Servidor.enviarTodos(o);
             }
         }
 
-        public void enviar(Object o) {
+        private void safeRead(byte[] userData, int len) {
+            int dataRead = 0;
+            do {
+                dataRead += net.Read(userData, dataRead, len - dataRead);
+            } while (dataRead < len);
+        }
+
+        public void enviar(Estado o) {
             //Escribir
-            Console.WriteLine(o.GetType());
             byte[] userDataBytes;
             MemoryStream ms = new MemoryStream();
-            Servidor.serializer.Serialize(ms, o);
+            Servidor.serializer.Serialize(ms,   o);
             userDataBytes = ms.ToArray();
 
-            Console.WriteLine(o.GetType());
             byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
             net.Write(userDataLen, 0, 4);
             net.Write(userDataBytes, 0, userDataBytes.Length);

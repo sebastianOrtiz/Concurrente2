@@ -32,7 +32,7 @@ namespace PACMANv3.pkgVista {
         private int identificador;
         private Boolean entradaPorVoz;
         private SpeechRecognitionEngine escucha;
-        private List<Mensaje> mensajes;
+        //private List<Estado> mensajes;
 
         private List<Mapa> listaDeMapas;
         private List<string> nombresDeMapas;
@@ -469,7 +469,7 @@ namespace PACMANv3.pkgVista {
         private void btnEnviarMensaje_Click(object sender, EventArgs e) {
             string mensaje = txtMensaje.Text;
             if (mensaje != "") {
-                Mensaje m = new Mensaje(this.identificador, ("usuario " + this.identificador), mensaje, 0);
+                Estado m = new Estado(this.identificador, ("usuario " + this.identificador), mensaje, 0);
                 this.rTMensajes.Text += "Yo:" + mensaje + "\n";
                 this.usuario.enviar(m);
             }

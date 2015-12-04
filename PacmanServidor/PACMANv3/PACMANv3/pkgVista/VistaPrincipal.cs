@@ -260,7 +260,7 @@ namespace PACMANv3 {
             net.Read(msgDataBytes, 0, dataLen);
             MemoryStream ms = new MemoryStream(msgDataBytes);
             ms.Position = 0;
-            Mensaje m = (Mensaje) serializer.Deserialize(ms);
+            Estado m = (Estado) serializer.Deserialize(ms);
             Console.WriteLine(m.Nombre);
             Console.WriteLine(m.Texto);
             /*** ***/
