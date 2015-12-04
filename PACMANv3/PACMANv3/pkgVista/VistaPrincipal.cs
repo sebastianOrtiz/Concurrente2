@@ -119,7 +119,10 @@ namespace PACMANv3 {
                     } else {
                         entradaPorVoz = false;
                     }
-
+                    if (mapaAJugar == null) {
+                        this.seleccionarMapaActual();
+                    }
+                    
                     juego = new Juego(mapaAJugar, dificultad, nuevoJugador, entradaPorVoz, (int) nudVidasPacman.Value, (int) nudHPPacman.Value);
 
                     VistaJuego vj = new VistaJuego();
@@ -231,6 +234,10 @@ namespace PACMANv3 {
         }
 
         private void cmbSeleccionMapa_SelectionChangeCommitted(object sender, EventArgs e) {
+            this.seleccionarMapaActual();
+        }
+
+        private void seleccionarMapaActual(){
             foreach (Mapa mapa in this.listaDeMapas) {
                 if (mapa.Nombre.Equals(cmbSeleccionMapa.SelectedItem.ToString())) {
                     this.mapaAJugar = mapa;
