@@ -22,7 +22,7 @@ namespace PACMANv3.pkgModelo {
         }
 
         public void enviarId() {
-            Mensaje m = new Mensaje(this.id, "", "conectado");
+            Mensaje m = new Mensaje(this.id, "", "conectado",0);
             m.Conectar = true;
             enviar(m);
         }
@@ -41,11 +41,7 @@ namespace PACMANv3.pkgModelo {
                 ms.Position = 0;
 
                 Object o = Servidor.serializer.Deserialize(ms);
-                if (o.GetType() == typeof(Mensaje)) {
-                    Servidor.enviarTodos(o);
-                } else if (o.GetType() == typeof(Estado)) {
-
-                }
+                Servidor.enviarTodos(o);
             }
         }
 

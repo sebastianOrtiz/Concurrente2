@@ -56,7 +56,7 @@ namespace PACMANv3.pkgModelo {
                     Console.WriteLine("id: {0} mensaje: {1}", m.Id, m.Texto);
                 }
             } else if (o.GetType() == typeof(Estado)) {
-
+                VistaJuegoOnline.colaDeEstados.Enqueue((Estado) o);
             }
         }
 

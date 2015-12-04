@@ -46,13 +46,19 @@ namespace PACMANv3.pkgModelo {
         public static void enviarTodos(Object o) {
             if (o.GetType() == typeof(Mensaje)) {
                 Mensaje m = (Mensaje) o;
-                foreach (UsuarioServidor usv in usuarios) {
-                    if (usv.Id != m.Id) {
-                        usv.enviar(m);
+                if (m.Direccion > 0) {
+                    foreach (UsuarioServidor usv in usuarios) {
+                        if (usv.Id != m.Id) {
+                            usv.enviar(m);
+                        }
                     }
+                } else if (m.Direccion == 0) {
+
                 }
             } else if (o.GetType() == typeof(Estado)) {
-
+                foreach (UsuarioServidor usv in usuarios) {
+                    usv.enviar(o);
+                }
             }
         }
 

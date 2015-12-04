@@ -11,12 +11,14 @@ namespace PACMANv3.pkgModelo {
         private string nombre;
         private string texto;
         private bool conectar;
+        private int direccion;
 
-        public Mensaje(int id, string nombre, string mensaje) {
+        public Mensaje(int id, string nombre, string mensaje, int dir) {
             this.id = id;
             this.nombre = nombre;
             this.texto = mensaje;
             this.conectar = false;
+            this.direccion = dir;
         }
 
         /// <summary>
@@ -49,6 +51,14 @@ namespace PACMANv3.pkgModelo {
         public bool Conectar {
             get { return conectar; }
             set { conectar = value; }
+        }
+
+        /// <summary>
+        /// Accesor y mutador de el atributo Direccion
+        /// </summary>
+        public int Direccion {
+            get { return direccion; }
+            set { direccion = value; }
         }
     }
 }

@@ -101,11 +101,11 @@ namespace PACMANv3.pkgVista {
             this.reproductor = new SoundPlayer();
             switch (n) {
                 case 1:
-                    this.reproductor = new SoundPlayer(Properties.Resources.victoria1);
-                    break;
+                this.reproductor = new SoundPlayer(Properties.Resources.victoria1);
+                break;
                 case 2:
-                    this.reproductor = new SoundPlayer(Properties.Resources.risaMacabra);
-                    break;
+                this.reproductor = new SoundPlayer(Properties.Resources.risaMacabra);
+                break;
             }
 
             this.reproductor.Load();
@@ -193,26 +193,26 @@ namespace PACMANv3.pkgVista {
                 if (!this.entradaPorVoz) {
                     switch (e.KeyData) {
                         case Keys.Up:
-                            this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
-                            break;
+                        this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
+                        break;
                         case Keys.Down:
-                            this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
-                            break;
+                        this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
+                        break;
                         case Keys.Right:
-                            this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
-                            break;
+                        this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
+                        break;
                         case Keys.Left:
-                            this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
-                            break;
+                        this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
+                        break;
                         case Keys.F1:
-                            this.Juego.Jugando = 2;
-                            break;
+                        this.Juego.Jugando = 2;
+                        break;
                         case Keys.F2:
-                            this.Juego.Jugando = 3;
-                            break;
+                        this.Juego.Jugando = 3;
+                        break;
                         case Keys.F4:
-                            this.juego.hubicarFrutilla();
-                            break;
+                        this.juego.hubicarFrutilla();
+                        break;
 
                     }
                 }
@@ -236,14 +236,14 @@ namespace PACMANv3.pkgVista {
                 if (celda.SePuedePasar && celda.Valor == "O" && celda.Bisc.Estado) {
                     switch (celda.Bisc.Tipo) {
                         case 1:
-                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
-                            break;
+                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
+                        break;
                         case 2:
-                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
-                            break;
+                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
+                        break;
                         case 3:
-                            g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
-                            break;
+                        g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
+                        break;
                     }
                 }
             }
@@ -295,6 +295,9 @@ namespace PACMANv3.pkgVista {
                     actualizaciones++;
                     cambio--;
                 }
+                Estado nuevoEstado = juego.generarEstado();
+                Servidor.enviarTodos(nuevoEstado);
+
                 graficarPanel();
                 cuadros++;
                 if (Environment.TickCount - cronometro > 1000) {
