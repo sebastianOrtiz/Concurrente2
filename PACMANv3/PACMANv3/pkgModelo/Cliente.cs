@@ -43,7 +43,7 @@ namespace PACMANv3.pkgModelo {
             MemoryStream ms = new MemoryStream(msgDataBytes);
             ms.Position = 0;
 
-            Estado o = (Estado) serializer.Deserialize(ms);
+            Estado o = (Estado)serializer.Deserialize(ms);
             this.procesar(o);
         }
 
@@ -61,7 +61,7 @@ namespace PACMANv3.pkgModelo {
             serializer.Serialize(ms, o);
             userDataBytes = ms.ToArray();
 
-            byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
+            byte[] userDataLen = BitConverter.GetBytes((Int32)userDataBytes.Length);
 
             Console.WriteLine(userDataBytes.Length);
             //Console.WriteLine();
@@ -86,7 +86,7 @@ namespace PACMANv3.pkgModelo {
                 // Mostrar tiempo de espera
             } else if (e.Biscochos == null) {
                 if (this.vista.InvokeRequired) {
-                    this.vista.Invoke(new DelegateCambiar(this.cambiarTexto), new object[] { e.Texto });
+                    this.vista.Invoke(new DelegateCambiar(this.cambiarTexto), new object[] { (e.Nombre + ": " + e.Texto) });
                 } else {
                     this.vista.recibirMensaje(e.Texto);
                 }

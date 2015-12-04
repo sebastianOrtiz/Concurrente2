@@ -470,7 +470,7 @@ namespace PACMANv3.pkgVista {
             string mensaje = txtMensaje.Text;
             if (mensaje != "") {
                 Estado m = new Estado(this.identificador, ("usuario " + this.identificador), mensaje, 0);
-                this.rTMensajes.Text += "Yo:" + mensaje + "\n";
+                this.rTMensajes.Text += "Yo: " + mensaje + "\n";
                 this.usuario.enviar(m);
             }
         }
