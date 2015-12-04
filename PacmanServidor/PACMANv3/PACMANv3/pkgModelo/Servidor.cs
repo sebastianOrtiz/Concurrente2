@@ -26,26 +26,41 @@ namespace PACMANv3.pkgModelo {
             this.server = new TcpListener(IPAddress.Loopback, 1339);
         }
 
-        public void atender() {
-            this.conectado = true;
-            server.Start();
+        private void atender() {
+            int conectados = 0;
 
-            while (this.conectado) {
-                while (this.conectado && usuarios.Count < this.cantTotalJugadores) {
-                    TcpClient client = server.AcceptTcpClient();
+            conectados = usuarios.Count;
+            while (this.conectado && conectados < this.cantTotalJugadores) {
+                TcpClient client = server.AcceptTcpClient();
 
-                    UsuarioServidor usv = new UsuarioServidor(usuarios.Count, client);
-                    usv.enviarId();
-                    usuarios.Add(usv);
+                UsuarioServidor usv = new UsuarioServidor(usuarios.Count, client);
+                usv.enviarId();
+                usuarios.Add(usv);
 
-                    new Thread(usv.atender).Start();
-                }
+                new Thread(usv.atender).Start();
+                conectados = usuarios.Count;
+                Console.WriteLine("tiempo: {0}", conectados);
+            }
+        }
+
+        private void cuentaRegresiva() {
+            Console.WriteLine("cuenta");
+            int espera = 5;
+            Mensaje m;
+            while (espera > 0) {
+                m = new Mensaje();
+                m.TEspera = espera;
+                enviarTodos(m);
+                Console.WriteLine(m.TEspera);
+                Thread.Sleep(1000);
+                --espera;
             }
         }
 
         public static void enviarTodos(Object o) {
             if (o.GetType() == typeof(Mensaje)) {
                 Mensaje m = (Mensaje) o;
+                Console.WriteLine("dir: {0}", m.Direccion);
                 if (m.Direccion > 0) {
                     foreach (UsuarioServidor usv in usuarios) {
                         if (usv.Id != m.Id) {
@@ -53,7 +68,10 @@ namespace PACMANv3.pkgModelo {
                         }
                     }
                 } else if (m.Direccion == 0) {
-
+                    foreach (UsuarioServidor usv in usuarios) {
+                        Console.WriteLine(usv.Id);
+                        usv.enviar(m);
+                    }
                 }
             } else if (o.GetType() == typeof(Estado)) {
                 foreach (UsuarioServidor usv in usuarios) {
@@ -67,6 +85,16 @@ namespace PACMANv3.pkgModelo {
             foreach (UsuarioServidor usv in usuarios) {
                 usv.Conectado = false;
             }
+        }
+
+        public void run() {
+            this.conectado = true;
+            server.Start();
+
+            //while (this.conectado) {
+            this.atender();
+            this.cuentaRegresiva();
+            //}
         }
     }
 }

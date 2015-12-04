@@ -26,7 +26,7 @@ namespace PACMANv3.pkgModelo {
             this.conectado = false;
         }
 
-        public void recibirId() {
+        public void recibir() {
             //Leer
             byte[] msgDataLen = new byte[4];
             net.Read(msgDataLen, 0, 4);
@@ -44,16 +44,22 @@ namespace PACMANv3.pkgModelo {
 
         public void escuchar() {
             while (this.conectado) {
-
+                this.recibir();
             }
         }
 
         public void procesar(Object o) {
             if (o.GetType() == typeof(Mensaje)) {
                 Mensaje m = (Mensaje) o;
+                Console.WriteLine(m.TEspera);
                 if (m.Conectar) {
                     this.vista.Identificador = m.Id;
                     Console.WriteLine("id: {0} mensaje: {1}", m.Id, m.Texto);
+                } else if (m.TEspera >= 1 && m.TEspera <= 5) {
+                    Console.WriteLine("Inicia en {0}", m.TEspera);
+                    // Mostrar tiempo de espera
+                } else {
+                    /* RECIBIR MENSAJES CHAT */
                 }
             } else if (o.GetType() == typeof(Estado)) {
                 VistaJuegoOnline.colaDeEstados.Enqueue((Estado) o);

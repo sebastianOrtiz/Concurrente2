@@ -339,14 +339,14 @@ namespace PACMANv3.pkgVista {
                 if (celda.SePuedePasar && celda.Valor == "O" && celda.Bisc.Estado) {
                     switch (celda.Bisc.Tipo) {
                         case 1:
-                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
-                            break;
+                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
+                        break;
                         case 2:
-                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
-                            break;
+                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
+                        break;
                         case 3:
-                            g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
-                            break;
+                        g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
+                        break;
                     }
                 }
             }
@@ -435,7 +435,8 @@ namespace PACMANv3.pkgVista {
 
         public void conectar(string ipAddress, int port) {
             this.usuario = new Cliente(ipAddress, port, this);
-            this.usuario.recibirId();
+            this.usuario.Conectado = true;
+            new Thread(this.usuario.escuchar).Start();
         }
 
         private void terminarHilos() {

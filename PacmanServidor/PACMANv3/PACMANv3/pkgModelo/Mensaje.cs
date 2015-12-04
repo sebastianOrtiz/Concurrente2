@@ -12,6 +12,9 @@ namespace PACMANv3.pkgModelo {
         private string texto;
         private bool conectar;
         private int direccion;
+        private int tEspera;
+
+        public Mensaje() { }
 
         public Mensaje(int id, string nombre, string mensaje, int dir) {
             this.id = id;
@@ -19,6 +22,7 @@ namespace PACMANv3.pkgModelo {
             this.texto = mensaje;
             this.conectar = false;
             this.direccion = dir;
+            this.tEspera = 0;
         }
 
         /// <summary>
@@ -59,6 +63,14 @@ namespace PACMANv3.pkgModelo {
         public int Direccion {
             get { return direccion; }
             set { direccion = value; }
+        }
+
+        /// <summary>
+        /// Accesor y mutador de el atributo TEspera
+        /// </summary>
+        public int TEspera {
+            get { return tEspera; }
+            set { tEspera = value; }
         }
     }
 }

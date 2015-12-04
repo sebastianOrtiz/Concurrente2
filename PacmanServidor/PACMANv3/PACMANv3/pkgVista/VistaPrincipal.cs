@@ -41,8 +41,8 @@ namespace PACMANv3 {
             cargarMapas();
 
             //this.socket();
-            this.servidor = new Servidor(2, "127.0.0.1");
-            new Thread(this.servidor.atender).Start();
+            this.servidor = new Servidor(1, "127.0.0.1");
+            new Thread(this.servidor.run).Start();
         }
 
         public void cargarMapasEnCombobox() {

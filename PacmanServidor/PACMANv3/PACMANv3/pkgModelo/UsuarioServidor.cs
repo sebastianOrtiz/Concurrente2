@@ -22,7 +22,10 @@ namespace PACMANv3.pkgModelo {
         }
 
         public void enviarId() {
-            Mensaje m = new Mensaje(this.id, "", "conectado",0);
+            Mensaje m = new Mensaje();
+            m.Id = this.id;
+            m.Texto = "conectado";
+            m.TEspera = -1;
             m.Conectar = true;
             enviar(m);
         }
@@ -47,14 +50,17 @@ namespace PACMANv3.pkgModelo {
 
         public void enviar(Object o) {
             //Escribir
+            Console.WriteLine(o.GetType());
             byte[] userDataBytes;
             MemoryStream ms = new MemoryStream();
             Servidor.serializer.Serialize(ms, o);
             userDataBytes = ms.ToArray();
 
+            Console.WriteLine(o.GetType());
             byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
             net.Write(userDataLen, 0, 4);
             net.Write(userDataBytes, 0, userDataBytes.Length);
+            Console.WriteLine("envio");
         }
 
         /*public void enviar(Mensaje m) {
