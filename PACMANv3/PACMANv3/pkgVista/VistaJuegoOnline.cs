@@ -339,14 +339,14 @@ namespace PACMANv3.pkgVista {
                 if (celda.SePuedePasar && celda.Valor == "O" && celda.Bisc.Estado) {
                     switch (celda.Bisc.Tipo) {
                         case 1:
-                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
-                        break;
+                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
+                            break;
                         case 2:
-                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
-                        break;
+                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
+                            break;
                         case 3:
-                        g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
-                        break;
+                            g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
+                            break;
                     }
                 }
             }
@@ -460,6 +460,15 @@ namespace PACMANv3.pkgVista {
         public int Identificador {
             get { return identificador; }
             set { identificador = value; }
+        }
+
+        private void btnEnviarMensaje_Click(object sender, EventArgs e) {
+            String mensaje = txtMensaje.Text;
+            if (mensaje != "") {
+                Mensaje m = new Mensaje(this.identificador, ("usuario " + this.identificador), mensaje, 0);
+                this.rTMensajes.Text += "Yo:" + mensaje + "\n";
+                this.usuario.enviar(m);
+            }
         }
     }
 }
