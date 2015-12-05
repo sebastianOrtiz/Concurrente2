@@ -38,6 +38,7 @@ namespace PACMANv3.pkgModelo {
 
                 UsuarioServidor usv = new UsuarioServidor(usuarios.Count + 1, client);
                 usv.enviarId();
+                usv.enviar(this.vista.MapaAJugar);
                 usuarios.Add(usv);
 
                 new Thread(usv.atender).Start();
@@ -95,7 +96,7 @@ namespace PACMANv3.pkgModelo {
             //while (this.conectado) {
             this.atender();
             this.cuentaRegresiva();
-            this.enviarMapa();
+            //this.enviarMapa();
             Estado m = new Estado();
             m.Texto = "Inicia juego";
             enviarTodos(m);

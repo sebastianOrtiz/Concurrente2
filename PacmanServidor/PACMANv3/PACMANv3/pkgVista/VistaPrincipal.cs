@@ -285,6 +285,9 @@ namespace PACMANv3 {
         }
 
         private void button1_Click(object sender, EventArgs e) {
+            if (mapaAJugar == null) {
+                this.seleccionarMapaActual();
+            }
             this.servidor = new Servidor((int)this.numDDJugadores.Value, "0.0.0.0", this);
             new Thread(this.servidor.run).Start();
             this.btnIniciarServ.Enabled = false;
