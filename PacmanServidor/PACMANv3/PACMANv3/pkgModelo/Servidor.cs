@@ -65,8 +65,12 @@ namespace PACMANv3.pkgModelo {
             //Console.WriteLine("usuario: {1}, mensaje: {0}", o.Texto, o.Nombre);
             if (o.Direccion > 0) {
                 foreach (UsuarioServidor usv in usuarios) {
-                    vJuego.cambiarDirPacman(usv.Id, o.Direccion);
-                    Console.WriteLine("usuario {0}: Envia direccion {1}", usv.Id, o.Direccion);
+                    if (usv.Id == o.Id) {
+                        vJuego.cambiarDirPacman(usv.Id, o.Direccion);
+                        Console.WriteLine("usuario {0}: Envia direccion {1}", usv.Id, o.Direccion);
+                        break;
+                    }
+                    
                 }
             } else if (o.Direccion == 0) {
                 foreach (UsuarioServidor usv in usuarios) {
