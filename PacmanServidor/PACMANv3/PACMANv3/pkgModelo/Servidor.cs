@@ -61,9 +61,10 @@ namespace PACMANv3.pkgModelo {
             if (o.Direccion > 0) {
                 foreach (UsuarioServidor usv in usuarios) {
                     //modificar
-                    if (usv.Id != o.Id) {
-                        usv.enviar(o);
-                    }
+                    Console.WriteLine("usuario {0}: Envia direccion {1}", usv.Id, o.Direccion);
+                    ////if (usv.Id != o.Id) {
+                    ////    usv.enviar(o);
+                    ////}
                 }
             } else if (o.Direccion == 0) {
                 foreach (UsuarioServidor usv in usuarios) {
