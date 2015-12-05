@@ -23,7 +23,7 @@ namespace PACMANv3 {
         private Juego juego;
         private List<Mapa> listaDeMapas;
         private List<String> nombresDeMapas;
-        private List<DatosJugador> datosJugadores;
+        //private List<DatosJugador> datosJugadores;
         private SoundPlayer soundFondo;
         private Mapa mapaAJugar;
 
@@ -37,8 +37,8 @@ namespace PACMANv3 {
 
             this.listaDeMapas = new List<Mapa>();
             this.nombresDeMapas = new List<String>();
-            this.datosJugadores = new List<DatosJugador>();
-            cargarDatosJugadores();
+            //this.datosJugadores = new List<DatosJugador>();
+            //cargarDatosJugadores();
             cargarNombresDeMapas();
             cargarMapas();
         }
@@ -51,25 +51,25 @@ namespace PACMANv3 {
             }
         }
 
-        private void escribirJSONJugadores() {
-            String js = JsonConvert.SerializeObject(datosJugadores);
-            StreamWriter sw = File.CreateText("./../../ArchivosConf/DatosUsuarios/HistoricoDeUsuarios.data");
-            sw.Write(js);
-            sw.Close();
-        }
+        //private void escribirJSONJugadores() {
+        //    String js = JsonConvert.SerializeObject(datosJugadores);
+        //    StreamWriter sw = File.CreateText("./../../ArchivosConf/DatosUsuarios/HistoricoDeUsuarios.data");
+        //    sw.Write(js);
+        //    sw.Close();
+        //}
 
-        private void cargarDatosJugadores() {
-            //LEYENDO JSON
-            StreamReader sr;
-            sr = File.OpenText("./../../ArchivosConf/DatosUsuarios/HistoricoDeUsuarios.data");
-            String entrada = sr.ReadToEnd();
-            if (entrada != "") {
-                this.datosJugadores = JsonConvert.DeserializeObject<List<DatosJugador>>(entrada);
-            }
-            sr.Close();
+        //private void cargarDatosJugadores() {
+        //    //LEYENDO JSON
+        //    StreamReader sr;
+        //    sr = File.OpenText("./../../ArchivosConf/DatosUsuarios/HistoricoDeUsuarios.data");
+        //    String entrada = sr.ReadToEnd();
+        //    if (entrada != "") {
+        //        this.datosJugadores = JsonConvert.DeserializeObject<List<DatosJugador>>(entrada);
+        //    }
+        //    sr.Close();
 
 
-        }
+        //}
 
         private void Form1_Load(object sender, EventArgs e) {
             carYReproducir();
@@ -128,26 +128,26 @@ namespace PACMANv3 {
                     if (mapaAJugar == null) {
                         this.seleccionarMapaActual();
                     }
-
-                    juego = new Juego(mapaAJugar, dificultad, nuevoJugador, false, 5, 5);
+                    int jugadores = (int)this.numDDJugadores.Value;
+                    juego = new Juego(mapaAJugar, dificultad, jugadores);
 
                     VistaJuego vj = new VistaJuego();
-                    vj.definirEntrada(entradaPorVoz);
-                    if (entradaPorVoz) {
-                        vj.iniciarReconocedor();
-                    }
+                    //vj.definirEntrada(entradaPorVoz);
+                    //if (entradaPorVoz) {
+                    //    vj.iniciarReconocedor();
+                    //}
                     vj.crearJuego(this.juego);
                     DialogResult res = vj.ShowDialog();
 
                     if (res == DialogResult.OK) {
                         carYReproducir();
-                        DatosJugador jugadorEntrante = vj.Juego.DatosJugador;
-                        jugadorEntrante.Fecha = DateTime.Now.ToString();
-                        this.datosJugadores.Add(jugadorEntrante);
-                        this.ordenarDescendente();
+                        //DatosJugador jugadorEntrante = vj.Juego.DatosJugador;
+                        //jugadorEntrante.Fecha = DateTime.Now.ToString();
+                        //this.datosJugadores.Add(jugadorEntrante);
+                        //this.ordenarDescendente();
                         this.panelConfigInicio.Visible = false;
                         this.panelPuntajes.Visible = true;
-                        this.listarDatosJugadores();
+                        //this.listarDatosJugadores();
                         this.cargarMapas();
                     }
                 } else {
@@ -158,23 +158,23 @@ namespace PACMANv3 {
             }
         }
 
-        private void listarDatosJugadores() {
-            String datNom = "";
-            String datdif = "";
-            String datpts = "";
-            String datfecha = "";
-            for (int i = 0; i < this.datosJugadores.Count; i++) {
-                datNom += (i + 1) + "- " + this.datosJugadores.ElementAt(i).Nombre + "\n";
-                datdif += this.datosJugadores.ElementAt(i).Dificultad + "\n";
-                datpts += this.datosJugadores.ElementAt(i).Puntaje + " pts\n";
-                datfecha += this.datosJugadores.ElementAt(i).Fecha + "\n";
-            }
-            lblListadoDatos.Text = datNom;
-            lblPtsDat.Text = datpts;
-            lblDifDatos.Text = datdif;
-            lblFechaDat.Text = datfecha;
+        //private void listarDatosJugadores() {
+        //    String datNom = "";
+        //    String datdif = "";
+        //    String datpts = "";
+        //    String datfecha = "";
+        //    for (int i = 0; i < this.datosJugadores.Count; i++) {
+        //        datNom += (i + 1) + "- " + this.datosJugadores.ElementAt(i).Nombre + "\n";
+        //        datdif += this.datosJugadores.ElementAt(i).Dificultad + "\n";
+        //        datpts += this.datosJugadores.ElementAt(i).Puntaje + " pts\n";
+        //        datfecha += this.datosJugadores.ElementAt(i).Fecha + "\n";
+        //    }
+        //    lblListadoDatos.Text = datNom;
+        //    lblPtsDat.Text = datpts;
+        //    lblDifDatos.Text = datdif;
+        //    lblFechaDat.Text = datfecha;
 
-        }
+        //}
 
         private void btnCrearMapa_Click(object sender, EventArgs e) {
             VistaCreacionDeMapas nuevaVen = new VistaCreacionDeMapas();
@@ -186,30 +186,30 @@ namespace PACMANv3 {
             }
         }
 
-        private void ordenarDescendente() {
-            DatosJugador[] arrJug = this.datosJugadores.ToArray();
-            for (int i = 0; i < arrJug.Length; i++) {
-                for (int j = i + 1; j < arrJug.Length; j++) {
-                    if (arrJug[i].Puntaje < arrJug[j].Puntaje) {
-                        DatosJugador aux = arrJug[i];
-                        arrJug[i] = arrJug[j];
-                        arrJug[j] = aux;
-                    }
-                }
-            }
-            this.datosJugadores.Clear();
-            this.datosJugadores.AddRange(arrJug);
-        }
+        //private void ordenarDescendente() {
+        //    DatosJugador[] arrJug = this.datosJugadores.ToArray();
+        //    for (int i = 0; i < arrJug.Length; i++) {
+        //        for (int j = i + 1; j < arrJug.Length; j++) {
+        //            if (arrJug[i].Puntaje < arrJug[j].Puntaje) {
+        //                DatosJugador aux = arrJug[i];
+        //                arrJug[i] = arrJug[j];
+        //                arrJug[j] = aux;
+        //            }
+        //        }
+        //    }
+        //    this.datosJugadores.Clear();
+        //    this.datosJugadores.AddRange(arrJug);
+        //}
 
         private void btnAceptarDatos_Click(object sender, EventArgs e) {
-            escribirJSONJugadores();
+            //escribirJSONJugadores();
             this.panelPuntajes.Visible = false;
             this.panelConfigInicio.Visible = true;
         }
 
         private void btnIntPuntajes_Click(object sender, EventArgs e) {
-            this.ordenarDescendente();
-            this.listarDatosJugadores();
+            //this.ordenarDescendente();
+            //this.listarDatosJugadores();
             this.panelConfigInicio.Visible = false;
             this.panelPuntajes.Visible = true;
         }
@@ -285,7 +285,7 @@ namespace PACMANv3 {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            this.servidor = new Servidor((int) this.numDDJugadores.Value, "0.0.0.0", this);
+            this.servidor = new Servidor((int)this.numDDJugadores.Value, "0.0.0.0", this);
             new Thread(this.servidor.run).Start();
             this.btnIniciarServ.Enabled = false;
         }

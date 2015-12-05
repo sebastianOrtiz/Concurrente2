@@ -39,6 +39,9 @@ namespace PACMANv3.pkgModelo {
         private Random randCambairDir;
 
         private int identificador;
+        private int puntuacion;
+
+        
 
         /// <summary>
         /// Constructor de la clase PacMan
@@ -68,6 +71,12 @@ namespace PACMANv3.pkgModelo {
             this.jAct = j;
             this.randCambairDir = new Random(DateTime.Now.Millisecond);
             this.configuracionInicialPacman();
+            this.puntuacion = 0;
+        }
+
+        public int aumentarPuntaje(int puntos) {
+            puntuacion = puntuacion + puntos;
+            return puntuacion;
         }
 
         /// <summary>
@@ -487,5 +496,9 @@ namespace PACMANv3.pkgModelo {
             set { identificador = value; }
         }
 
+        public int Puntuacion {
+            get { return puntuacion; }
+            set { puntuacion = value; }
+        }
     }
 }

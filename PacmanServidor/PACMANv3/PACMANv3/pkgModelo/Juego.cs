@@ -16,7 +16,7 @@ namespace PACMANv3.pkgModelo {
         private string dificultad;
         private List<Fantasma> fantasmas;
         private List<PacMan> pacMans;
-        private int nivelActual;
+
         private Boolean estadoDelJuego;
         private int jugando; //1 jugando, 2 gano, 3 perdio
         private Random r;
@@ -44,7 +44,7 @@ namespace PACMANv3.pkgModelo {
             this.fantasmas = new List<Fantasma>();
             this.pacMans = new List<PacMan>();
             this.dificultad = dificultad;
-            this.nivelActual = 1;
+
             this.r = new Random();
             this.configurarJuego();
             this.estadoDelJuego = true;
@@ -59,13 +59,10 @@ namespace PACMANv3.pkgModelo {
 
         }
 
-        public Biscocho[,] obtenerBiscochos()
-        {
+        public Biscocho[,] obtenerBiscochos() {
             Biscocho[,] biscochos = new Biscocho[mapa.Filas, mapa.Columnas];
-            for (int i = 0; i < mapa.Filas; i++)
-            {
-                for (int j = 0; j < mapa.Columnas; j++)
-                {
+            for (int i = 0; i < mapa.Filas; i++) {
+                for (int j = 0; j < mapa.Columnas; j++) {
                     biscochos[i, j] = mapa.MatrizDiseño[i, j].Bisc;
                 }
             }
@@ -93,9 +90,9 @@ namespace PACMANv3.pkgModelo {
         /// Calcula intersecciones entre el PacMan y un fantasma ejecutando acciones dependiendo del estado del fantasma
         /// </summary>
         /// <param name="fant">Fantasma al que se le evaluara la colision</param>
-        private void interseccionPacmanFantasma(Fantasma fant) {
+        private void interseccionPacmanFantasma(Fantasma fant, PacMan pac) {
             //Colision por la izquierda
-            if ((this.pacMans.ElementAt(0).X <= (fant.X + fant.Windth) && (this.pacMans.ElementAt(0).X + 10) >= (fant.X + fant.Windth)) && (this.pacMans.ElementAt(0).Y >= fant.Y && this.pacMans.ElementAt(0).Y <= fant.Y + fant.Height || this.pacMans.ElementAt(0).Y + this.pacMans.ElementAt(0).Height >= fant.Y && this.pacMans.ElementAt(0).Y <= fant.Y + fant.Height)) {
+            if ((pac.X <= (fant.X + fant.Windth) && (pac.X + 10) >= (fant.X + fant.Windth)) && (pac.Y >= fant.Y && pac.Y <= fant.Y + fant.Height || pac.Y + pac.Height >= fant.Y && pac.Y <= fant.Y + fant.Height)) {
                 if (fant.Estado == 2) {
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
@@ -108,31 +105,31 @@ namespace PACMANv3.pkgModelo {
                 sonido(2);
 
             } //Colision por la derecha
-            else if (((this.pacMans.ElementAt(0).X + this.pacMans.ElementAt(0).Windth) >= fant.X && (this.pacMans.ElementAt(0).X + this.pacMans.ElementAt(0).Windth - 10) <= fant.X) && (this.pacMans.ElementAt(0).Y >= fant.Y && this.pacMans.ElementAt(0).Y <= fant.Y + fant.Height || this.pacMans.ElementAt(0).Y + this.pacMans.ElementAt(0).Height >= fant.Y && this.pacMans.ElementAt(0).Y <= fant.Y + fant.Height)) {
+            else if (((pac.X + pac.Windth) >= fant.X && (pac.X + pac.Windth - 10) <= fant.X) && (pac.Y >= fant.Y && pac.Y <= fant.Y + fant.Height || pac.Y + pac.Height >= fant.Y && pac.Y <= fant.Y + fant.Height)) {
                 if (fant.Estado == 2) {
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
                 } else {
                     this.rehubicarPacman(pacMans.ElementAt(0));
-                    if (this.pacMans.ElementAt(0).disminuirVida(fant.Poder) <= 0) {
+                    if (pac.disminuirVida(fant.Poder) <= 0) {
                         this.jugando = 3;
                     }
                 }
                 sonido(2);
             } //Colision por la arriba
-            else if ((this.pacMans.ElementAt(0).Y <= (fant.Y + fant.Height) && (this.pacMans.ElementAt(0).Y + 10) >= (fant.Y + fant.Height)) && (this.pacMans.ElementAt(0).X >= fant.X && this.pacMans.ElementAt(0).X <= fant.X + fant.Windth || this.pacMans.ElementAt(0).X + this.pacMans.ElementAt(0).Windth >= fant.X && this.pacMans.ElementAt(0).X <= fant.X + fant.Windth)) {
+            else if ((pac.Y <= (fant.Y + fant.Height) && (pac.Y + 10) >= (fant.Y + fant.Height)) && (pac.X >= fant.X && pac.X <= fant.X + fant.Windth || pac.X + pac.Windth >= fant.X && pac.X <= fant.X + fant.Windth)) {
                 if (fant.Estado == 2) {
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
                 } else {
                     this.rehubicarPacman(pacMans.ElementAt(0));
-                    if (this.pacMans.ElementAt(0).disminuirVida(fant.Poder) <= 0) {
+                    if (pac.disminuirVida(fant.Poder) <= 0) {
                         this.jugando = 3;
                     }
                 }
                 sonido(2);
             } //Colision por la abajo
-            else if (((this.pacMans.ElementAt(0).Y + this.pacMans.ElementAt(0).Height) >= fant.Y && (this.pacMans.ElementAt(0).Y + this.pacMans.ElementAt(0).Height - 10) <= fant.Y) && (this.pacMans.ElementAt(0).X >= fant.X && this.pacMans.ElementAt(0).X <= fant.X + fant.Windth || this.pacMans.ElementAt(0).X + this.pacMans.ElementAt(0).Windth >= fant.X && this.pacMans.ElementAt(0).X <= fant.X + fant.Windth)) {
+            else if (((pac.Y + pac.Height) >= fant.Y && (pac.Y + pac.Height - 10) <= fant.Y) && (pac.X >= fant.X && pac.X <= fant.X + fant.Windth || pac.X + pac.Windth >= fant.X && pac.X <= fant.X + fant.Windth)) {
                 if (fant.Estado == 2) {
 
                     this.rehubicarFantasmas(fant);
@@ -140,7 +137,7 @@ namespace PACMANv3.pkgModelo {
 
                 } else {
                     this.rehubicarPacman(pacMans.ElementAt(0));
-                    if (this.pacMans.ElementAt(0).disminuirVida(fant.Poder) <= 0) {
+                    if (pac.disminuirVida(fant.Poder) <= 0) {
                         this.jugando = 3;
                     }
                 }
@@ -153,7 +150,9 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         private void evaluarColisiones() {
             foreach (Fantasma fantasma in this.fantasmas) {
-                this.interseccionPacmanFantasma(fantasma);
+                foreach (PacMan pacman in this.pacMans) {
+                    this.interseccionPacmanFantasma(fantasma, pacman);
+                }
             }
         }
 
@@ -164,7 +163,10 @@ namespace PACMANv3.pkgModelo {
             foreach (Fantasma fantasma in this.fantasmas) {
                 fantasma.aumentarVelocidad();
             }
-            this.pacMans.ElementAt(0).aumentarVelocidad();
+            foreach (PacMan pacman in this.pacMans) {
+                pacman.aumentarVelocidad();
+            }
+
         }
 
         /// <summary>
@@ -274,38 +276,48 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         public void iteracionLoopDelJuego() {
             if (this.jugando == 1 && this.hayBiscochos()) {
-                this.pacMans.ElementAt(0).mover();
-                if (mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc != null && mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Estado) {
-                    if (mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Tipo == 3) {
-                        sonido(4);
-                        this.datosJugador.aumentarPuntaje(100);
-                    } else if (mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Tipo == 2) {
-                        sonido(3);
-                        this.datosJugador.aumentarPuntaje(this.pacMans.ElementAt(0).Velocidad * this.nivelActual);
-                        this.tiempoFantasmasVulnerables = 0;
-                        this.tiempoFantasmasVulnerables++;
-                        this.volverVulnerables();
-                    } else if (mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Tipo == 1) {
-                        sonido(1);
-                        this.datosJugador.aumentarPuntaje(this.pacMans.ElementAt(0).Velocidad * this.nivelActual);
+                this.moverPacMans();
+                foreach (PacMan pacman in this.pacMans) {
+                    if (mapa.MatrizDiseño[pacman.IAct, pacman.JAct].Bisc != null && mapa.MatrizDiseño[pacman.IAct, pacman.JAct].Bisc.Estado) {
+                        if (mapa.MatrizDiseño[pacman.IAct, pacman.JAct].Bisc.Tipo == 3) {
+                            sonido(4);
+                            pacman.aumentarPuntaje(100);
+                        } else if (mapa.MatrizDiseño[pacman.IAct, pacman.JAct].Bisc.Tipo == 2) {
+                            sonido(3);
+                            pacman.aumentarPuntaje(pacman.Velocidad * 2);
+                            this.tiempoFantasmasVulnerables = 0;
+                            this.tiempoFantasmasVulnerables++;
+                            this.volverVulnerables();
+                        } else if (mapa.MatrizDiseño[pacman.IAct, pacman.JAct].Bisc.Tipo == 1) {
+                            sonido(1);
+                            pacman.aumentarPuntaje(pacman.Velocidad * 2);
+                        }
+
+                        mapa.MatrizDiseño[pacman.IAct, pacman.JAct].Bisc.Estado = false;
+
                     }
-
-                    mapa.MatrizDiseño[this.pacMans.ElementAt(0).IAct, this.pacMans.ElementAt(0).JAct].Bisc.Estado = false;
-
+                    this.evaluarColisiones();
+                    this.moverFantasmas();
                 }
-                this.evaluarColisiones();
 
-
-                foreach (Fantasma fantasma in this.fantasmas) {
-                    fantasma.mover();
-                }
 
             } else {
-        
+
             }
 
         }
 
+        private void moverFantasmas() {
+            foreach (Fantasma fantasma in this.fantasmas) {
+                fantasma.mover();
+            }
+        }
+
+        private void moverPacMans() {
+            foreach (PacMan pacman in this.pacMans) {
+                pacman.mover();
+            }
+        }
         /// <summary>
         /// Metodo que llama a una iteracion de juego
         /// </summary>
@@ -432,7 +444,7 @@ namespace PACMANv3.pkgModelo {
             Point[] posCaman = mapa.posicionInicialPacMan();
             posFrut = posCaman[0];
             //mapaActual.MatrizDiseño[posFrut.X, posFrut.Y].Bisc.Estado = false;
-            pacMans.Add(new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), this.NivelActual, mapa, vidas, hp, posCaman[0].X, posCaman[0].Y));
+            pacMans.Add(new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), 1, mapa, vidas, hp, posCaman[0].X, posCaman[0].Y));
         }
 
         /// <summary>
@@ -466,14 +478,6 @@ namespace PACMANv3.pkgModelo {
             pacMan.JAct = posCaman[0].Y;
             pacMan.X = posCaman[1].X;
             pacMan.Y = posCaman[1].Y;
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo nivelActual
-        /// </summary>
-        public int NivelActual {
-            get { return nivelActual; }
-            set { nivelActual = value; }
         }
 
         /// <summary>

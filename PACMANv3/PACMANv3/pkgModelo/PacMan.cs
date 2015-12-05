@@ -10,7 +10,7 @@ namespace PACMANv3.pkgModelo {
     /// </summary>
     [Serializable()]
     public class PacMan {
-        
+
         private Image imgActual;
         private Image[] imgArriba;
         private Image[] imgAbajo;
@@ -39,7 +39,10 @@ namespace PACMANv3.pkgModelo {
         private Random randCambairDir;
 
         private int identificador;
-        
+        private int puntuacion;
+
+
+
         /// <summary>
         /// Constructor de la clase PacMan
         /// </summary>
@@ -53,7 +56,7 @@ namespace PACMANv3.pkgModelo {
         /// <param name="hp">Valor de cada vida</param>
         /// <param name="i">Indica la posicion inicial en las filas de la matriz</param>
         /// <param name="j">Indica la posicion inicial en las columnas de la matriz</param>
-        public PacMan(int lado, int x, int y, int velocidad, int nivel,  Mapa mapaActual, int vidas, int hp, int i, int j) {
+        public PacMan(int lado, int x, int y, int velocidad, int nivel, Mapa mapaActual, int vidas, int hp, int i, int j) {
             this.windth = lado;
             this.height = lado;
             this.x = x;
@@ -68,6 +71,12 @@ namespace PACMANv3.pkgModelo {
             this.jAct = j;
             this.randCambairDir = new Random(DateTime.Now.Millisecond);
             this.configuracionInicialPacman();
+            this.puntuacion = 0;
+        }
+
+        public int aumentarPuntaje(int puntos) {
+            puntuacion = puntuacion + puntos;
+            return puntuacion;
         }
 
         /// <summary>
@@ -150,7 +159,7 @@ namespace PACMANv3.pkgModelo {
             this.direccion = 3;
             this.imgActual = this.imgDerecha[0];
 
-            
+
         }
 
         public Image obtenerCamisetaRoja() {
@@ -480,13 +489,16 @@ namespace PACMANv3.pkgModelo {
             set { imgActual = value; }
         }
 
-        
 
-        public int Identificador
-        {
+
+        public int Identificador {
             get { return identificador; }
             set { identificador = value; }
         }
 
+        public int Puntuacion {
+            get { return puntuacion; }
+            set { puntuacion = value; }
+        }
     }
 }

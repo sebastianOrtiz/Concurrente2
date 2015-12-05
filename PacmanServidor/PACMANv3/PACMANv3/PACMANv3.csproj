@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="pkgModelo\Biscocho.cs" />
     <Compile Include="pkgModelo\Celda.cs" />
-    <Compile Include="pkgModelo\DatosJugador.cs" />
     <Compile Include="pkgModelo\Estado.cs" />
     <Compile Include="pkgModelo\Fantasma.cs" />
     <Compile Include="pkgModelo\Juego.cs" />

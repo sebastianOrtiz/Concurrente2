@@ -118,11 +118,11 @@ namespace PACMANv3.pkgVista {
         }
 
         private void refrescarTextos() {
-            this.lblPuntaje.Text = "Puntos: " + this.Juego.DatosJugador.Puntaje + "";
+            //this.lblPuntaje.Text = "Puntos: " + this.Juego.DatosJugador.Puntaje + "";
             this.lblOrdenesEnCola.Text = "Ordenes en cola:\n" + this.Juego.PacMans.ElementAt(0).listarOrdenesActuales();
             this.lblTiempo.Text = "Tiempo: " + this.Juego.obtenerTiempo();
             this.lblVidasPac.Text = this.Juego.PacMans.ElementAt(0).estadoDeVida();
-            this.lblNombreJugador.Text = this.Juego.DatosJugador.Nombre;
+            //this.lblNombreJugador.Text = this.Juego.DatosJugador.Nombre;
         }
 
         private void pintar(object sender, PaintEventArgs e) {
@@ -171,8 +171,8 @@ namespace PACMANv3.pkgVista {
                     this.sonidoFinJuego = false;
                 }
             }
-            lblNombreFinal.Text = Juego.DatosJugador.Nombre;
-            lblPuntosFinal.Text = Juego.DatosJugador.Puntaje + " pts";
+            //lblNombreFinal.Text = Juego.DatosJugador.Nombre;
+            //lblPuntosFinal.Text = Juego.DatosJugador.Puntaje + " pts";
             panel1.Left = 80;
             panel1.Top = 50;
             panel1.Height = 390;
