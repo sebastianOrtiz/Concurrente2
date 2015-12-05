@@ -235,7 +235,7 @@ namespace PACMANv3.pkgVista {
 
 
         private void pintar(object sender, PaintEventArgs e) {
-            if (estadoActual != null) {
+            if (this.jugando > 0) {
                 Graphics g = e.Graphics;
                 this.graficarEstadoActual(g);
             }
@@ -422,7 +422,7 @@ namespace PACMANv3.pkgVista {
                 }
 
                 this.graficarPanel();
-                Thread.Sleep(100);
+                Thread.Sleep(10);
             }
 
             //long ultimo = Environment.TickCount;
