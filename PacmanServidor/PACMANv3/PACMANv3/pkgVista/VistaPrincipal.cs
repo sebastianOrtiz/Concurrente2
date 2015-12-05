@@ -29,6 +29,8 @@ namespace PACMANv3 {
 
         private Servidor servidor;
 
+        private delegate void DelegateModif();
+
         public Form1() {
             InitializeComponent();
             cmbSeleccionarDificultad.SelectedIndex = 0;
@@ -107,18 +109,27 @@ namespace PACMANv3 {
         }
 
         private void btnAceptarConfigInicial_Click(object sender, EventArgs e) {
+            this.iniciarJuego();
+        }
+
+        public void iniciarJuego() {
+            if (cmbSeleccionMapa.InvokeRequired) {
+                cmbSeleccionMapa.Invoke(new DelegateModif(iniciarJuego));
+            }
+            if (cmbSeleccionarDificultad.InvokeRequired) {
+                cmbSeleccionarDificultad.Invoke(new DelegateModif(iniciarJuego));
+            }
+
+
             if (cmbSeleccionMapa.SelectedIndex > -1) {
-                if (txtNombreJu.Text != null && cmbSeleccionarDificultad.SelectedIndex > -1) {
+                if (cmbSeleccionarDificultad.SelectedIndex > -1) {
                     String dificultad = cmbSeleccionarDificultad.SelectedItem.ToString();
-                    DatosJugador nuevoJugador = new DatosJugador(txtNombreJu.Text, dificultad);
-                    Boolean entradaPorVoz;
-                    if (rBtnVoz.Checked) {
-                        entradaPorVoz = true;
-                    } else {
-                        entradaPorVoz = false;
+
+                    if (mapaAJugar == null) {
+                        this.seleccionarMapaActual();
                     }
 
-                    juego = new Juego(mapaAJugar, dificultad, nuevoJugador, entradaPorVoz, (int) nudVidasPacman.Value, (int) nudHPPacman.Value);
+                    juego = new Juego(mapaAJugar, dificultad, nuevoJugador, false, 5, 5);
 
                     VistaJuego vj = new VistaJuego();
                     vj.definirEntrada(entradaPorVoz);
@@ -145,7 +156,6 @@ namespace PACMANv3 {
             } else {
                 MessageBox.Show("Seleccione un Mapa");
             }
-
         }
 
         private void listarDatosJugadores() {
@@ -229,6 +239,10 @@ namespace PACMANv3 {
         }
 
         private void cmbSeleccionMapa_SelectionChangeCommitted(object sender, EventArgs e) {
+            this.seleccionarMapaActual();
+        }
+
+        private void seleccionarMapaActual() {
             foreach (Mapa mapa in this.listaDeMapas) {
                 if (mapa.Nombre.Equals(cmbSeleccionMapa.SelectedItem.ToString())) {
                     this.mapaAJugar = mapa;
@@ -264,82 +278,6 @@ namespace PACMANv3 {
             Console.WriteLine(m.Nombre);
             Console.WriteLine(m.Texto);
             /*** ***/
-
-            /*//Conexión socket(envio y recibo)
-            ss = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
-            try
-            {
-                ss.Bind(direccion);
-                Console.WriteLine("Escuchando");
-                ss.Listen(1);
-                Console.WriteLine("Esperando");
-                Socket sc = ss.Accept();
-                BinaryFormatter serializer = new BinaryFormatter();
-
-                Mensaje m = null;
-                NetworkStream net = new NetworkStream(sc);
-
-                /*m = (Mensaje)serializer.Deserialize(net);
-                Console.WriteLine("" + m.Nombre);
-                Console.WriteLine("" + m.Texto);*/
-
-            /*m = new Mensaje("servidor", "mundo!!");
-            serializer.Serialize(net, m);*/
-
-            /*** Leer ***/
-            /*byte[] msgDataLen = new byte[4];
-            net.Read(msgDataLen, 0, 4);
-
-            int dataLen = BitConverter.ToInt32(msgDataLen, 0);
-            Console.WriteLine("tamaño leido {0}", dataLen);
-            Console.WriteLine("esperando datos");
-            byte[] msgDataBytes = new byte[dataLen];
-            net.Read(msgDataBytes, 0, dataLen);
-            /*** ***/
-
-            /*MemoryStream ms = new MemoryStream(msgDataBytes);
-            serializer.Serialize(ms, m);
-            msgDataBytes = ms.ToArray();
-
-            byte[] msgDataLen = BitConverter.GetBytes((Int32)msgDataBytes.Length);
-            net.Write(msgDataLen, 0, 4);
-            net.Write(msgDataBytes, 0, msgDataBytes.Length);*/
-
-            /*net.Close();
-            sc.Close();
-            ss.Close();
-            Console.WriteLine("Cerrando conexion");
-        }
-        catch (Exception error)
-        {
-            Console.WriteLine("Error: {0}", error.ToString());
-        }*/
-
-            //-------------------------------------------------
-
-            //Conexión socket(envio y recibo)
-            /*Socket sc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint direccion = new IPEndPoint(IPAddress.Loopback, 1339);
-
-            try
-            {
-                sc.Connect(direccion);            
-                Console.WriteLine("Conectado con exito");
-                Mensaje m = new Mensaje("cliente", "hola!!");
-                BinaryFormatter serializer = new BinaryFormatter();
-                NetworkStream st = new NetworkStream(sc);
-                serializer.Serialize(st, m);
-                m = (Mensaje)serializer.Deserialize(st);
-                Console.WriteLine("" + m.Nombre);
-                Console.WriteLine("" + m.Texto);
-                st.Close();
-                sc.Close();
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine("Error: {0}", error.ToString());
-            }*/
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
@@ -347,7 +285,7 @@ namespace PACMANv3 {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            this.servidor = new Servidor((int) this.numDDJugadores.Value, "0.0.0.0");
+            this.servidor = new Servidor((int) this.numDDJugadores.Value, "0.0.0.0", this);
             new Thread(this.servidor.run).Start();
             this.btnIniciarServ.Enabled = false;
         }

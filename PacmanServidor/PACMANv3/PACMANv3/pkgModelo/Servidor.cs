@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using PACMANv3.pkgVista;
 
 namespace PACMANv3.pkgModelo {
 
@@ -16,11 +17,13 @@ namespace PACMANv3.pkgModelo {
         private Thread th;
         private int cantTotalJugadores;
         private bool conectado;
+        private Form1 vista;
 
         public static BinaryFormatter serializer = new BinaryFormatter();
         private static List<UsuarioServidor> usuarios = new List<UsuarioServidor>();
 
-        public Servidor(int cantJugadores, string ipAddress) {
+        public Servidor(int cantJugadores, string ipAddress, Form1 vista) {
+            this.vista = vista;
             this.cantTotalJugadores = cantJugadores;
             this.server = new TcpListener(IPAddress.Parse(ipAddress), 1339);
             Console.WriteLine(this.server);
@@ -60,11 +63,7 @@ namespace PACMANv3.pkgModelo {
             //Console.WriteLine("usuario: {1}, mensaje: {0}", o.Texto, o.Nombre);
             if (o.Direccion > 0) {
                 foreach (UsuarioServidor usv in usuarios) {
-                    //modificar
                     Console.WriteLine("usuario {0}: Envia direccion {1}", usv.Id, o.Direccion);
-                    ////if (usv.Id != o.Id) {
-                    ////    usv.enviar(o);
-                    ////}
                 }
             } else if (o.Direccion == 0) {
                 foreach (UsuarioServidor usv in usuarios) {
@@ -93,6 +92,7 @@ namespace PACMANv3.pkgModelo {
             Estado m = new Estado();
             m.Texto = "Inicia juego";
             enviarTodos(m);
+            this.vista.iniciarJuego();
             //}
         }
     }

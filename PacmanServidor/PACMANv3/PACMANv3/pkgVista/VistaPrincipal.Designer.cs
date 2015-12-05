@@ -25,18 +25,9 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pruebasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtNombreJu = new System.Windows.Forms.TextBox();
             this.btnAceptarConfigInicial = new System.Windows.Forms.Button();
             this.lblDificultad = new System.Windows.Forms.Label();
             this.cmbSeleccionarDificultad = new System.Windows.Forms.ComboBox();
-            this.lblNombreJugador = new System.Windows.Forms.Label();
-            this.lblMetodoDeEntrada = new System.Windows.Forms.Label();
-            this.rBtnVoz = new System.Windows.Forms.RadioButton();
-            this.rBtnTeclado = new System.Windows.Forms.RadioButton();
-            this.lblNumVidas = new System.Windows.Forms.Label();
-            this.lblHPPACMAN = new System.Windows.Forms.Label();
-            this.nudHPPacman = new System.Windows.Forms.NumericUpDown();
-            this.nudVidasPacman = new System.Windows.Forms.NumericUpDown();
             this.btnCrearMapa = new System.Windows.Forms.Button();
             this.btnEditarMapa = new System.Windows.Forms.Button();
             this.panelConfigInicio = new System.Windows.Forms.Panel();
@@ -52,8 +43,6 @@
             this.lblDifDatos = new System.Windows.Forms.Label();
             this.btnAceptarDatos = new System.Windows.Forms.Button();
             this.lblListadoDatos = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHPPacman)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudVidasPacman)).BeginInit();
             this.panelConfigInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDDJugadores)).BeginInit();
             this.panelPuntajes.SuspendLayout();
@@ -63,15 +52,6 @@
             // 
             this.pruebasToolStripMenuItem.Name = "pruebasToolStripMenuItem";
             this.pruebasToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // txtNombreJu
-            // 
-            this.txtNombreJu.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreJu.Location = new System.Drawing.Point(576, 83);
-            this.txtNombreJu.Name = "txtNombreJu";
-            this.txtNombreJu.Size = new System.Drawing.Size(203, 22);
-            this.txtNombreJu.TabIndex = 16;
-            this.txtNombreJu.Text = "Jugador 1";
             // 
             // btnAceptarConfigInicial
             // 
@@ -112,120 +92,6 @@
             this.cmbSeleccionarDificultad.Size = new System.Drawing.Size(203, 25);
             this.cmbSeleccionarDificultad.TabIndex = 13;
             // 
-            // lblNombreJugador
-            // 
-            this.lblNombreJugador.AutoSize = true;
-            this.lblNombreJugador.BackColor = System.Drawing.SystemColors.ControlText;
-            this.lblNombreJugador.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombreJugador.ForeColor = System.Drawing.Color.White;
-            this.lblNombreJugador.Location = new System.Drawing.Point(414, 86);
-            this.lblNombreJugador.Name = "lblNombreJugador";
-            this.lblNombreJugador.Size = new System.Drawing.Size(154, 17);
-            this.lblNombreJugador.TabIndex = 12;
-            this.lblNombreJugador.Text = "Nombre del Jugador:";
-            // 
-            // lblMetodoDeEntrada
-            // 
-            this.lblMetodoDeEntrada.AutoSize = true;
-            this.lblMetodoDeEntrada.BackColor = System.Drawing.SystemColors.ControlText;
-            this.lblMetodoDeEntrada.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMetodoDeEntrada.ForeColor = System.Drawing.Color.White;
-            this.lblMetodoDeEntrada.Location = new System.Drawing.Point(423, 153);
-            this.lblMetodoDeEntrada.Name = "lblMetodoDeEntrada";
-            this.lblMetodoDeEntrada.Size = new System.Drawing.Size(151, 17);
-            this.lblMetodoDeEntrada.TabIndex = 11;
-            this.lblMetodoDeEntrada.Text = "Metodo de entrada:";
-            // 
-            // rBtnVoz
-            // 
-            this.rBtnVoz.AutoSize = true;
-            this.rBtnVoz.BackColor = System.Drawing.SystemColors.ControlText;
-            this.rBtnVoz.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rBtnVoz.ForeColor = System.Drawing.Color.White;
-            this.rBtnVoz.Location = new System.Drawing.Point(667, 151);
-            this.rBtnVoz.Name = "rBtnVoz";
-            this.rBtnVoz.Size = new System.Drawing.Size(53, 21);
-            this.rBtnVoz.TabIndex = 10;
-            this.rBtnVoz.TabStop = true;
-            this.rBtnVoz.Text = "Voz";
-            this.rBtnVoz.UseVisualStyleBackColor = false;
-            // 
-            // rBtnTeclado
-            // 
-            this.rBtnTeclado.AutoSize = true;
-            this.rBtnTeclado.BackColor = System.Drawing.SystemColors.ControlText;
-            this.rBtnTeclado.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rBtnTeclado.ForeColor = System.Drawing.Color.White;
-            this.rBtnTeclado.Location = new System.Drawing.Point(580, 151);
-            this.rBtnTeclado.Name = "rBtnTeclado";
-            this.rBtnTeclado.Size = new System.Drawing.Size(81, 21);
-            this.rBtnTeclado.TabIndex = 9;
-            this.rBtnTeclado.TabStop = true;
-            this.rBtnTeclado.Text = "Teclado";
-            this.rBtnTeclado.UseVisualStyleBackColor = false;
-            // 
-            // lblNumVidas
-            // 
-            this.lblNumVidas.AutoSize = true;
-            this.lblNumVidas.BackColor = System.Drawing.SystemColors.ControlText;
-            this.lblNumVidas.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumVidas.ForeColor = System.Drawing.Color.White;
-            this.lblNumVidas.Location = new System.Drawing.Point(557, 170);
-            this.lblNumVidas.Name = "lblNumVidas";
-            this.lblNumVidas.Size = new System.Drawing.Size(127, 17);
-            this.lblNumVidas.TabIndex = 18;
-            this.lblNumVidas.Text = "Numero de Vidas";
-            // 
-            // lblHPPACMAN
-            // 
-            this.lblHPPACMAN.AutoSize = true;
-            this.lblHPPACMAN.BackColor = System.Drawing.SystemColors.ControlText;
-            this.lblHPPACMAN.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHPPACMAN.ForeColor = System.Drawing.Color.White;
-            this.lblHPPACMAN.Location = new System.Drawing.Point(444, 170);
-            this.lblHPPACMAN.Name = "lblHPPACMAN";
-            this.lblHPPACMAN.Size = new System.Drawing.Size(111, 17);
-            this.lblHPPACMAN.TabIndex = 17;
-            this.lblHPPACMAN.Text = "HP de PACMAN";
-            // 
-            // nudHPPacman
-            // 
-            this.nudHPPacman.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.nudHPPacman.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudHPPacman.Location = new System.Drawing.Point(470, 190);
-            this.nudHPPacman.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudHPPacman.Name = "nudHPPacman";
-            this.nudHPPacman.ReadOnly = true;
-            this.nudHPPacman.Size = new System.Drawing.Size(55, 22);
-            this.nudHPPacman.TabIndex = 19;
-            this.nudHPPacman.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // nudVidasPacman
-            // 
-            this.nudVidasPacman.Font = new System.Drawing.Font("Ravie", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudVidasPacman.Location = new System.Drawing.Point(591, 190);
-            this.nudVidasPacman.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudVidasPacman.Name = "nudVidasPacman";
-            this.nudVidasPacman.Size = new System.Drawing.Size(53, 22);
-            this.nudVidasPacman.TabIndex = 20;
-            this.nudVidasPacman.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
             // btnCrearMapa
             // 
             this.btnCrearMapa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -257,20 +123,11 @@
             this.panelConfigInicio.Controls.Add(this.lblSeleccioneMapa);
             this.panelConfigInicio.Controls.Add(this.cmbSeleccionMapa);
             this.panelConfigInicio.Controls.Add(this.btnIntPuntajes);
-            this.panelConfigInicio.Controls.Add(this.lblNombreJugador);
             this.panelConfigInicio.Controls.Add(this.btnEditarMapa);
-            this.panelConfigInicio.Controls.Add(this.rBtnTeclado);
             this.panelConfigInicio.Controls.Add(this.btnCrearMapa);
-            this.panelConfigInicio.Controls.Add(this.rBtnVoz);
-            this.panelConfigInicio.Controls.Add(this.nudVidasPacman);
-            this.panelConfigInicio.Controls.Add(this.lblMetodoDeEntrada);
-            this.panelConfigInicio.Controls.Add(this.nudHPPacman);
             this.panelConfigInicio.Controls.Add(this.cmbSeleccionarDificultad);
-            this.panelConfigInicio.Controls.Add(this.lblNumVidas);
             this.panelConfigInicio.Controls.Add(this.lblDificultad);
-            this.panelConfigInicio.Controls.Add(this.lblHPPACMAN);
             this.panelConfigInicio.Controls.Add(this.btnAceptarConfigInicial);
-            this.panelConfigInicio.Controls.Add(this.txtNombreJu);
             this.panelConfigInicio.Location = new System.Drawing.Point(-1, 1);
             this.panelConfigInicio.Name = "panelConfigInicio";
             this.panelConfigInicio.Size = new System.Drawing.Size(793, 458);
@@ -444,8 +301,6 @@
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.nudHPPacman)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudVidasPacman)).EndInit();
             this.panelConfigInicio.ResumeLayout(false);
             this.panelConfigInicio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDDJugadores)).EndInit();
@@ -458,18 +313,9 @@
         #endregion
 
         private System.Windows.Forms.ToolStripMenuItem pruebasToolStripMenuItem;
-        private System.Windows.Forms.TextBox txtNombreJu;
         private System.Windows.Forms.Button btnAceptarConfigInicial;
         private System.Windows.Forms.Label lblDificultad;
         private System.Windows.Forms.ComboBox cmbSeleccionarDificultad;
-        private System.Windows.Forms.Label lblNombreJugador;
-        private System.Windows.Forms.Label lblMetodoDeEntrada;
-        private System.Windows.Forms.RadioButton rBtnVoz;
-        private System.Windows.Forms.RadioButton rBtnTeclado;
-        private System.Windows.Forms.Label lblNumVidas;
-        private System.Windows.Forms.Label lblHPPACMAN;
-        private System.Windows.Forms.NumericUpDown nudHPPacman;
-        private System.Windows.Forms.NumericUpDown nudVidasPacman;
         private System.Windows.Forms.Button btnCrearMapa;
         private System.Windows.Forms.Button btnEditarMapa;
         private System.Windows.Forms.Panel panelConfigInicio;

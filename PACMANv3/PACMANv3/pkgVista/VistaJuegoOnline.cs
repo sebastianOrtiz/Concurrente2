@@ -34,100 +34,100 @@ namespace PACMANv3.pkgVista {
         private SpeechRecognitionEngine escucha;
         //private List<Estado> mensajes;
 
-        private List<Mapa> listaDeMapas;
-        private List<string> nombresDeMapas;
+        //private List<Mapa> listaDeMapas;
+        //private List<string> nombresDeMapas;
 
         private Cliente usuario;
 
         public VistaJuegoOnline() {
             InitializeComponent();
 
-            this.listaDeMapas = new List<Mapa>();
-            this.nombresDeMapas = new List<string>();
+            //this.listaDeMapas = new List<Mapa>();
+            //this.nombresDeMapas = new List<string>();
 
             colaDeEstados = new Queue<Estado>();
             this.cargarRecursos();
             this.jugando = 1;
-            cargarNombresDeMapas();
-            cargarMapas();
-            generarEstadoActual();
+            //cargarNombresDeMapas();
+            //cargarMapas();
+            //generarEstadoActual();
             new Thread(cicloJuego).Start();
         }
 
-        private void cargarNombresDeMapas() {
-            StreamReader sr = new StreamReader("./../../ArchivosConf/Config/nombresMapas.conf");
-            string linea;
-            linea = sr.ReadLine();
-            while (linea != null) {
-                nombresDeMapas.Add(linea);
-                linea = sr.ReadLine();
-            }
-            sr.Close();
-            //this.cargarMapasEnCombobox();
-        }
+        ////private void cargarNombresDeMapas() {
+        ////    StreamReader sr = new StreamReader("./../../ArchivosConf/Config/nombresMapas.conf");
+        ////    string linea;
+        ////    linea = sr.ReadLine();
+        ////    while (linea != null) {
+        ////        nombresDeMapas.Add(linea);
+        ////        linea = sr.ReadLine();
+        ////    }
+        ////    sr.Close();
+        ////    //this.cargarMapasEnCombobox();
+        ////}
 
-        private void cargarMapas() {
-            //LEYENDO JSON
-            StreamReader sr;
-            foreach (string nombreMapa in nombresDeMapas) {
-                sr = File.OpenText("./../../ArchivosConf/Maps/" + nombreMapa + ".map");
-                string entrada = sr.ReadToEnd();
-                if (entrada != "") {
-                    Mapa nMap = JsonConvert.DeserializeObject<Mapa>(entrada);
-                    nMap.MatrizDiseño = new Celda[nMap.Filas, nMap.Columnas];
-                    nMap.crearMapa();
-                    listaDeMapas.Add(nMap);
-                }
-            }
-        }
+        //private void cargarMapas() {
+        //    //LEYENDO JSON
+        //    StreamReader sr;
+        //    foreach (string nombreMapa in nombresDeMapas) {
+        //        sr = File.OpenText("./../../ArchivosConf/Maps/" + nombreMapa + ".map");
+        //        string entrada = sr.ReadToEnd();
+        //        if (entrada != "") {
+        //            Mapa nMap = JsonConvert.DeserializeObject<Mapa>(entrada);
+        //            nMap.MatrizDiseño = new Celda[nMap.Filas, nMap.Columnas];
+        //            nMap.crearMapa();
+        //            listaDeMapas.Add(nMap);
+        //        }
+        //    }
+        //}
 
-        public Biscocho[,] obtenerBiscochos() {
-            Biscocho[,] biscochos = new Biscocho[mapa.Filas, mapa.Columnas];
-            for (int i = 0; i < mapa.Filas; i++) {
-                for (int j = 0; j < mapa.Columnas; j++) {
-                    biscochos[i, j] = mapa.MatrizDiseño[i, j].Bisc;
-                }
-            }
-            return biscochos;
-        }
+        //public Biscocho[,] obtenerBiscochos() {
+        //    Biscocho[,] biscochos = new Biscocho[mapa.Filas, mapa.Columnas];
+        //    for (int i = 0; i < mapa.Filas; i++) {
+        //        for (int j = 0; j < mapa.Columnas; j++) {
+        //            biscochos[i, j] = mapa.MatrizDiseño[i, j].Bisc;
+        //        }
+        //    }
+        //    return biscochos;
+        //}
 
-        private void generarEstadoActual() {
-            this.mapa = listaDeMapas.ElementAt(0);
-
-
-            Point[] centro = mapa.posicionInicalFantasmas();
-            int dirSalida = mapa.direccionDeSalidaDelFantasma();
-
-            List<Fantasma> fantasmas = new List<Fantasma>();
-            for (int i = 0; i < 2; i++) {
-                fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
-                fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
-                fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
-                fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
-            }
-
-            for (int i = 0; i < 30; i++) {
-                List<PacMan> pacmans = new List<PacMan>();
-                Point[] posCaman = this.mapa.posicionInicialPacMan();
-                PacMan p = new PacMan(19, posCaman[1].X + i, posCaman[1].Y, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y);
-                p.Identificador = 0;
-                PacMan p1 = new PacMan(19, posCaman[1].X, posCaman[1].Y - i, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y);
-                p1.Identificador = 1;
-                PacMan p2 = new PacMan(19, posCaman[1].X - i, posCaman[1].Y, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y);
-                p2.Identificador = 2;
-                pacmans.Add(p);
-                pacmans.Add(p1);
-                pacmans.Add(p2);
-                Estado est = new Estado(pacmans, fantasmas, obtenerBiscochos());
-
-                colaDeEstados.Enqueue(est);
-                //pacmans.ElementAt(0).mover();
-            }
+        //private void generarEstadoActual() {
+        //    this.mapa = listaDeMapas.ElementAt(0);
 
 
-            //estadoActual = est;
-            //this.graficarPanel();
-        }
+        //    Point[] centro = mapa.posicionInicalFantasmas();
+        //    int dirSalida = mapa.direccionDeSalidaDelFantasma();
+
+        //    List<Fantasma> fantasmas = new List<Fantasma>();
+        //    for (int i = 0; i < 2; i++) {
+        //        fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
+        //        fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
+        //        fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
+        //        fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, "Facil", mapa, centro[0].X, centro[0].Y));
+        //    }
+
+        //    for (int i = 0; i < 30; i++) {
+        //        List<PacMan> pacmans = new List<PacMan>();
+        //        Point[] posCaman = this.mapa.posicionInicialPacMan();
+        //        PacMan p = new PacMan(19, posCaman[1].X + i, posCaman[1].Y, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y);
+        //        p.Identificador = 0;
+        //        PacMan p1 = new PacMan(19, posCaman[1].X, posCaman[1].Y - i, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y);
+        //        p1.Identificador = 1;
+        //        PacMan p2 = new PacMan(19, posCaman[1].X - i, posCaman[1].Y, 3, 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y);
+        //        p2.Identificador = 2;
+        //        pacmans.Add(p);
+        //        pacmans.Add(p1);
+        //        pacmans.Add(p2);
+        //        Estado est = new Estado(pacmans, fantasmas, obtenerBiscochos());
+
+        //        colaDeEstados.Enqueue(est);
+        //        //pacmans.ElementAt(0).mover();
+        //    }
+
+
+        //    //estadoActual = est;
+        //    //this.graficarPanel();
+        //}
 
         private void cargarRecursos() {
 
@@ -250,25 +250,25 @@ namespace PACMANv3.pkgVista {
                     Estado estado = new Estado();
                     switch (e.KeyData) {
                         case Keys.Up:
-                            estado.Direccion = 1;
-                            this.usuario.enviar(estado);
-                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
-                            break;
+                        estado.Direccion = 1;
+                        this.usuario.enviar(estado);
+                        //this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
+                        break;
                         case Keys.Down:
-                            estado.Direccion = 2;
-                            this.usuario.enviar(estado);
-                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
-                            break;
+                        estado.Direccion = 2;
+                        this.usuario.enviar(estado);
+                        //this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
+                        break;
                         case Keys.Right:
-                            estado.Direccion = 3;
-                            this.usuario.enviar(estado);
-                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
-                            break;
+                        estado.Direccion = 3;
+                        this.usuario.enviar(estado);
+                        //this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
+                        break;
                         case Keys.Left:
-                            estado.Direccion = 4;
-                            this.usuario.enviar(estado);
-                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
-                            break;
+                        estado.Direccion = 4;
+                        this.usuario.enviar(estado);
+                        //this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
+                        break;
                         //case Keys.F1:
                         //    this.jugando = 2;
                         //    break;
@@ -344,14 +344,14 @@ namespace PACMANv3.pkgVista {
                 if (celda.SePuedePasar && celda.Valor == "O" && celda.Bisc.Estado) {
                     switch (celda.Bisc.Tipo) {
                         case 1:
-                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
-                            break;
+                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
+                        break;
                         case 2:
-                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
-                            break;
+                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
+                        break;
                         case 3:
-                            g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
-                            break;
+                        g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
+                        break;
                     }
                 }
             }

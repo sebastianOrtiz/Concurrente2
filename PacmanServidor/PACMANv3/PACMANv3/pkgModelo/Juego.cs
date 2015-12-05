@@ -14,8 +14,6 @@ namespace PACMANv3.pkgModelo {
     public class Juego {
         private Mapa mapa;
         private string dificultad;
-        private DatosJugador datosJugador;
-        private Boolean entradaPorVoz;
         private List<Fantasma> fantasmas;
         private List<PacMan> pacMans;
         private int nivelActual;
@@ -41,16 +39,14 @@ namespace PACMANv3.pkgModelo {
         /// <param name="entradaVoz">Vaor booleano que indica el metodo de entrada del juego (Voz o teclado)</param>
         /// <param name="vidasPac">Vidas del jugador</param>
         /// <param name="hpPac">Valor de cada vida del Jugador</param>
-        public Juego(Mapa mapa, String dificultad, DatosJugador jugador, Boolean entradaVoz, int vidasPac, int hpPac) {
+        public Juego(Mapa mapa, String dificultad, int jugadores) {
             this.mapa = mapa;
             this.fantasmas = new List<Fantasma>();
             this.pacMans = new List<PacMan>();
             this.dificultad = dificultad;
-            this.datosJugador = jugador;
-            this.entradaPorVoz = entradaVoz;
             this.nivelActual = 1;
             this.r = new Random();
-            this.configurarJuego(vidasPac, hpPac);
+            this.configurarJuego();
             this.estadoDelJuego = true;
             this.jugando = 1;
             this.tiempoFantasmasVulnerables = 0;
@@ -322,7 +318,7 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         /// <param name="vid"></param>
         /// <param name="hp"></param>
-        private void configurarJuego(int vid, int hp) {
+        private void configurarJuego() {
             if (this.mapa != null) {
                 Random rdm = new Random();
                 Point[] centro = mapa.posicionInicalFantasmas();
@@ -361,7 +357,7 @@ namespace PACMANv3.pkgModelo {
 
 
 
-                hubicarPacmanEnMapaActualInicial(vid, hp);
+                hubicarPacmanEnMapaActualInicial(5, 5);
                 hubicarComodines();
             } else {
 
@@ -503,22 +499,6 @@ namespace PACMANv3.pkgModelo {
         public List<Fantasma> Fantasmas {
             get { return fantasmas; }
             set { fantasmas = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo EntradaPorVoz 
-        /// </summary>
-        public Boolean EntradaPorVoz {
-            get { return entradaPorVoz; }
-            set { entradaPorVoz = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo DatosJugador
-        /// </summary>
-        public DatosJugador DatosJugador {
-            get { return datosJugador; }
-            set { datosJugador = value; }
         }
 
         /// <summary>
