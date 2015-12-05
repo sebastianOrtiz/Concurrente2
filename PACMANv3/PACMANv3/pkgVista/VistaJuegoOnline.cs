@@ -244,40 +244,45 @@ namespace PACMANv3.pkgVista {
         //    this.juego.EstadoDelJuego = false;
         //}
 
-        /*private void cambiarDireccionPacman(object sender, KeyEventArgs e)
-        {
-            if (this.estadoActual != null)
-            {
-                if (!this.entradaPorVoz)
-                {
-                    switch (e.KeyData)
-                    {
+        private void cambiarDireccionPacman(object sender, KeyEventArgs e) {
+            if (this.estadoActual != null) {
+                if (!this.entradaPorVoz) {
+                    Estado estado = new Estado();
+                    switch (e.KeyData) {
                         case Keys.Up:
-                            this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
+                            estado.Direccion = 1;
+                            this.usuario.enviar(estado);
+                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
                             break;
                         case Keys.Down:
-                            this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
+                            estado.Direccion = 2;
+                            this.usuario.enviar(estado);
+                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
                             break;
                         case Keys.Right:
-                            this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
+                            estado.Direccion = 3;
+                            this.usuario.enviar(estado);
+                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
                             break;
                         case Keys.Left:
-                            this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
+                            estado.Direccion = 4;
+                            this.usuario.enviar(estado);
+                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
                             break;
-                        case Keys.F1:
-                            this.jugando = 2;
-                            break;
-                        case Keys.F2:
-                            this.jugando = 3;
-                            break;
-                        case Keys.F4:
-                            this.juego.hubicarFrutilla();
-                            break;
+                        //case Keys.F1:
+                        //    this.jugando = 2;
+                        //    break;
+                        //case Keys.F2:
+                        //    this.jugando = 3;
+                        //    break;
+                        //case Keys.F4:
+                        //    this.juego.hubicarFrutilla();
+                        //    break;
 
                     }
                 }
             }
-        }*/
+        }
 
         /*public void iniciarReconocedor()
         {
