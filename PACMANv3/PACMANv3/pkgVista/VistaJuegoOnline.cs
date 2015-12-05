@@ -398,8 +398,11 @@ namespace PACMANv3.pkgVista {
         }
 
         private void cicloJuego() {
-            while (jugando == 1) {
-                this.cambierEstadoActual();
+            while (jugando > 0) {
+                if (colaDeEstados.Count > 0) {
+                    this.cambierEstadoActual();
+                }
+                
                 this.graficarPanel();
                 Thread.Sleep(100);
             }
