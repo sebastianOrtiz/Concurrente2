@@ -51,7 +51,7 @@ namespace PACMANv3.pkgModelo {
                 }
                 this.procesar(o);
             } else {
-                this.recibirMapa();
+                //this.recibirMapa();
                 this.vista.Jugando = 1;
             }
         }
@@ -109,6 +109,7 @@ namespace PACMANv3.pkgModelo {
             if (e.Conectar) {
                 this.vista.Identificador = e.Id;
                 Console.WriteLine("id: {0} mensaje: {1}", e.Id, e.Texto);
+                this.recibirMapa();
             } else if (e.TEspera >= 1 && e.TEspera <= 5) {
                 Console.WriteLine("Inicia en {0}", e.TEspera);
                 // Mostrar tiempo de espera

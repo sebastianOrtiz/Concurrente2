@@ -205,6 +205,7 @@ namespace PACMANv3.pkgVista {
                 }
                 case 4: {
                     g.DrawString("Esperando jugadores...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
+                    g.FillRectangle(Brushes.Red,10,10,50,50);
                     break;
                 }
                 case 5: {
