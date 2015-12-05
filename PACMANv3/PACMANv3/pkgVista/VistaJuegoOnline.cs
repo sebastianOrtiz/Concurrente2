@@ -162,57 +162,57 @@ namespace PACMANv3.pkgVista {
         private void graficarEstadoActual(Graphics g) {
             switch (this.jugando) {
                 case 1: {
-                    if (this.mapa != null) {
-                        graficarMapa(this.mapa, g);
-                        dibujarControno(this.mapa, g);
-                        this.mapa.llenarBiscochos(this.estadoActual.Biscochos);
-                        graficarBiscochos(this.mapa, g);
-                        foreach (Fantasma fantasma in this.estadoActual.Fantasmas) {
-                            g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
-                        }
-                        foreach (PacMan jugador in this.estadoActual.Jugadores) {
-                            if (jugador.Identificador == this.identificador) {
-                                g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
-                                g.DrawImage(jugador.obtenerCamisetaVerde(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
-                            } else {
-                                g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
-                                g.DrawImage(jugador.obtenerCamisetaRoja(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                        if (this.mapa != null) {
+                            graficarMapa(this.mapa, g);
+                            dibujarControno(this.mapa, g);
+                            this.mapa.llenarBiscochos(this.estadoActual.Biscochos);
+                            graficarBiscochos(this.mapa, g);
+                            foreach (Fantasma fantasma in this.estadoActual.Fantasmas) {
+                                g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
+                            }
+                            foreach (PacMan jugador in this.estadoActual.Jugadores) {
+                                if (jugador.Identificador == this.identificador) {
+                                    g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                                    g.DrawImage(jugador.obtenerCamisetaVerde(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                                } else {
+                                    g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                                    g.DrawImage(jugador.obtenerCamisetaRoja(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                                }
+
                             }
 
+                            //if (this.lblPuntaje.InvokeRequired)
+                            //{
+                            //    this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));
+                            //}
+                            //else
+                            //{
+                            //    this.refrescarTextos();
+                            //}
                         }
-
-                        //if (this.lblPuntaje.InvokeRequired)
-                        //{
-                        //    this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));
-                        //}
-                        //else
-                        //{
-                        //    this.refrescarTextos();
-                        //}
+                        break;
                     }
-                    break;
-                }
                 case 2: {
-                    //accionesFinDelJuego();
-                    g.DrawImage(imgGameOver, 0, 87, 596, 200);
-                    g.DrawImage(imgVictoria, 10, 260, 596, 56);
-                    break;
-                }
+                        //accionesFinDelJuego();
+                        g.DrawImage(imgGameOver, 0, 87, 596, 200);
+                        g.DrawImage(imgVictoria, 10, 260, 596, 56);
+                        break;
+                    }
                 case 3: {
-                    //accionesFinDelJuego();
-                    g.DrawImage(imgGameOver, 0, 87, 596, 200);
-                    g.DrawImage(imgDerrota, 10, 260, 596, 56);
-                    break;
-                }
+                        //accionesFinDelJuego();
+                        g.DrawImage(imgGameOver, 0, 87, 596, 200);
+                        g.DrawImage(imgDerrota, 10, 260, 596, 56);
+                        break;
+                    }
                 case 4: {
-                    g.DrawString("Esperando jugadores...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
-                    g.FillRectangle(Brushes.Red,10,10,50,50);
-                    break;
-                }
+                        g.DrawString("Esperando jugadores...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
+                        g.FillRectangle(Brushes.Red, 10, 10, 50, 50);
+                        break;
+                    }
                 case 5: {
-                    g.DrawString("Iniciando en " + this.tiempoEspera + "...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
-                    break;
-                }
+                        g.DrawString("Iniciando en " + this.tiempoEspera + "...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
+                        break;
+                    }
             }
         }
 
@@ -263,25 +263,25 @@ namespace PACMANv3.pkgVista {
                     Estado estado = new Estado();
                     switch (e.KeyData) {
                         case Keys.Up:
-                        estado.Direccion = 1;
-                        this.usuario.enviar(estado);
-                        //this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
-                        break;
+                            estado.Direccion = 1;
+                            this.usuario.enviar(estado);
+                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(1);
+                            break;
                         case Keys.Down:
-                        estado.Direccion = 2;
-                        this.usuario.enviar(estado);
-                        //this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
-                        break;
+                            estado.Direccion = 2;
+                            this.usuario.enviar(estado);
+                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(2);
+                            break;
                         case Keys.Right:
-                        estado.Direccion = 3;
-                        this.usuario.enviar(estado);
-                        //this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
-                        break;
+                            estado.Direccion = 3;
+                            this.usuario.enviar(estado);
+                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(3);
+                            break;
                         case Keys.Left:
-                        estado.Direccion = 4;
-                        this.usuario.enviar(estado);
-                        //this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
-                        break;
+                            estado.Direccion = 4;
+                            this.usuario.enviar(estado);
+                            //this.Juego.PacMans.ElementAt(0).adicionarOrden(4);
+                            break;
                         //case Keys.F1:
                         //    this.jugando = 2;
                         //    break;
@@ -357,14 +357,14 @@ namespace PACMANv3.pkgVista {
                 if (celda.SePuedePasar && celda.Valor == "O" && celda.Bisc.Estado) {
                     switch (celda.Bisc.Tipo) {
                         case 1:
-                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
-                        break;
+                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 3, 3);
+                            break;
                         case 2:
-                        g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
-                        break;
+                            g.FillEllipse(Brushes.White, celda.Bisc.X, celda.Bisc.Y, 8, 8);
+                            break;
                         case 3:
-                        g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
-                        break;
+                            g.DrawImage(imgFruta, celda.Bisc.X, celda.Bisc.Y, 20, 20);
+                            break;
                     }
                 }
             }
