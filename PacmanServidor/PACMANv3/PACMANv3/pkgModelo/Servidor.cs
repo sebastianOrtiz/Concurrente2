@@ -26,7 +26,6 @@ namespace PACMANv3.pkgModelo {
             this.vista = vista;
             this.cantTotalJugadores = cantJugadores;
             this.server = new TcpListener(IPAddress.Parse(ipAddress), 1339);
-            Console.WriteLine(this.server);
             //this.server = new TcpListener(IPAddress.Loopback, 1339);
         }
 
@@ -75,6 +74,12 @@ namespace PACMANv3.pkgModelo {
             }
         }
 
+        private void enviarMapa() {
+            foreach (UsuarioServidor usv in usuarios) {
+                usv.enviar(this.vista.MapaAJugar);
+            }
+        }
+
         public void terminarHilos() {
             this.conectado = false;
             foreach (UsuarioServidor usv in usuarios) {
@@ -85,10 +90,12 @@ namespace PACMANv3.pkgModelo {
         public void run() {
             this.conectado = true;
             server.Start();
+            Console.WriteLine("Servidor iniciado");
 
             //while (this.conectado) {
             this.atender();
             this.cuentaRegresiva();
+            this.enviarMapa();
             Estado m = new Estado();
             m.Texto = "Inicia juego";
             enviarTodos(m);

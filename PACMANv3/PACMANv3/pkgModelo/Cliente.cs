@@ -43,8 +43,17 @@ namespace PACMANv3.pkgModelo {
             MemoryStream ms = new MemoryStream(msgDataBytes);
             ms.Position = 0;
 
-            Estado o = (Estado)serializer.Deserialize(ms);
-            this.procesar(o);
+            Estado o = (Estado) serializer.Deserialize(ms);
+            if (o.TEspera != 1) {
+                if (o.TEspera == 5) {
+                    this.vista.TiempoEspera = 5;
+                    this.vista.Jugando = 5;
+                }
+                this.procesar(o);
+            } else {
+                this.recibirMapa();
+                this.vista.Jugando = 1;
+            }
         }
 
         private void safeRead(byte[] userData, int len) {
@@ -54,6 +63,25 @@ namespace PACMANv3.pkgModelo {
             } while (dataRead < len);
         }
 
+        private void recibirMapa() {
+            //Leer
+            byte[] msgDataLen = new byte[4];
+            net.Read(msgDataLen, 0, 4);
+
+            int dataLen = BitConverter.ToInt32(msgDataLen, 0);
+
+            byte[] msgDataBytes = new byte[dataLen];
+
+            //net.Read(msgDataBytes, 0, dataLen);
+            this.safeRead(msgDataBytes, dataLen);
+
+            MemoryStream ms = new MemoryStream(msgDataBytes);
+            ms.Position = 0;
+
+            Mapa m = (Mapa) serializer.Deserialize(ms);
+            this.vista.MapaAct = m;
+        }
+
         public void enviar(Estado o) {
             //Escribir
             byte[] userDataBytes;
@@ -61,7 +89,7 @@ namespace PACMANv3.pkgModelo {
             serializer.Serialize(ms, o);
             userDataBytes = ms.ToArray();
 
-            byte[] userDataLen = BitConverter.GetBytes((Int32)userDataBytes.Length);
+            byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
 
             Console.WriteLine(userDataBytes.Length);
             //Console.WriteLine();

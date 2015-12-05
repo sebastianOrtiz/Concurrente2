@@ -253,32 +253,32 @@ namespace PACMANv3 {
 
 
 
-        private void socket() {
-            TcpListener server = new TcpListener(IPAddress.Loopback, 1339);
-            server.Start();
-            Console.WriteLine("esperando");
-            TcpClient client = server.AcceptTcpClient();
-            NetworkStream net = client.GetStream();
+        //private void socket() {
+        //    TcpListener server = new TcpListener(IPAddress.Loopback, 1339);
+        //    server.Start();
+        //    Console.WriteLine("esperando");
+        //    TcpClient client = server.AcceptTcpClient();
+        //    NetworkStream net = client.GetStream();
 
-            BinaryFormatter serializer = new BinaryFormatter();
-            Console.WriteLine(net.ReadTimeout);
+        //    BinaryFormatter serializer = new BinaryFormatter();
+        //    Console.WriteLine(net.ReadTimeout);
 
-            /*** Leer ***/
-            byte[] msgDataLen = new byte[4];
-            net.Read(msgDataLen, 0, 4);
+        //    /*** Leer ***/
+        //    byte[] msgDataLen = new byte[4];
+        //    net.Read(msgDataLen, 0, 4);
 
-            int dataLen = BitConverter.ToInt32(msgDataLen, 0);
-            Console.WriteLine("tamaño leido {0}", dataLen);
-            Console.WriteLine("esperando datos");
-            byte[] msgDataBytes = new byte[dataLen];
-            net.Read(msgDataBytes, 0, dataLen);
-            MemoryStream ms = new MemoryStream(msgDataBytes);
-            ms.Position = 0;
-            Estado m = (Estado) serializer.Deserialize(ms);
-            Console.WriteLine(m.Nombre);
-            Console.WriteLine(m.Texto);
-            /*** ***/
-        }
+        //    int dataLen = BitConverter.ToInt32(msgDataLen, 0);
+        //    Console.WriteLine("tamaño leido {0}", dataLen);
+        //    Console.WriteLine("esperando datos");
+        //    byte[] msgDataBytes = new byte[dataLen];
+        //    net.Read(msgDataBytes, 0, dataLen);
+        //    MemoryStream ms = new MemoryStream(msgDataBytes);
+        //    ms.Position = 0;
+        //    Estado m = (Estado) serializer.Deserialize(ms);
+        //    Console.WriteLine(m.Nombre);
+        //    Console.WriteLine(m.Texto);
+        //    /*** ***/
+        //}
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             this.servidor.terminarHilos();
@@ -290,5 +290,9 @@ namespace PACMANv3 {
             this.btnIniciarServ.Enabled = false;
         }
 
+        public Mapa MapaAJugar {
+            get { return mapaAJugar; }
+            set { mapaAJugar = value; }
+        }
     }
 }

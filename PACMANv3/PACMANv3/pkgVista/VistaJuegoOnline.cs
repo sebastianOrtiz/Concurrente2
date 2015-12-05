@@ -21,6 +21,7 @@ using System.Drawing.Imaging;
 namespace PACMANv3.pkgVista {
     public partial class VistaJuegoOnline : Form {
         private Mapa mapa;
+        private int tiempoEspera;
         public static Queue<Estado> colaDeEstados;
         private Estado estadoActual;
         private Image[] imagenPared;
@@ -47,7 +48,7 @@ namespace PACMANv3.pkgVista {
 
             colaDeEstados = new Queue<Estado>();
             this.cargarRecursos();
-            this.jugando = 1;
+            this.jugando = 4;
             //cargarNombresDeMapas();
             //cargarMapas();
             //generarEstadoActual();
@@ -159,47 +160,57 @@ namespace PACMANv3.pkgVista {
         //}
 
         private void graficarEstadoActual(Graphics g) {
-            if (this.jugando == 1) {
+            switch (this.jugando) {
+                case 1: {
+                    if (this.mapa != null) {
+                        graficarMapa(this.mapa, g);
+                        dibujarControno(this.mapa, g);
+                        graficarBiscochos(this.mapa, g);
+                        foreach (Fantasma fantasma in this.estadoActual.Fantasmas) {
+                            g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
+                        }
+                        foreach (PacMan jugador in this.estadoActual.Jugadores) {
+                            if (jugador.Identificador == this.identificador) {
+                                g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                                g.DrawImage(jugador.obtenerCamisetaVerde(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                            } else {
+                                g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                                g.DrawImage(jugador.obtenerCamisetaRoja(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                            }
 
-                if (this.mapa != null) {
-                    graficarMapa(this.mapa, g);
-                    dibujarControno(this.mapa, g);
-                    graficarBiscochos(this.mapa, g);
-                    foreach (Fantasma fantasma in this.estadoActual.Fantasmas) {
-                        g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
-                    }
-                    foreach (PacMan jugador in this.estadoActual.Jugadores) {
-                        if (jugador.Identificador == this.identificador) {
-                            g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
-                            g.DrawImage(jugador.obtenerCamisetaVerde(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
-                        } else {
-                            g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
-                            g.DrawImage(jugador.obtenerCamisetaRoja(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
                         }
 
+                        //if (this.lblPuntaje.InvokeRequired)
+                        //{
+                        //    this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));
+                        //}
+                        //else
+                        //{
+                        //    this.refrescarTextos();
+                        //}
                     }
-
-
-                    //if (this.lblPuntaje.InvokeRequired)
-                    //{
-                    //    this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));
-                    //}
-                    //else
-                    //{
-                    //    this.refrescarTextos();
-                    //}
+                    break;
                 }
-            } else if (this.jugando == 2) {
-                //accionesFinDelJuego();
-                g.DrawImage(imgGameOver, 0, 87, 596, 200);
-                g.DrawImage(imgVictoria, 10, 260, 596, 56);
-
-
-
-            } else if (this.jugando == 3) {
-                //accionesFinDelJuego();
-                g.DrawImage(imgGameOver, 0, 87, 596, 200);
-                g.DrawImage(imgDerrota, 10, 260, 596, 56);
+                case 2: {
+                    //accionesFinDelJuego();
+                    g.DrawImage(imgGameOver, 0, 87, 596, 200);
+                    g.DrawImage(imgVictoria, 10, 260, 596, 56);
+                    break;
+                }
+                case 3: {
+                    //accionesFinDelJuego();
+                    g.DrawImage(imgGameOver, 0, 87, 596, 200);
+                    g.DrawImage(imgDerrota, 10, 260, 596, 56);
+                    break;
+                }
+                case 4: {
+                    g.DrawString("Esperando jugadores...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
+                    break;
+                }
+                case 5: {
+                    g.DrawString("Iniciando en " + this.tiempoEspera + "...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
+                    break;
+                }
             }
         }
 
@@ -465,6 +476,21 @@ namespace PACMANv3.pkgVista {
         public int Identificador {
             get { return identificador; }
             set { identificador = value; }
+        }
+
+        public int Jugando {
+            get { return jugando; }
+            set { jugando = value; }
+        }
+
+        public Mapa MapaAct {
+            get { return mapa; }
+            set { mapa = value; }
+        }
+
+        public int TiempoEspera {
+            get { return tiempoEspera; }
+            set { tiempoEspera = value; }
         }
 
         public void recibirMensaje(string m) {

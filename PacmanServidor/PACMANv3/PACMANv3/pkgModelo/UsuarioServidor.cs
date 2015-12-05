@@ -59,7 +59,7 @@ namespace PACMANv3.pkgModelo {
             } while (dataRead < len);
         }
 
-        public void enviar(Estado o) {
+        public void enviar(Object o) {
             //Escribir
             byte[] userDataBytes;
             MemoryStream ms = new MemoryStream();
