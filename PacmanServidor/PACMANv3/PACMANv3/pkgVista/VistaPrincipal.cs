@@ -26,6 +26,8 @@ namespace PACMANv3 {
         //private List<DatosJugador> datosJugadores;
         private SoundPlayer soundFondo;
         private Mapa mapaAJugar;
+        private VistaJuego vj;
+
 
         private Servidor servidor;
 
@@ -131,7 +133,7 @@ namespace PACMANv3 {
                     int jugadores = (int)this.numDDJugadores.Value;
                     juego = new Juego(mapaAJugar, dificultad, jugadores);
 
-                    VistaJuego vj = new VistaJuego();
+                    //vj = new VistaJuego();
                     //vj.definirEntrada(entradaPorVoz);
                     //if (entradaPorVoz) {
                     //    vj.iniciarReconocedor();
@@ -288,7 +290,27 @@ namespace PACMANv3 {
             if (mapaAJugar == null) {
                 this.seleccionarMapaActual();
             }
-            this.servidor = new Servidor((int)this.numDDJugadores.Value, "0.0.0.0", this, );
+            vj = new VistaJuego();
+            //vj.definirEntrada(entradaPorVoz);
+            //if (entradaPorVoz) {
+            //    vj.iniciarReconocedor();
+            //}
+            //vj.crearJuego(this.juego);
+            //vj.Visible = true;
+            //DialogResult res = vj.ShowDialog();
+
+            //if (res == DialogResult.OK) {
+            //    carYReproducir();
+            //    //DatosJugador jugadorEntrante = vj.Juego.DatosJugador;
+            //    //jugadorEntrante.Fecha = DateTime.Now.ToString();
+            //    //this.datosJugadores.Add(jugadorEntrante);
+            //    //this.ordenarDescendente();
+            //    this.panelConfigInicio.Visible = false;
+            //    this.panelPuntajes.Visible = true;
+            //    //this.listarDatosJugadores();
+            //    this.cargarMapas();
+            //}
+            this.servidor = new Servidor((int)this.numDDJugadores.Value, "0.0.0.0", this, vj);
             new Thread(this.servidor.run).Start();
             this.btnIniciarServ.Enabled = false;
         }
@@ -296,6 +318,10 @@ namespace PACMANv3 {
         public Mapa MapaAJugar {
             get { return mapaAJugar; }
             set { mapaAJugar = value; }
+        }
+        public VistaJuego Vj {
+            get { return vj; }
+            set { vj = value; }
         }
     }
 }
