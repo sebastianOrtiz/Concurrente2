@@ -46,6 +46,14 @@ namespace PACMANv3.pkgModelo {
             this.MatrizDiseño = new Celda[filas, columnas];
         }
 
+        public void llenarBiscochos(Biscocho [,] estadosBiscochos) {
+            for (int i = 0; i < this.filas; i++) {
+                for (int j = 0; j < this.columnas; j++) {
+                    this.matrizDiseño[i, j].Bisc = estadosBiscochos[i, j];
+                }
+            }
+        }
+
         /// <summary>
         /// Calcula el centro del mapa el cual sera la posicio inicial de los fantasmas
         /// </summary>

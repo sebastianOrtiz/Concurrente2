@@ -165,6 +165,7 @@ namespace PACMANv3.pkgVista {
                     if (this.mapa != null) {
                         graficarMapa(this.mapa, g);
                         dibujarControno(this.mapa, g);
+                        this.mapa.llenarBiscochos(this.estadoActual.Biscochos);
                         graficarBiscochos(this.mapa, g);
                         foreach (Fantasma fantasma in this.estadoActual.Fantasmas) {
                             g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
