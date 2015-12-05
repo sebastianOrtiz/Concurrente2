@@ -14,6 +14,7 @@ namespace PACMANv3.pkgModelo {
 
     class Servidor {
         private TcpListener server;
+        private TcpListener serverM;
         private Thread th;
         private int cantTotalJugadores;
         private bool conectado;
@@ -21,7 +22,7 @@ namespace PACMANv3.pkgModelo {
         private static VistaJuego vJuego;
 
         public static BinaryFormatter serializer = new BinaryFormatter();
-        private static List<UsuarioServidor> usuarios = new List<UsuarioServidor>();
+        public static List<UsuarioServidor> usuarios = new List<UsuarioServidor>();
 
         public Servidor(int cantJugadores, string ipAddress, Form1 vista, VistaJuego visJuego) {
             this.vista = vista;
@@ -29,6 +30,8 @@ namespace PACMANv3.pkgModelo {
             this.cantTotalJugadores = cantJugadores;
             this.server = new TcpListener(IPAddress.Parse(ipAddress), 1339);
             //this.server = new TcpListener(IPAddress.Loopback, 1339);
+            this.serverM = new TcpListener(IPAddress.Parse(ipAddress), 6000);
+            //this.serverv = new TcpListener(IPAddress.Loopback, 1339);
         }
 
         private void atender() {
@@ -37,13 +40,17 @@ namespace PACMANv3.pkgModelo {
             conectados = usuarios.Count;
             while (this.conectado && conectados < this.cantTotalJugadores) {
                 TcpClient client = server.AcceptTcpClient();
+                TcpClient clientM = serverM.AcceptTcpClient();
 
-                UsuarioServidor usv = new UsuarioServidor(usuarios.Count + 1, client);
+                UsuarioServidor usv = new UsuarioServidor(conectados + 1, client, clientM);
+
                 usv.enviarId();
                 usv.enviar(this.vista.MapaAJugar);
+
                 usuarios.Add(usv);
 
                 new Thread(usv.atender).Start();
+                new Thread(usv.atenderM).Start();
                 conectados = usuarios.Count;
             }
         }
@@ -98,6 +105,7 @@ namespace PACMANv3.pkgModelo {
         public void run() {
             this.conectado = true;
             server.Start();
+            serverM.Start();
             Console.WriteLine("Servidor iniciado");
 
             //while (this.conectado) {
