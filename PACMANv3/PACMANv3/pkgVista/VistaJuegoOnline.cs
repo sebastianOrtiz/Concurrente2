@@ -165,7 +165,6 @@ namespace PACMANv3.pkgVista {
                     if (this.mapa != null) {
                         graficarMapa(this.mapa, g);
                         dibujarControno(this.mapa, g);
-                        this.mapa.llenarBiscochos(this.estadoActual.Biscochos);
                         graficarBiscochos(this.mapa, g);
                         foreach (Fantasma fantasma in this.estadoActual.Fantasmas) {
                             g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
@@ -206,7 +205,6 @@ namespace PACMANv3.pkgVista {
                 }
                 case 4: {
                     g.DrawString("Esperando jugadores...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
-                    g.FillRectangle(Brushes.Red,10,10,50,50);
                     break;
                 }
                 case 5: {
@@ -398,10 +396,8 @@ namespace PACMANv3.pkgVista {
         }
 
         private void cicloJuego() {
-            while (jugando > 0) {
-                if (colaDeEstados.Count > 0) {
-                    this.cambierEstadoActual();
-                }
+            while (jugando == 1) {
+                this.cambierEstadoActual();
                 this.graficarPanel();
                 Thread.Sleep(100);
             }

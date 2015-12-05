@@ -91,9 +91,8 @@ namespace PACMANv3.pkgModelo {
 
             byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
 
-            Console.WriteLine(userDataBytes.Length);
-            //Console.WriteLine();
-
+            //Console.WriteLine(userDataBytes.Length);
+            
             net.Write(userDataLen, 0, 4);
             net.Write(userDataBytes, 0, userDataBytes.Length);
         }

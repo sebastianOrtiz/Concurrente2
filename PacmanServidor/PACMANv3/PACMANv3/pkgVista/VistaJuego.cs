@@ -299,6 +299,7 @@ namespace PACMANv3.pkgVista {
                     cambio--;
                 }
                 Estado nuevoEstado = juego.generarEstado();
+                Console.WriteLine("cicloJugar");
                 Servidor.enviarTodos(nuevoEstado);
 
                 graficarPanel();
