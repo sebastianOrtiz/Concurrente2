@@ -159,6 +159,22 @@ namespace PACMANv3.pkgVista {
         //    this.lblNombreJugador.Text = this.Juego.DatosJugador.Nombre;
         //}
 
+        private void mostrarPuntos() {
+            if (estadoActual != null) {
+                string misPuntos = "Yo: ";
+                string otrosPuntos = "";
+                foreach (PacMan pacman in this.estadoActual.Jugadores) {
+                    if (pacman.Identificador == this.identificador) {
+                        misPuntos += pacman.Puntuacion;
+                    } else {
+                        otrosPuntos += "Usuario "+pacman.Identificador+": "+pacman.Puntuacion;
+                    }
+                }
+                lblPuntosYo.Text = misPuntos;
+                lblPuntosEnemigos.Text = otrosPuntos;
+            }
+        }
+
         private void graficarEstadoActual(Graphics g) {
             switch (this.jugando) {
                 case 1: {
@@ -189,6 +205,7 @@ namespace PACMANv3.pkgVista {
                         //{
                         //    this.refrescarTextos();
                         //}
+                        this.mostrarPuntos();
                     }
                     break;
                 }
