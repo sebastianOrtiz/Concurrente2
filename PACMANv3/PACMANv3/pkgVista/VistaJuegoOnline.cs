@@ -235,7 +235,7 @@ namespace PACMANv3.pkgVista {
 
 
         private void pintar(object sender, PaintEventArgs e) {
-            if (this.jugando > 0) {
+            if (estadoActual != null) {
                 Graphics g = e.Graphics;
                 this.graficarEstadoActual(g);
             }
