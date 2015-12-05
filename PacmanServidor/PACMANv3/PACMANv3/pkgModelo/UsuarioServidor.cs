@@ -55,7 +55,6 @@ namespace PACMANv3.pkgModelo {
             int dataRead = 0;
             do {
                 dataRead += net.Read(userData, dataRead, len - dataRead);
-                Console.WriteLine(dataRead);
             } while (dataRead < len);
         }
 
