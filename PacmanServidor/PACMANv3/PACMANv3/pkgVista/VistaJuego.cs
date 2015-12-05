@@ -48,6 +48,15 @@ namespace PACMANv3.pkgVista {
             }
         }
 
+        public void cambiarDirPacman(int id, int dir) {
+            foreach (PacMan p in this.juego.PacMans) {
+                if (p.Identificador == id) {
+                    p.adicionarOrden(dir);
+                    break;
+                }
+            }
+        }
+
         public void lector(object sender, SpeechRecognizedEventArgs e) {
             foreach (RecognizedWordUnit palabra in e.Result.Words) {
                 lblPalabra.Text = palabra.Text;
@@ -138,9 +147,9 @@ namespace PACMANv3.pkgVista {
                             g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
                         }
                         foreach (PacMan pacman in this.juego.PacMans) {
-                            g.DrawImage(pacman.ImgActual, pacman.X, pacman.Y, pacman.Windth, pacman.Height);    
+                            g.DrawImage(pacman.ImgActual, pacman.X, pacman.Y, pacman.Windth, pacman.Height);
                         }
-                        
+
 
                         if (this.lblPuntaje.InvokeRequired) {
                             this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));
@@ -299,7 +308,6 @@ namespace PACMANv3.pkgVista {
                     cambio--;
                 }
                 Estado nuevoEstado = juego.generarEstado();
-                Console.WriteLine("cicloJugar");
                 Servidor.enviarTodos(nuevoEstado);
 
                 graficarPanel();

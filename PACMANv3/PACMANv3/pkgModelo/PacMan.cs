@@ -191,25 +191,25 @@ namespace PACMANv3.pkgModelo {
         private Boolean sePuedeMover() {
             switch (this.direccion) {
                 case 1:
-                    if ((IAct - 1) >= 0 && mapaActual.MatrizDiseño[IAct - 1, JAct].SePuedePasar) {
-                        return true;
-                    }
-                    break;
+                if ((IAct - 1) >= 0 && mapaActual.MatrizDiseño[IAct - 1, JAct].SePuedePasar) {
+                    return true;
+                }
+                break;
                 case 2:
-                    if ((IAct + 1) < mapaActual.Filas && mapaActual.MatrizDiseño[IAct + 1, JAct].SePuedePasar) {
-                        return true;
-                    }
-                    break;
+                if ((IAct + 1) < mapaActual.Filas && mapaActual.MatrizDiseño[IAct + 1, JAct].SePuedePasar) {
+                    return true;
+                }
+                break;
                 case 3:
-                    if ((JAct + 1) < mapaActual.Columnas && mapaActual.MatrizDiseño[IAct, JAct + 1].SePuedePasar) {
-                        return true;
-                    }
-                    break;
+                if ((JAct + 1) < mapaActual.Columnas && mapaActual.MatrizDiseño[IAct, JAct + 1].SePuedePasar) {
+                    return true;
+                }
+                break;
                 case 4:
-                    if ((JAct - 1) >= 0 && mapaActual.MatrizDiseño[IAct, JAct - 1].SePuedePasar) {
-                        return true;
-                    }
-                    break;
+                if ((JAct - 1) >= 0 && mapaActual.MatrizDiseño[IAct, JAct - 1].SePuedePasar) {
+                    return true;
+                }
+                break;
             }
             return false;
         }
@@ -223,25 +223,25 @@ namespace PACMANv3.pkgModelo {
             if (this.x == mapaActual.MatrizDiseño[iAct, jAct].X && this.y == mapaActual.MatrizDiseño[iAct, jAct].Y) {
                 switch (dir) {
                     case 1:
-                        if ((IAct - 1) >= 0 && mapaActual.MatrizDiseño[IAct - 1, JAct].SePuedePasar) {
-                            return true;
-                        }
-                        break;
+                    if ((IAct - 1) >= 0 && mapaActual.MatrizDiseño[IAct - 1, JAct].SePuedePasar) {
+                        return true;
+                    }
+                    break;
                     case 2:
-                        if ((IAct + 1) < mapaActual.Filas && mapaActual.MatrizDiseño[IAct + 1, JAct].SePuedePasar) {
-                            return true;
-                        }
-                        break;
+                    if ((IAct + 1) < mapaActual.Filas && mapaActual.MatrizDiseño[IAct + 1, JAct].SePuedePasar) {
+                        return true;
+                    }
+                    break;
                     case 3:
-                        if ((JAct + 1) < mapaActual.Columnas && mapaActual.MatrizDiseño[IAct, JAct + 1].SePuedePasar) {
-                            return true;
-                        }
-                        break;
+                    if ((JAct + 1) < mapaActual.Columnas && mapaActual.MatrizDiseño[IAct, JAct + 1].SePuedePasar) {
+                        return true;
+                    }
+                    break;
                     case 4:
-                        if ((JAct - 1) >= 0 && mapaActual.MatrizDiseño[IAct, JAct - 1].SePuedePasar) {
-                            return true;
-                        }
-                        break;
+                    if ((JAct - 1) >= 0 && mapaActual.MatrizDiseño[IAct, JAct - 1].SePuedePasar) {
+                        return true;
+                    }
+                    break;
                 }
             }
 
@@ -255,62 +255,62 @@ namespace PACMANv3.pkgModelo {
             if (sePuedeMover()) {
                 switch (this.direccion) {
                     case 1:
-                        this.ImgActual = this.imgArriba[setImagen()];
-                        if ((this.Y - this.velocidad) < mapaActual.MatrizDiseño[iAct - 1, jAct].Y) {
-                            this.Y = mapaActual.MatrizDiseño[iAct - 1, jAct].Y;
-                            iAct = iAct - 1;
-                            if (colaDeOrdenes.Count > 0) {
-                                if (sePuedeMover(colaDeOrdenes.Peek())) {
-                                    this.direccion = colaDeOrdenes.Dequeue();
-                                }
+                    this.ImgActual = this.imgArriba[setImagen()];
+                    if ((this.Y - this.velocidad) < mapaActual.MatrizDiseño[iAct - 1, jAct].Y) {
+                        this.Y = mapaActual.MatrizDiseño[iAct - 1, jAct].Y;
+                        iAct = iAct - 1;
+                        if (colaDeOrdenes.Count > 0) {
+                            if (sePuedeMover(colaDeOrdenes.Peek())) {
+                                this.direccion = colaDeOrdenes.Dequeue();
                             }
-                        } else {
-                            this.Y -= this.velocidad;
                         }
-                        break;
+                    } else {
+                        this.Y -= this.velocidad;
+                    }
+                    break;
                     case 2:
-                        this.ImgActual = this.imgAbajo[setImagen()];
-                        if ((this.Y + this.velocidad) > mapaActual.MatrizDiseño[iAct + 1, jAct].Y) {
-                            this.Y = mapaActual.MatrizDiseño[iAct + 1, jAct].Y;
-                            iAct = iAct + 1;
-                            if (colaDeOrdenes.Count > 0) {
-                                if (sePuedeMover(colaDeOrdenes.Peek())) {
-                                    this.direccion = colaDeOrdenes.Dequeue();
-                                }
+                    this.ImgActual = this.imgAbajo[setImagen()];
+                    if ((this.Y + this.velocidad) > mapaActual.MatrizDiseño[iAct + 1, jAct].Y) {
+                        this.Y = mapaActual.MatrizDiseño[iAct + 1, jAct].Y;
+                        iAct = iAct + 1;
+                        if (colaDeOrdenes.Count > 0) {
+                            if (sePuedeMover(colaDeOrdenes.Peek())) {
+                                this.direccion = colaDeOrdenes.Dequeue();
                             }
-                        } else {
-                            this.Y += this.velocidad;
                         }
-                        break;
+                    } else {
+                        this.Y += this.velocidad;
+                    }
+                    break;
                     case 3:
-                        this.ImgActual = this.imgDerecha[setImagen()];
-                        if ((this.X + this.velocidad) > mapaActual.MatrizDiseño[iAct, jAct + 1].X) {
-                            this.X = mapaActual.MatrizDiseño[iAct, jAct + 1].X;
-                            jAct = jAct + 1;
-                            if (colaDeOrdenes.Count > 0) {
-                                if (sePuedeMover(colaDeOrdenes.Peek())) {
-                                    this.direccion = colaDeOrdenes.Dequeue();
-                                }
+                    this.ImgActual = this.imgDerecha[setImagen()];
+                    if ((this.X + this.velocidad) > mapaActual.MatrizDiseño[iAct, jAct + 1].X) {
+                        this.X = mapaActual.MatrizDiseño[iAct, jAct + 1].X;
+                        jAct = jAct + 1;
+                        if (colaDeOrdenes.Count > 0) {
+                            if (sePuedeMover(colaDeOrdenes.Peek())) {
+                                this.direccion = colaDeOrdenes.Dequeue();
                             }
+                        }
 
-                        } else {
-                            this.X += this.velocidad;
-                        }
-                        break;
+                    } else {
+                        this.X += this.velocidad;
+                    }
+                    break;
                     case 4:
-                        this.ImgActual = this.imgIzquierda[setImagen()];
-                        if ((this.X - this.velocidad) < mapaActual.MatrizDiseño[iAct, jAct - 1].X) {
-                            this.X = mapaActual.MatrizDiseño[iAct, jAct - 1].X;
-                            jAct = jAct - 1;
-                            if (colaDeOrdenes.Count > 0) {
-                                if (sePuedeMover(colaDeOrdenes.Peek())) {
-                                    this.direccion = colaDeOrdenes.Dequeue();
-                                }
+                    this.ImgActual = this.imgIzquierda[setImagen()];
+                    if ((this.X - this.velocidad) < mapaActual.MatrizDiseño[iAct, jAct - 1].X) {
+                        this.X = mapaActual.MatrizDiseño[iAct, jAct - 1].X;
+                        jAct = jAct - 1;
+                        if (colaDeOrdenes.Count > 0) {
+                            if (sePuedeMover(colaDeOrdenes.Peek())) {
+                                this.direccion = colaDeOrdenes.Dequeue();
                             }
-                        } else {
-                            this.X -= this.velocidad;
                         }
-                        break;
+                    } else {
+                        this.X -= this.velocidad;
+                    }
+                    break;
                 }
             } else {
                 if (colaDeOrdenes.Count > 0) {
@@ -319,9 +319,9 @@ namespace PACMANv3.pkgModelo {
                     } else {
                         colaDeOrdenes.Dequeue();
                     }
-                } else {
+                } /*else {
                     this.cambiarDirecion();
-                }
+                }*/
             }
 
         }
@@ -373,7 +373,8 @@ namespace PACMANv3.pkgModelo {
                 }
             }
 
-            return Fantasma.desordenarLista(listaDeDireccionesPosibles); ;
+            return Fantasma.desordenarLista(listaDeDireccionesPosibles);
+            ;
         }
 
         /// <summary>
@@ -409,17 +410,17 @@ namespace PACMANv3.pkgModelo {
             foreach (int ord in colaDeOrdenes) {
                 switch (ord) {
                     case 1:
-                        s += "Arriba\n";
-                        break;
+                    s += "Arriba\n";
+                    break;
                     case 2:
-                        s += "Abajo\n";
-                        break;
+                    s += "Abajo\n";
+                    break;
                     case 3:
-                        s += "Derecha\n";
-                        break;
+                    s += "Derecha\n";
+                    break;
                     case 4:
-                        s += "Izquierda\n";
-                        break;
+                    s += "Izquierda\n";
+                    break;
                 }
 
             }

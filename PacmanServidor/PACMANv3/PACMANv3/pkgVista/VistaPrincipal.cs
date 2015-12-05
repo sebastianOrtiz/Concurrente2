@@ -288,7 +288,7 @@ namespace PACMANv3 {
             if (mapaAJugar == null) {
                 this.seleccionarMapaActual();
             }
-            this.servidor = new Servidor((int)this.numDDJugadores.Value, "0.0.0.0", this);
+            this.servidor = new Servidor((int)this.numDDJugadores.Value, "0.0.0.0", this, );
             new Thread(this.servidor.run).Start();
             this.btnIniciarServ.Enabled = false;
         }

@@ -18,12 +18,14 @@ namespace PACMANv3.pkgModelo {
         private int cantTotalJugadores;
         private bool conectado;
         private Form1 vista;
+        private static VistaJuego vJuego;
 
         public static BinaryFormatter serializer = new BinaryFormatter();
         private static List<UsuarioServidor> usuarios = new List<UsuarioServidor>();
 
-        public Servidor(int cantJugadores, string ipAddress, Form1 vista) {
+        public Servidor(int cantJugadores, string ipAddress, Form1 vista, VistaJuego visJuego) {
             this.vista = vista;
+            vJuego = visJuego;
             this.cantTotalJugadores = cantJugadores;
             this.server = new TcpListener(IPAddress.Parse(ipAddress), 1339);
             //this.server = new TcpListener(IPAddress.Loopback, 1339);
@@ -63,6 +65,7 @@ namespace PACMANv3.pkgModelo {
             //Console.WriteLine("usuario: {1}, mensaje: {0}", o.Texto, o.Nombre);
             if (o.Direccion > 0) {
                 foreach (UsuarioServidor usv in usuarios) {
+                    vJuego.cambiarDirPacman(usv.Id, o.Direccion);
                     Console.WriteLine("usuario {0}: Envia direccion {1}", usv.Id, o.Direccion);
                 }
             } else if (o.Direccion == 0) {
