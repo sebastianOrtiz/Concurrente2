@@ -13,7 +13,9 @@ using PACMANv3.pkgVista;
 namespace PACMANv3.pkgModelo {
     class Cliente {
         private TcpClient sc;
+        private TcpClient scM;
         private NetworkStream net;
+        private NetworkStream netM;
         private VistaJuegoOnline vista;
         private bool conectado;
 
@@ -23,7 +25,9 @@ namespace PACMANv3.pkgModelo {
 
         public Cliente(string ipAddress, int port, VistaJuegoOnline vista) {
             this.sc = new TcpClient(ipAddress, port);
+            this.scM = new TcpClient(ipAddress, 6000);
             this.net = sc.GetStream();
+            this.netM = scM.GetStream();
             this.vista = vista;
             this.conectado = false;
         }
@@ -38,7 +42,7 @@ namespace PACMANv3.pkgModelo {
             byte[] msgDataBytes = new byte[dataLen];
 
             //net.Read(msgDataBytes, 0, dataLen);
-            this.safeRead(msgDataBytes, dataLen);
+            this.safeRead(msgDataBytes, dataLen, net);
 
             MemoryStream ms = new MemoryStream(msgDataBytes);
             ms.Position = 0;
@@ -56,10 +60,29 @@ namespace PACMANv3.pkgModelo {
             }
         }
 
-        private void safeRead(byte[] userData, int len) {
+        public void recibirM() {
+            //Leer
+            byte[] msgDataLen = new byte[4];
+            netM.Read(msgDataLen, 0, 4);
+
+            int dataLen = BitConverter.ToInt32(msgDataLen, 0);
+
+            byte[] msgDataBytes = new byte[dataLen];
+
+            //net.Read(msgDataBytes, 0, dataLen);
+            this.safeRead(msgDataBytes, dataLen, netM);
+
+            MemoryStream ms = new MemoryStream(msgDataBytes);
+            ms.Position = 0;
+
+            Estado o = (Estado) serializer.Deserialize(ms);
+            this.procesarM(o);
+        }
+
+        private void safeRead(byte[] userData, int len, NetworkStream ns) {
             int dataRead = 0;
             do {
-                dataRead += net.Read(userData, dataRead, len - dataRead);
+                dataRead += ns.Read(userData, dataRead, len - dataRead);
             } while (dataRead < len);
         }
 
@@ -73,7 +96,7 @@ namespace PACMANv3.pkgModelo {
             byte[] msgDataBytes = new byte[dataLen];
 
             //net.Read(msgDataBytes, 0, dataLen);
-            this.safeRead(msgDataBytes, dataLen);
+            this.safeRead(msgDataBytes, dataLen, net);
 
             MemoryStream ms = new MemoryStream(msgDataBytes);
             ms.Position = 0;
@@ -92,14 +115,35 @@ namespace PACMANv3.pkgModelo {
             byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
 
             //Console.WriteLine(userDataBytes.Length);
-            
+
             net.Write(userDataLen, 0, 4);
             net.Write(userDataBytes, 0, userDataBytes.Length);
+        }
+
+        public void enviarM(Estado o) {
+            //Escribir
+            byte[] userDataBytes;
+            MemoryStream ms = new MemoryStream();
+            serializer.Serialize(ms, o);
+            userDataBytes = ms.ToArray();
+
+            byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
+
+            //Console.WriteLine(userDataBytes.Length);
+
+            netM.Write(userDataLen, 0, 4);
+            netM.Write(userDataBytes, 0, userDataBytes.Length);
         }
 
         public void escuchar() {
             while (this.conectado) {
                 this.recibir();
+            }
+        }
+
+        public void escucharMensajes() {
+            while (this.conectado) {
+                this.recibirM();
             }
         }
 
@@ -113,13 +157,21 @@ namespace PACMANv3.pkgModelo {
                 Console.WriteLine("Inicia en {0}", e.TEspera);
                 // Mostrar tiempo de espera
             } else if (e.Biscochos == null) {
-                if (this.vista.InvokeRequired) {
-                    this.vista.Invoke(new DelegateCambiar(this.cambiarTexto), new object[] { (e.Nombre + ": " + e.Texto) });
-                } else {
-                    this.vista.recibirMensaje(e.Texto);
-                }
+                //if (this.vista.InvokeRequired) {
+                //    this.vista.Invoke(new DelegateCambiar(this.cambiarTexto), new object[] { (e.Nombre + ": " + e.Texto) });
+                //} else {
+                //    this.vista.recibirMensaje(e.Texto);
+                //}
             } else {
                 VistaJuegoOnline.colaDeEstados.Enqueue(e);
+            }
+        }
+
+        public void procesarM(Estado e) {
+            if (this.vista.InvokeRequired) {
+                this.vista.Invoke(new DelegateCambiar(this.cambiarTexto), new object[] { (e.Nombre + ": " + e.Texto) });
+            } else {
+                this.vista.recibirMensaje(e.Texto);
             }
         }
 

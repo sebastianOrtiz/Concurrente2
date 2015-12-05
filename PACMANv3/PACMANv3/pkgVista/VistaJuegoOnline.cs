@@ -167,7 +167,7 @@ namespace PACMANv3.pkgVista {
                     if (pacman.Identificador == this.identificador) {
                         misPuntos += pacman.Puntuacion;
                     } else {
-                        otrosPuntos += "Usuario "+pacman.Identificador+": "+pacman.Puntuacion;
+                        otrosPuntos += "Usuario " + pacman.Identificador + ": " + pacman.Puntuacion;
                     }
                 }
                 lblPuntosYo.Text = misPuntos;
@@ -476,6 +476,7 @@ namespace PACMANv3.pkgVista {
             this.usuario = new Cliente(ipAddress, port, this);
             this.usuario.Conectado = true;
             new Thread(this.usuario.escuchar).Start();
+            new Thread(this.usuario.escucharMensajes).Start();
         }
 
         private void terminarHilos() {
@@ -525,7 +526,7 @@ namespace PACMANv3.pkgVista {
             if (mensaje != "") {
                 Estado m = new Estado(this.identificador, ("usuario " + this.identificador), mensaje, 0);
                 this.rTMensajes.Text += "Yo: " + mensaje + "\n";
-                this.usuario.enviar(m);
+                this.usuario.enviarM(m);
             }
         }
     }
