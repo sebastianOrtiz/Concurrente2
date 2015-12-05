@@ -104,7 +104,7 @@ namespace PACMANv3.pkgModelo {
         }
 
         public void procesar(Estado e) {
-            Console.WriteLine(e.TEspera);
+            //Console.WriteLine(e.TEspera);
             if (e.Conectar) {
                 this.vista.Identificador = e.Id;
                 Console.WriteLine("id: {0} mensaje: {1}", e.Id, e.Texto);

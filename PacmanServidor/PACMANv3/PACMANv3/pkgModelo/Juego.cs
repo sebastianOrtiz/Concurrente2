@@ -99,9 +99,9 @@ namespace PACMANv3.pkgModelo {
                     fant.quitarVulnerabilidad();
                 } else {
                     this.rehubicarPacman(pac);
-                    if (pac.disminuirVida(fant.Poder) <= 0) {
-                        this.jugando = 3;
-                    }
+                    //if (pac.disminuirVida(fant.Poder) <= 0) {
+                    //    this.jugando = 3;
+                    //}
                 }
                 sonido(2);
 
@@ -112,9 +112,9 @@ namespace PACMANv3.pkgModelo {
                     fant.quitarVulnerabilidad();
                 } else {
                     this.rehubicarPacman(pac);
-                    if (pac.disminuirVida(fant.Poder) <= 0) {
-                        this.jugando = 3;
-                    }
+                    //if (pac.disminuirVida(fant.Poder) <= 0) {
+                    //    this.jugando = 3;
+                    //}
                 }
                 sonido(2);
             } //Colision por la arriba
@@ -124,9 +124,9 @@ namespace PACMANv3.pkgModelo {
                     fant.quitarVulnerabilidad();
                 } else {
                     this.rehubicarPacman(pac);
-                    if (pac.disminuirVida(fant.Poder) <= 0) {
-                        this.jugando = 3;
-                    }
+                    //if (pac.disminuirVida(fant.Poder) <= 0) {
+                    //    this.jugando = 3;
+                    //}
                 }
                 sonido(2);
             } //Colision por la abajo
@@ -138,9 +138,9 @@ namespace PACMANv3.pkgModelo {
 
                 } else {
                     this.rehubicarPacman(pac);
-                    if (pac.disminuirVida(fant.Poder) <= 0) {
-                        this.jugando = 3;
-                    }
+                    //if (pac.disminuirVida(fant.Poder) <= 0) {
+                    //    this.jugando = 3;
+                    //}
                 }
                 sonido(2);
             }
