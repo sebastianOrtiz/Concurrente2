@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.rTMensajes = new System.Windows.Forms.RichTextBox();
             this.txtMensaje = new System.Windows.Forms.TextBox();
             this.btnEnviarMensaje = new System.Windows.Forms.Button();
@@ -43,17 +42,6 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.pintar);
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Silver;
-            this.button1.Location = new System.Drawing.Point(13, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // rTMensajes
             // 
             this.rTMensajes.Location = new System.Drawing.Point(609, 40);
@@ -61,6 +49,7 @@
             this.rTMensajes.Size = new System.Drawing.Size(268, 343);
             this.rTMensajes.TabIndex = 2;
             this.rTMensajes.Text = "";
+            this.rTMensajes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cambiarDireccionPacman);
             // 
             // txtMensaje
             // 
@@ -68,6 +57,7 @@
             this.txtMensaje.Name = "txtMensaje";
             this.txtMensaje.Size = new System.Drawing.Size(268, 20);
             this.txtMensaje.TabIndex = 3;
+            this.txtMensaje.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cambiarDireccionPacman);
             // 
             // btnEnviarMensaje
             // 
@@ -79,6 +69,7 @@
             this.btnEnviarMensaje.Text = "Enviar";
             this.btnEnviarMensaje.UseVisualStyleBackColor = false;
             this.btnEnviarMensaje.Click += new System.EventHandler(this.btnEnviarMensaje_Click);
+            this.btnEnviarMensaje.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cambiarDireccionPacman);
             // 
             // VistaJuegoOnline
             // 
@@ -89,12 +80,12 @@
             this.Controls.Add(this.btnEnviarMensaje);
             this.Controls.Add(this.txtMensaje);
             this.Controls.Add(this.rTMensajes);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Name = "VistaJuegoOnline";
             this.Text = "VistaJuegoOnline";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VistaJuegoOnline_FormClosing);
             this.Load += new System.EventHandler(this.VistaJuegoOnline_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cambiarDireccionPacman);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,7 +94,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox rTMensajes;
         private System.Windows.Forms.TextBox txtMensaje;
         private System.Windows.Forms.Button btnEnviarMensaje;
