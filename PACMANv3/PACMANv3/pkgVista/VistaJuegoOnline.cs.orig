@@ -162,6 +162,22 @@ namespace PACMANv3.pkgVista {
         private void graficarEstadoActual(Graphics g) {
             switch (this.jugando) {
                 case 1: {
+<<<<<<< HEAD
+                    if (this.mapa != null) {
+                        graficarMapa(this.mapa, g);
+                        dibujarControno(this.mapa, g);
+                        graficarBiscochos(this.mapa, g);
+                        foreach (Fantasma fantasma in this.estadoActual.Fantasmas) {
+                            g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
+                        }
+                        foreach (PacMan jugador in this.estadoActual.Jugadores) {
+                            if (jugador.Identificador == this.identificador) {
+                                g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                                g.DrawImage(jugador.obtenerCamisetaVerde(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                            } else {
+                                g.DrawImage(jugador.ImgActual, jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+                                g.DrawImage(jugador.obtenerCamisetaRoja(), jugador.X, jugador.Y, jugador.Windth, jugador.Height);
+=======
                         if (this.mapa != null) {
                             graficarMapa(this.mapa, g);
                             dibujarControno(this.mapa, g);
@@ -169,6 +185,7 @@ namespace PACMANv3.pkgVista {
                             graficarBiscochos(this.mapa, g);
                             foreach (Fantasma fantasma in this.estadoActual.Fantasmas) {
                                 g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
+>>>>>>> 6c178070e781199c88a7e008808933aaf3dc13e3
                             }
                             foreach (PacMan jugador in this.estadoActual.Jugadores) {
                                 if (jugador.Identificador == this.identificador) {
@@ -205,10 +222,16 @@ namespace PACMANv3.pkgVista {
                         break;
                     }
                 case 4: {
+<<<<<<< HEAD
+                    g.DrawString("Esperando jugadores...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
+                    break;
+                }
+=======
                         g.DrawString("Esperando jugadores...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
                         g.FillRectangle(Brushes.Red, 10, 10, 50, 50);
                         break;
                     }
+>>>>>>> 6c178070e781199c88a7e008808933aaf3dc13e3
                 case 5: {
                         g.DrawString("Iniciando en " + this.tiempoEspera + "...", new Font("Ravie", 8), Brushes.White, new Point(0, 0));
                         break;
@@ -400,116 +423,6 @@ namespace PACMANv3.pkgVista {
         private void cicloJuego() {
             while (jugando == 1) {
                 this.cambierEstadoActual();
-                this.graficarPanel();
-                Thread.Sleep(100);
-            }
-
-            //long ultimo = Environment.TickCount;
-            //long cronometro = Environment.TickCount;
-            //double milisegundo = 1000 / 60;
-            //double cambio = 0;
-            //int cuadros = 0;
-            //int actualizaciones = 0;
-            //while (jugando == 1) {
-            //    long ahora = Environment.TickCount;
-            //    cambio += (ahora - ultimo) / milisegundo;
-            //    ultimo = ahora;
-            //    while (cambio >= 1) {
-            //        if (this.jugando == 1) {
-            //            this.cambierEstadoActual();
-            //            //Juego.actualizar();
-            //        }
-
-            //        actualizaciones++;
-            //        cambio--;
-            //    }
-            //    //this.cambierEstadoActual();
-            //    graficarPanel();
-            //    cuadros++;
-            //    if (Environment.TickCount - cronometro > 1000) {
-            //        cronometro += 1000;
-            //        cuadros = 0;
-            //        actualizaciones = 0;
-            //    }
-            //}
-        }
-
-        private void cambierEstadoActual() {
-            if (colaDeEstados.Count > 0) {
-                this.estadoActual = colaDeEstados.Dequeue();
-            }
-
-        }
-
-        /*public void actualizarChat(Mensaje m)
-        {
-            this.mensajes.Add(m);
-            /*
-             * 
-             * ACTUALIZAR CHAT
-             * 
-             
-        }*/
-
-        public void conectar(string ipAddress, int port) {
-            this.usuario = new Cliente(ipAddress, port, this);
-            this.usuario.Conectado = true;
-            new Thread(this.usuario.escuchar).Start();
-        }
-
-        private void terminarHilos() {
-            this.usuario.Conectado = false;
-        }
-
-        private void VistaJuegoOnline_Load(object sender, EventArgs e) {
-            DoubleBuffered = true;
-            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true });
-        }
-
-        private void button1_Click(object sender, EventArgs e) {
-            this.cambierEstadoActual();
-            this.graficarPanel();
-        }
-
-        private void VistaJuegoOnline_FormClosing(object sender, FormClosingEventArgs e) {
-            this.terminarHilos();
-        }
-
-        public int Identificador {
-            get { return identificador; }
-            set { identificador = value; }
-        }
-
-        public int Jugando {
-            get { return jugando; }
-            set { jugando = value; }
-        }
-
-        public Mapa MapaAct {
-            get { return mapa; }
-            set { mapa = value; }
-        }
-
-        public int TiempoEspera {
-            get { return tiempoEspera; }
-            set { tiempoEspera = value; }
-        }
-
-        public void recibirMensaje(string m) {
-            this.rTMensajes.Text += m + "\n";
-        }
-
-        private void btnEnviarMensaje_Click(object sender, EventArgs e) {
-            string mensaje = txtMensaje.Text;
-            if (mensaje != "") {
-                Estado m = new Estado(this.identificador, ("usuario " + this.identificador), mensaje, 0);
-                this.rTMensajes.Text += "Yo: " + mensaje + "\n";
-                this.usuario.enviar(m);
-            }
-        }
-    }
-}
-
                 this.graficarPanel();
                 Thread.Sleep(100);
             }
