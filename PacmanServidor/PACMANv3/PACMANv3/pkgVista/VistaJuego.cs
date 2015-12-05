@@ -137,7 +137,10 @@ namespace PACMANv3.pkgVista {
                         foreach (Fantasma fantasma in Juego.Fantasmas) {
                             g.DrawImage(fantasma.ImgActual, fantasma.X, fantasma.Y, fantasma.Windth, fantasma.Height);
                         }
-                        g.DrawImage(Juego.PacMans.ElementAt(0).ImgActual, Juego.PacMans.ElementAt(0).X, Juego.PacMans.ElementAt(0).Y, Juego.PacMans.ElementAt(0).Windth, Juego.PacMans.ElementAt(0).Height);
+                        foreach (PacMan pacman in this.juego.PacMans) {
+                            g.DrawImage(pacman.ImgActual, pacman.X, pacman.Y, pacman.Windth, pacman.Height);    
+                        }
+                        
 
                         if (this.lblPuntaje.InvokeRequired) {
                             this.lblPuntaje.Invoke(new DelegadoPuntuacion(this.refrescarTextos));

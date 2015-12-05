@@ -26,7 +26,6 @@ namespace PACMANv3.pkgModelo {
         private int x;
         private int y;
         private int velocidad;
-        private int nivel;
         private int dificultad;//1 Facil, 2 Medio, 3 Dificil
         private Mapa mapaActual;
         private int iAct;
@@ -49,7 +48,7 @@ namespace PACMANv3.pkgModelo {
         /// <param name="m">Mapa actual en el que se esta juagdo</param>
         /// <param name="i">Posicion de la fila en la que se encuentra actualmente el fantasma</param>
         /// <param name="j">Posicion de la columna en la que se encuentra actualmente el fantasma</param>
-        public Fantasma(int direccion, String fantasma, int lado, int x, int y, int nivel, String dificultad, Mapa m, int i, int j) {
+        public Fantasma(int direccion, String fantasma, int lado, int x, int y, String dificultad, Mapa m, int i, int j) {
             this.direccion = direccion;
             this.estado = 1;
             this.nombreFantasma = fantasma;
@@ -57,9 +56,8 @@ namespace PACMANv3.pkgModelo {
             this.height = lado;
             this.x = x;
             this.y = y;
-            this.nivel = nivel;
             this.mapaActual = m;
-            configuracionInicialDeFantasma(fantasma, nivel, dificultad);
+            configuracionInicialDeFantasma(fantasma, dificultad);
             this.iAct = i;
             this.jAct = j;
             this.imagenActual = 0;
@@ -72,7 +70,7 @@ namespace PACMANv3.pkgModelo {
         /// <param name="fantasma">Nombre identificador del fantasma</param>
         /// <param name="nivel">Nivel actual de juego</param>
         /// <param name="dificultad">Dificultad actual de juego</param>
-        private void configuracionInicialDeFantasma(String fantasma, int nivel, String dificultad) {
+        private void configuracionInicialDeFantasma(String fantasma, String dificultad) {
             //Configuacion de Imagenes
             imgArriba = new Image[2];
             imgAbajo = new Image[2];
@@ -160,7 +158,7 @@ namespace PACMANv3.pkgModelo {
                     break;
             }
             //Configuracion de poder y velocidad
-            if (nivel == 1) {
+            if (this.dificultad == 1) {
                 if (fantasma.ToUpper().Equals("ROJO")) {
                     this.velocidad = 2;
                     this.poder = 1;
@@ -174,7 +172,7 @@ namespace PACMANv3.pkgModelo {
                     this.velocidad = 2;
                     this.poder = 1;
                 }
-            } else if (nivel == 2) {
+            } else if (this.dificultad == 2) {
                 if (fantasma.ToUpper().Equals("ROJO")) {
                     this.velocidad = 4;
                     this.poder = 3;
@@ -188,7 +186,7 @@ namespace PACMANv3.pkgModelo {
                     this.velocidad = 2;
                     this.poder = 1;
                 }
-            } else if (nivel == 3) {
+            } else if (this.dificultad == 3) {
                 if (fantasma.ToUpper().Equals("ROJO")) {
                     this.velocidad = 5;
                     this.poder = 3;
@@ -466,14 +464,6 @@ namespace PACMANv3.pkgModelo {
         public int Dificultad {
             get { return dificultad; }
             set { dificultad = value; }
-        }
-
-        /// <summary>
-        /// Metodo accesor y mutador del atributo nivel
-        /// </summary>
-        public int Nivel {
-            get { return nivel; }
-            set { nivel = value; }
         }
 
         /// <summary>

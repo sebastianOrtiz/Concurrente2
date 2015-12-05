@@ -319,31 +319,31 @@ namespace PACMANv3.pkgModelo {
                 switch (this.dificultad) {
                     case "Facil":
                         //Fantasmas del nivel Facl: 1 Rojo, 1 Rosa, 1 Naranja, 2 Azul
-                        fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                        fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                        fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         for (int i = 0; i < 2; i++) {
-                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         }
                         break;
                     case "Medio":
                         //Fantasmas del nivel Medio: 2 Rojo, 2 Rosa, 2 Naranja, 2 Azul
                         for (int i = 0; i < 2; i++) {
-                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         }
                         break;
                     case "Dificil":
                         //Fantasmas del nivel Dificl: 2 Rojo, 2 Rosa, 3 Naranja, 3 Azul
                         for (int i = 0; i < 2; i++) {
-                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         }
                         for (int i = 0; i < 3; i++) {
-                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         }
                         break;
                 }
@@ -425,7 +425,7 @@ namespace PACMANv3.pkgModelo {
             Point[] posCaman = mapa.posicionInicialPacMan();
             posFrut = posCaman[0];
             //mapaActual.MatrizDiseño[posFrut.X, posFrut.Y].Bisc.Estado = false;
-            pacMans.Add(new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), this.NivelActual, mapa, vidas, hp, posCaman[0].X, posCaman[0].Y));
+            pacMans.Add(new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), this.NivelActual, mapa, vidas, hp, posCaman[0].X, posCaman[0].Y,1));
         }
 
         /// <summary>

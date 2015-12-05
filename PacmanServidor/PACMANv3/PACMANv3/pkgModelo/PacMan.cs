@@ -56,7 +56,8 @@ namespace PACMANv3.pkgModelo {
         /// <param name="hp">Valor de cada vida</param>
         /// <param name="i">Indica la posicion inicial en las filas de la matriz</param>
         /// <param name="j">Indica la posicion inicial en las columnas de la matriz</param>
-        public PacMan(int lado, int x, int y, int velocidad, int nivel, Mapa mapaActual, int vidas, int hp, int i, int j) {
+        public PacMan(int lado, int x, int y, int velocidad, int nivel, Mapa mapaActual, int vidas, int hp, int i, int j,int identificador) {
+            this.identificador = identificador;
             this.windth = lado;
             this.height = lado;
             this.x = x;

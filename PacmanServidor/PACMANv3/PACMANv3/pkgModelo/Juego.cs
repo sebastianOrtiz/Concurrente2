@@ -29,6 +29,7 @@ namespace PACMANv3.pkgModelo {
         private SoundPlayer reproductor;
         private int iFrut;
         private int jFrut;
+        private int jugadores;
         //KMZWA8AWAA
         /// <summary>
         /// Constructor de la clase Juego
@@ -44,7 +45,7 @@ namespace PACMANv3.pkgModelo {
             this.fantasmas = new List<Fantasma>();
             this.pacMans = new List<PacMan>();
             this.dificultad = dificultad;
-
+            this.jugadores = jugadores;
             this.r = new Random();
             this.configurarJuego();
             this.estadoDelJuego = true;
@@ -97,8 +98,8 @@ namespace PACMANv3.pkgModelo {
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
                 } else {
-                    this.rehubicarPacman(pacMans.ElementAt(0));
-                    if (this.pacMans.ElementAt(0).disminuirVida(fant.Poder) <= 0) {
+                    this.rehubicarPacman(pac);
+                    if (pac.disminuirVida(fant.Poder) <= 0) {
                         this.jugando = 3;
                     }
                 }
@@ -110,7 +111,7 @@ namespace PACMANv3.pkgModelo {
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
                 } else {
-                    this.rehubicarPacman(pacMans.ElementAt(0));
+                    this.rehubicarPacman(pac);
                     if (pac.disminuirVida(fant.Poder) <= 0) {
                         this.jugando = 3;
                     }
@@ -122,7 +123,7 @@ namespace PACMANv3.pkgModelo {
                     this.rehubicarFantasmas(fant);
                     fant.quitarVulnerabilidad();
                 } else {
-                    this.rehubicarPacman(pacMans.ElementAt(0));
+                    this.rehubicarPacman(pac);
                     if (pac.disminuirVida(fant.Poder) <= 0) {
                         this.jugando = 3;
                     }
@@ -136,7 +137,7 @@ namespace PACMANv3.pkgModelo {
                     fant.quitarVulnerabilidad();
 
                 } else {
-                    this.rehubicarPacman(pacMans.ElementAt(0));
+                    this.rehubicarPacman(pac);
                     if (pac.disminuirVida(fant.Poder) <= 0) {
                         this.jugando = 3;
                     }
@@ -338,38 +339,44 @@ namespace PACMANv3.pkgModelo {
                 switch (this.dificultad) {
                     case "Facil":
                         //Fantasmas del nivel Facl: 1 Rojo, 1 Rosa, 1 Naranja, 2 Azul
-                        fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                        fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                        fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                        fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         for (int i = 0; i < 2; i++) {
-                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         }
                         break;
                     case "Medio":
                         //Fantasmas del nivel Medio: 2 Rojo, 2 Rosa, 2 Naranja, 2 Azul
                         for (int i = 0; i < 2; i++) {
-                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         }
                         break;
                     case "Dificil":
                         //Fantasmas del nivel Dificl: 2 Rojo, 2 Rosa, 3 Naranja, 3 Azul
                         for (int i = 0; i < 2; i++) {
-                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rojo", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Rosa", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         }
                         for (int i = 0; i < 3; i++) {
-                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
-                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, 1, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Naranja", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
+                            fantasmas.Add(new Fantasma(dirSalida, "Azul", 19, centro[1].X, centro[1].Y, this.dificultad, mapa, centro[0].X, centro[0].Y));
                         }
                         break;
                 }
 
 
 
-                hubicarPacmanEnMapaActualInicial(5, 5);
+                Point[] posCaman = mapa.posicionInicialPacMan();
+                posFrut = posCaman[0];
+                //mapaActual.MatrizDiseño[posFrut.X, posFrut.Y].Bisc.Estado = false;
+                for (int i = 0; i < jugadores; i++) {
+                    pacMans.Add(new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y,(i+1)));
+                    
+                }
                 hubicarComodines();
             } else {
 
@@ -440,12 +447,12 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         /// <param name="vidas">Cantidad de vidas de PacMan</param>
         /// <param name="hp">Valor de cada Vida de PacMan</param>
-        private void hubicarPacmanEnMapaActualInicial(int vidas, int hp) {
-            Point[] posCaman = mapa.posicionInicialPacMan();
-            posFrut = posCaman[0];
-            //mapaActual.MatrizDiseño[posFrut.X, posFrut.Y].Bisc.Estado = false;
-            pacMans.Add(new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), 1, mapa, vidas, hp, posCaman[0].X, posCaman[0].Y));
-        }
+        //private void hubicarPacmanEnMapaActualInicial(int vidas, int hp) {
+        //    Point[] posCaman = mapa.posicionInicialPacMan();
+        //    posFrut = posCaman[0];
+        //    //mapaActual.MatrizDiseño[posFrut.X, posFrut.Y].Bisc.Estado = false;
+        //    pacMans.Add(new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), 1, mapa, vidas, hp, posCaman[0].X, posCaman[0].Y));
+        //}
 
         /// <summary>
         /// Calcula la mayor velocidad de los fantasmas la cual sera la velocidad de Pacman
