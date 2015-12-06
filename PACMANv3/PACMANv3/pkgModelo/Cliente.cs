@@ -50,9 +50,11 @@ namespace PACMANv3.pkgModelo {
             Estado o = (Estado) serializer.Deserialize(ms);
             if (o.TEspera != 1) {
                 if (o.TEspera == 5) {
-                    this.vista.TiempoEspera = 5;
+                    //this.vista.TiempoEspera = 5;
                     this.vista.Jugando = 5;
                 }
+                if (this.vista.TiempoEspera > 0)
+                    this.vista.TiempoEspera = o.TEspera;
                 this.procesar(o);
             } else {
                 //this.recibirMapa();
