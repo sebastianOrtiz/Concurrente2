@@ -371,7 +371,7 @@ namespace PACMANv3.pkgModelo {
 
 
                 Point[] posCaman = mapa.posicionInicialPacMan();
-                posFrut = posCaman[0];
+                
                 //mapaActual.MatrizDiseño[posFrut.X, posFrut.Y].Bisc.Estado = false;
                 for (int i = 0; i < jugadores; i++) {
                     pacMans.Add(new PacMan(19, posCaman[1].X, posCaman[1].Y, this.velocidadMayor(), 1, mapa, 5, 5, posCaman[0].X, posCaman[0].Y,(i+1)));

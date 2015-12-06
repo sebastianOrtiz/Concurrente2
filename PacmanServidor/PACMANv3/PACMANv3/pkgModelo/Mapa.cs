@@ -21,12 +21,13 @@ namespace PACMANv3.pkgModelo {
         private string nombre;
         private string dificultad;
         private String[,] arreglo;
+        Random r = new Random();
 
         /// <summary>
         /// Contructor vacio utilizado para recontruit un mapa desde un archivo JSON
         /// </summary>
         public Mapa() {
-            
+
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         /// <returns>retorna 2 puntos uno con las posiciones X y Y del centro y otra con la I y J de la fila y columna del centro del mapa</returns>
         public Point[] posicionInicalFantasmas() {
-            Point [] pts = new Point[2];
+            Point[] pts = new Point[2];
             pts[0] = new Point(filas / 2, columnas / 2);
             pts[1] = new Point(matrizDiseño[filas / 2, columnas / 2].X, matrizDiseño[filas / 2, columnas / 2].Y);
             return pts;
@@ -83,32 +84,27 @@ namespace PACMANv3.pkgModelo {
         /// </summary>
         /// <returns>retorna 2 puntos uno con las posiciones X y Y del centro y otra con la I y J de la fila y columna del centro del mapa</returns>
         public Point[] posicionInicialPacMan() {
-            int i = filas / 2;
-            int j = columnas / 2;
-            Point p = new Point(-1,-1);
-            Point p2 = new Point(-1,-1);
-            if (arreglo[i - 1, j] == "Y") {
-                p.X = matrizDiseño[i + 2, j].X;
-                p.Y = matrizDiseño[i + 2, j].Y;
-                p2 = new Point(i + 2, j);
-            } else if (arreglo[i + 1, j] == "Y") {
-                p.X = matrizDiseño[i - 2, j].X;
-                p.Y = matrizDiseño[i - 2, j].Y;
-                p2 = new Point(i - 2, j);
-            } else if (arreglo[i, j - 1] == "Y") {
-                p.X = matrizDiseño[i, j + 2].X;
-                p.Y = matrizDiseño[i, j + 2].Y;
-                p2 = new Point(i, j + 2);
-            } else if (arreglo[i, j + 1] == "Y") {
-                p.X = matrizDiseño[i, j - 2].X;
-                p.Y = matrizDiseño[i, j - 2].Y;
-                p2 = new Point(i, j - 2);
-            }
 
+            int centroFinlas = filas / 2;
+            int centroColumnas = columnas / 2;
+            int filasAct = this.Filas;
+            int columnasAct = this.Columnas;
+            List<Point> posibles = new List<Point>();
+
+            for (int i = 0; i < filasAct; i++) {
+                for (int j = 0; j < columnasAct; j++) {
+                    if (this.MatrizDiseño[i, j].Valor.Equals("O") && (i <= (centroFinlas - 4) || i >= (centroFinlas + 4)) && (j <= (centroColumnas - 4) || j >= (centroColumnas + 4))) {
+                        posibles.Add(new Point(i, j));
+                    }
+                }
+            }
+            Point p = posibles.ElementAt(r.Next(0, posibles.Count));
+            Point p2 = new Point(this.matrizDiseño[p.X, p.Y].X, this.matrizDiseño[p.X, p.Y].Y);
             Point[] pts = new Point[2];
-            pts[0] = p2;
-            pts[1] = p;
+            pts[0] = p;
+            pts[1] = p2;
             return pts;
+
         }
 
         /// <summary>

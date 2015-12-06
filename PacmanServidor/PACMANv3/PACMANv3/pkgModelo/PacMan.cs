@@ -43,6 +43,7 @@ namespace PACMANv3.pkgModelo {
 
 
 
+
         /// <summary>
         /// Constructor de la clase PacMan
         /// </summary>
