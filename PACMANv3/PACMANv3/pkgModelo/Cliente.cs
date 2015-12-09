@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using PACMANv3.pkgVista;
+using System.Media;
 
 namespace PACMANv3.pkgModelo {
     class Cliente {
@@ -47,7 +48,7 @@ namespace PACMANv3.pkgModelo {
             MemoryStream ms = new MemoryStream(msgDataBytes);
             ms.Position = 0;
 
-            Estado o = (Estado)serializer.Deserialize(ms);
+            Estado o = (Estado) serializer.Deserialize(ms);
 
             if (o.TEspera == 5) {
                 this.vista.TiempoEspera = 5;
@@ -57,13 +58,13 @@ namespace PACMANv3.pkgModelo {
                 this.vista.TiempoEspera = o.TEspera;
                 this.procesar(o);
             }
-                
+
 
             //this.recibirMapa();
             if (o.TEspera == 0) {
                 this.vista.Jugando = 1;
             }
-            
+
 
         }
 
@@ -82,7 +83,7 @@ namespace PACMANv3.pkgModelo {
             MemoryStream ms = new MemoryStream(msgDataBytes);
             ms.Position = 0;
 
-            Estado o = (Estado)serializer.Deserialize(ms);
+            Estado o = (Estado) serializer.Deserialize(ms);
             this.procesarM(o);
         }
 
@@ -108,7 +109,7 @@ namespace PACMANv3.pkgModelo {
             MemoryStream ms = new MemoryStream(msgDataBytes);
             ms.Position = 0;
 
-            Mapa m = (Mapa)serializer.Deserialize(ms);
+            Mapa m = (Mapa) serializer.Deserialize(ms);
             this.vista.MapaAct = m;
         }
 
@@ -119,7 +120,7 @@ namespace PACMANv3.pkgModelo {
             serializer.Serialize(ms, o);
             userDataBytes = ms.ToArray();
 
-            byte[] userDataLen = BitConverter.GetBytes((Int32)userDataBytes.Length);
+            byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
 
             //Console.WriteLine(userDataBytes.Length);
 
@@ -134,7 +135,7 @@ namespace PACMANv3.pkgModelo {
             serializer.Serialize(ms, o);
             userDataBytes = ms.ToArray();
 
-            byte[] userDataLen = BitConverter.GetBytes((Int32)userDataBytes.Length);
+            byte[] userDataLen = BitConverter.GetBytes((Int32) userDataBytes.Length);
 
             //Console.WriteLine(userDataBytes.Length);
 
@@ -171,6 +172,11 @@ namespace PACMANv3.pkgModelo {
                 //}
             } else {
                 VistaJuegoOnline.colaDeEstados.Enqueue(e);
+            }
+            if (e.TEspera == 5) {
+                SoundPlayer sp = new SoundPlayer(Properties.Resources.pacman_beginning);
+                sp.Load();
+                sp.Play();
             }
         }
 
