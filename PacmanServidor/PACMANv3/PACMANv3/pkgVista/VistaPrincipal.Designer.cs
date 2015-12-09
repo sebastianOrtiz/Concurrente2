@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pruebasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAceptarConfigInicial = new System.Windows.Forms.Button();
             this.lblDificultad = new System.Windows.Forms.Label();
             this.cmbSeleccionarDificultad = new System.Windows.Forms.ComboBox();
             this.btnCrearMapa = new System.Windows.Forms.Button();
@@ -36,7 +35,6 @@
             this.numDDJugadores = new System.Windows.Forms.NumericUpDown();
             this.lblSeleccioneMapa = new System.Windows.Forms.Label();
             this.cmbSeleccionMapa = new System.Windows.Forms.ComboBox();
-            this.btnIntPuntajes = new System.Windows.Forms.Button();
             this.panelPuntajes = new System.Windows.Forms.Panel();
             this.lblFechaDat = new System.Windows.Forms.Label();
             this.lblPtsDat = new System.Windows.Forms.Label();
@@ -52,19 +50,6 @@
             // 
             this.pruebasToolStripMenuItem.Name = "pruebasToolStripMenuItem";
             this.pruebasToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // btnAceptarConfigInicial
-            // 
-            this.btnAceptarConfigInicial.BackColor = System.Drawing.SystemColors.ControlText;
-            this.btnAceptarConfigInicial.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnAceptarConfigInicial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAceptarConfigInicial.Image = global::PACMANv3.Properties.Resources.BtnJugar;
-            this.btnAceptarConfigInicial.Location = new System.Drawing.Point(438, 213);
-            this.btnAceptarConfigInicial.Name = "btnAceptarConfigInicial";
-            this.btnAceptarConfigInicial.Size = new System.Drawing.Size(224, 114);
-            this.btnAceptarConfigInicial.TabIndex = 15;
-            this.btnAceptarConfigInicial.UseVisualStyleBackColor = false;
-            this.btnAceptarConfigInicial.Click += new System.EventHandler(this.btnAceptarConfigInicial_Click);
             // 
             // lblDificultad
             // 
@@ -122,12 +107,10 @@
             this.panelConfigInicio.Controls.Add(this.numDDJugadores);
             this.panelConfigInicio.Controls.Add(this.lblSeleccioneMapa);
             this.panelConfigInicio.Controls.Add(this.cmbSeleccionMapa);
-            this.panelConfigInicio.Controls.Add(this.btnIntPuntajes);
             this.panelConfigInicio.Controls.Add(this.btnEditarMapa);
             this.panelConfigInicio.Controls.Add(this.btnCrearMapa);
             this.panelConfigInicio.Controls.Add(this.cmbSeleccionarDificultad);
             this.panelConfigInicio.Controls.Add(this.lblDificultad);
-            this.panelConfigInicio.Controls.Add(this.btnAceptarConfigInicial);
             this.panelConfigInicio.Location = new System.Drawing.Point(-1, 1);
             this.panelConfigInicio.Name = "panelConfigInicio";
             this.panelConfigInicio.Size = new System.Drawing.Size(793, 458);
@@ -201,18 +184,6 @@
             this.cmbSeleccionMapa.Size = new System.Drawing.Size(203, 25);
             this.cmbSeleccionMapa.TabIndex = 24;
             this.cmbSeleccionMapa.SelectionChangeCommitted += new System.EventHandler(this.cmbSeleccionMapa_SelectionChangeCommitted);
-            // 
-            // btnIntPuntajes
-            // 
-            this.btnIntPuntajes.BackColor = System.Drawing.SystemColors.ControlText;
-            this.btnIntPuntajes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIntPuntajes.Image = global::PACMANv3.Properties.Resources.historial;
-            this.btnIntPuntajes.Location = new System.Drawing.Point(372, 324);
-            this.btnIntPuntajes.Name = "btnIntPuntajes";
-            this.btnIntPuntajes.Size = new System.Drawing.Size(109, 105);
-            this.btnIntPuntajes.TabIndex = 23;
-            this.btnIntPuntajes.UseVisualStyleBackColor = false;
-            this.btnIntPuntajes.Click += new System.EventHandler(this.btnIntPuntajes_Click);
             // 
             // panelPuntajes
             // 
@@ -313,7 +284,6 @@
         #endregion
 
         private System.Windows.Forms.ToolStripMenuItem pruebasToolStripMenuItem;
-        private System.Windows.Forms.Button btnAceptarConfigInicial;
         private System.Windows.Forms.Label lblDificultad;
         private System.Windows.Forms.ComboBox cmbSeleccionarDificultad;
         private System.Windows.Forms.Button btnCrearMapa;
@@ -322,7 +292,6 @@
         private System.Windows.Forms.Panel panelPuntajes;
         private System.Windows.Forms.Label lblListadoDatos;
         private System.Windows.Forms.Button btnAceptarDatos;
-        private System.Windows.Forms.Button btnIntPuntajes;
         private System.Windows.Forms.Label lblFechaDat;
         private System.Windows.Forms.Label lblPtsDat;
         private System.Windows.Forms.Label lblDifDatos;
